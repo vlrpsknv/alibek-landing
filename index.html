@@ -323,43 +323,56 @@
 
         /* Mobile menu */
         .mobile-nav {
-            display: none;
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            z-index: 99;
+            z-index: 10000;
             background: rgba(241,241,241,0.98);
             backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             gap: var(--s-xl);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
         }
-        .mobile-nav.open { display: flex; }
+        .mobile-nav.open { opacity: 1; visibility: visible; }
         .mobile-nav a {
             font-size: 1.5rem;
             font-weight: 600;
             color: var(--text);
             transition: color 0.2s;
         }
-        .mobile-nav a:hover { color: var(--accent); }
+        .mobile-nav a:hover { color: var(--gold); }
+        .mobile-nav a.btn-primary {
+            color: var(--white);
+            font-size: 0.95rem;
+            margin-top: var(--s-md);
+        }
+        .mobile-nav a.btn-primary:hover { color: var(--white); }
         .mobile-nav-close {
             position: absolute;
             top: var(--s-lg);
             right: var(--s-lg);
-            font-size: 1.5rem;
+            font-size: 1.75rem;
             color: var(--text);
             cursor: pointer;
             background: none;
             border: none;
-            width: 40px;
-            height: 40px;
+            width: 44px;
+            height: 44px;
             display: flex;
             align-items: center;
             justify-content: center;
+            border-radius: 50%;
+            transition: background 0.2s;
         }
+        .mobile-nav-close:hover { background: rgba(0,0,0,0.05); }
 
         /* SR only */
         .sr-only {
@@ -1042,17 +1055,36 @@
             bottom: 0;
             left: 0;
             right: 0;
-            z-index: 99;
+            z-index: 9999;
             padding: var(--s-md);
             background: rgba(241,241,241,0.95);
             backdrop-filter: blur(20px);
             border-top: 1px solid var(--border);
+            gap: 10px;
+            align-items: center;
         }
 
         .mobile-cta .btn {
-            width: 100%;
+            flex: 1;
             justify-content: center;
         }
+
+        .mobile-cta .mobile-chat-btn {
+            flex-shrink: 0;
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background: var(--accent);
+            color: #fff;
+            border: 1px solid rgba(255,255,255,0.1);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+        }
+        .mobile-cta .mobile-chat-btn:hover { background: #333; }
+        .mobile-cta .mobile-chat-btn svg { width: 24px; height: 24px; }
 
         /* ═══════════════════════════════════════
            SCROLL ANIMATIONS
@@ -1190,7 +1222,7 @@
             .nav { display: none; }
             .header .btn-primary { display: none; }
             .burger { display: flex; }
-            .mobile-cta { display: block; }
+            .mobile-cta { display: flex; }
 
             /* Hero: use display:contents to reorder children across grid/flex boundary */
             .hero { min-height: auto; padding-bottom: var(--s-lg); padding-top: 72px; }
@@ -1214,6 +1246,9 @@
             .rating-score { font-size: 0.95rem; }
             .rating-stars svg { width: 12px; height: 12px; }
             .rating-source { font-size: 0.7rem; }
+
+            /* Hide floating chat button on mobile — chat is in the sticky bar */
+            #kazimov-chat-btn { display: none !important; }
 
             /* Sections */
             .proof-grid { grid-template-columns: repeat(2, 1fr); gap: var(--s-xl) var(--s-md); }
@@ -1811,6 +1846,9 @@
      ═══════════════════════════════════════ -->
 <div class="mobile-cta">
     <a href="#contact" class="btn btn-primary" data-i18n="nav.cta">Записаться</a>
+    <button class="mobile-chat-btn" id="mobile-chat-trigger" aria-label="Открыть чат">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    </button>
 </div>
 
 <!-- ═══════════════════════════════════════
@@ -1832,12 +1870,14 @@ burger.addEventListener('click', () => {
     mobileNav.classList.add('open');
     burger.setAttribute('aria-expanded', 'true');
     document.body.style.overflow = 'hidden';
+    document.documentElement.style.overflow = 'hidden';
 });
 
 const closeMobileNav = () => {
     mobileNav.classList.remove('open');
     burger.setAttribute('aria-expanded', 'false');
     document.body.style.overflow = '';
+    document.documentElement.style.overflow = '';
 };
 
 mobileNavClose.addEventListener('click', closeMobileNav);
@@ -2076,8 +2116,37 @@ document.querySelectorAll('.lang-option').forEach(btn => {
 </script>
 
 <!-- Chat Widget -->
-<script>window.KAZIMOV_CHAT_URL='https://alibek-chatbot.vercel.app';</script>
-<script src="https://alibek-chatbot.vercel.app/widget-loader.js" defer></script>
+<script>window.KAZIMOV_CHAT_URL='http://localhost:3001';</script>
+<script src="http://localhost:3001/widget-loader.js" defer></script>
+
+<!-- Mobile chat button → triggers the widget's floating button + icon toggle -->
+<script>
+(function() {
+  var chatSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>';
+  var closeSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>';
+  var mobileOpen = false;
+
+  document.addEventListener('click', function(e) {
+    var trigger = e.target.closest('#mobile-chat-trigger');
+    if (!trigger) return;
+    var widgetBtn = document.getElementById('kazimov-chat-btn');
+    if (widgetBtn) widgetBtn.click();
+    mobileOpen = !mobileOpen;
+    trigger.innerHTML = mobileOpen ? closeSvg : chatSvg;
+  });
+
+  // Listen for close from iframe's X button
+  window.addEventListener('message', function(e) {
+    if (e.data && e.data.type === 'kazimov-chat-close' && mobileOpen) {
+      var widgetBtn = document.getElementById('kazimov-chat-btn');
+      if (widgetBtn) widgetBtn.click();
+      mobileOpen = false;
+      var trigger = document.getElementById('mobile-chat-trigger');
+      if (trigger) trigger.innerHTML = chatSvg;
+    }
+  });
+})();
+</script>
 
 </body>
 </html>
