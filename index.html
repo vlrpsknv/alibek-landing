@@ -1,0 +1,1818 @@
+<!DOCTYPE html>
+<html lang="ru" data-lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Казимов Алибек — Челюстно-лицевой хирург, Ташкент</title>
+    <meta name="description" content="Казимов Алибек — челюстно-лицевой хирург, ЛОР, онкология, пластическая хирургия. Ташкент. Запись на консультацию.">
+    <meta property="og:title" content="Казимов Алибек — Челюстно-лицевой хирург">
+    <meta property="og:description" content="ЧЛХ, ЛОР, онкология, пластика. Международный уровень в Ташкенте. Запись на консультацию.">
+    <meta property="og:image" content="assets/img/hero.png">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <noscript><style>.reveal{opacity:1;transform:none;}</style></noscript>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Schema.org -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Physician",
+        "name": "Казимов Алибек",
+        "medicalSpecialty": ["MaxillofacialSurgery", "Otolaryngology", "Oncology", "PlasticSurgery"],
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Ташкент",
+            "addressCountry": "UZ"
+        },
+        "telephone": "+998-XX-XXX-XX-XX",
+        "url": "https://kazimov.uz"
+    }
+    </script>
+
+    <style>
+        /* ═══════════════════════════════════════
+           DESIGN SYSTEM
+           ═══════════════════════════════════════ */
+        :root {
+            /* Colors */
+            --bg:        #F5F0E8;
+            --bg-deep:   #EBE4D8;
+            --surface:   #FFFFFF;
+            --text:      #1A1A1A;
+            --text-soft: #4A4A4A;
+            --text-muted:#6B6155;
+            --accent:    #2A5C4E;
+            --accent-l:  #3A7A68;
+            --gold:      #C4A265;
+            --gold-l:    #D4B87A;
+            --border:    #D8D0C4;
+            --white:     #FEFCF9;
+
+            /* Typography */
+            --font: 'Inter', -apple-system, sans-serif;
+
+            /* Spacing scale */
+            --s-xs:  4px;
+            --s-sm:  8px;
+            --s-md:  16px;
+            --s-lg:  24px;
+            --s-xl:  40px;
+            --s-2xl: 64px;
+            --s-3xl: 96px;
+            --s-4xl: 128px;
+
+            /* Layout */
+            --max-w: 1200px;
+            --radius: 14px;
+            --radius-sm: 8px;
+        }
+
+        /* ═══════════════════════════════════════
+           RESET & BASE
+           ═══════════════════════════════════════ */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            font-family: var(--font);
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            font-size: 16px;
+            overflow-x: hidden;
+        }
+
+        img { display: block; max-width: 100%; height: auto; }
+        a { color: inherit; text-decoration: none; }
+        button { font-family: inherit; cursor: pointer; border: none; background: none; }
+        ul { list-style: none; }
+
+        .container {
+            width: 100%;
+            max-width: var(--max-w);
+            margin: 0 auto;
+            padding: 0 var(--s-lg);
+        }
+
+        /* ═══════════════════════════════════════
+           TYPOGRAPHY
+           ═══════════════════════════════════════ */
+        .t-display {
+            font-size: clamp(2.8rem, 6vw, 5.2rem);
+            font-weight: 800;
+            line-height: 0.95;
+            letter-spacing: -0.03em;
+        }
+
+        .t-h1 {
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+        }
+
+        .t-h2 {
+            font-size: clamp(1.5rem, 3vw, 2.2rem);
+            font-weight: 700;
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+        }
+
+        .t-h3 {
+            font-size: clamp(1.1rem, 2vw, 1.4rem);
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        .t-body { font-size: 1rem; line-height: 1.7; }
+        .t-small { font-size: 0.875rem; line-height: 1.5; }
+        .t-caption { font-size: 0.75rem; line-height: 1.4; letter-spacing: 0.04em; text-transform: uppercase; font-weight: 600; }
+
+        /* ═══════════════════════════════════════
+           BUTTONS
+           ═══════════════════════════════════════ */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--s-sm);
+            padding: 14px 32px;
+            border-radius: 100px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+            white-space: nowrap;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: var(--white);
+        }
+        .btn-primary:hover { background: var(--accent-l); transform: translateY(-1px); }
+
+        .btn-gold {
+            background: var(--gold);
+            color: var(--white);
+        }
+        .btn-gold:hover { background: var(--gold-l); transform: translateY(-1px); }
+
+        .btn-outline {
+            border: 1.5px solid var(--border);
+            color: var(--text);
+            background: transparent;
+        }
+        .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+        .btn-ghost {
+            color: var(--accent);
+            padding: 14px 0;
+        }
+        .btn-ghost:hover { color: var(--accent-l); }
+        .btn-ghost svg { transition: transform 0.3s ease; }
+        .btn-ghost:hover svg { transform: translateX(4px); }
+
+        /* ═══════════════════════════════════════
+           01. HEADER
+           ═══════════════════════════════════════ */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: var(--s-md) 0;
+            transition: all 0.4s ease;
+        }
+
+        .header.scrolled {
+            background: rgba(245, 240, 232, 0.92);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 1.15rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        .logo span { color: var(--gold); }
+
+        .nav { display: flex; align-items: center; gap: var(--s-xl); }
+
+        .nav a {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text-soft);
+            transition: color 0.2s;
+        }
+        .nav a:hover { color: var(--accent); }
+
+        .header-actions { display: flex; align-items: center; gap: var(--s-md); }
+
+        .lang-switch {
+            display: flex;
+            gap: 2px;
+            background: rgba(0,0,0,0.05);
+            border-radius: 8px;
+            padding: 2px;
+        }
+
+        .lang-switch button {
+            padding: 6px 10px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            transition: all 0.2s;
+        }
+
+        .lang-switch button.active {
+            background: var(--white);
+            color: var(--text);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+
+        .header .btn { padding: 10px 24px; font-size: 0.85rem; }
+
+        .burger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            width: 24px;
+            cursor: pointer;
+        }
+        .burger span {
+            height: 2px;
+            background: var(--text);
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+
+        /* Mobile menu */
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 99;
+            background: rgba(245,240,232,0.98);
+            backdrop-filter: blur(20px);
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: var(--s-xl);
+        }
+        .mobile-nav.open { display: flex; }
+        .mobile-nav a {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text);
+            transition: color 0.2s;
+        }
+        .mobile-nav a:hover { color: var(--accent); }
+        .mobile-nav-close {
+            position: absolute;
+            top: var(--s-lg);
+            right: var(--s-lg);
+            font-size: 1.5rem;
+            color: var(--text);
+            cursor: pointer;
+            background: none;
+            border: none;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* SR only */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0,0,0,0);
+            border: 0;
+        }
+
+        /* ═══════════════════════════════════════
+           02. HERO
+           ═══════════════════════════════════════ */
+        .hero {
+            padding-top: clamp(100px, 14vh, 160px);
+            padding-bottom: var(--s-xl);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--s-xl);
+            align-items: end;
+        }
+
+        .hero-content {
+            padding-bottom: var(--s-3xl);
+        }
+
+        .hero-label {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--s-sm);
+            padding: 6px 14px;
+            background: rgba(42, 92, 78, 0.08);
+            border-radius: 100px;
+            margin-bottom: var(--s-lg);
+        }
+
+        .hero-label .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--accent);
+        }
+
+        .hero-name {
+            margin-bottom: var(--s-md);
+        }
+
+        .hero-sub {
+            font-size: clamp(1rem, 1.8vw, 1.25rem);
+            color: var(--text-soft);
+            max-width: 480px;
+            margin-bottom: var(--s-xl);
+            font-weight: 400;
+            line-height: 1.6;
+        }
+
+        .hero-ctas {
+            display: flex;
+            gap: var(--s-md);
+            flex-wrap: wrap;
+        }
+
+        .hero-photo {
+            position: relative;
+        }
+
+        .hero-photo img {
+            width: 100%;
+            max-width: 560px;
+            margin-left: auto;
+            object-fit: contain;
+        }
+
+        /* Rating cards */
+        .rating-cards {
+            display: flex;
+            gap: var(--s-md);
+            margin-top: calc(-1 * var(--s-xl));
+            position: relative;
+            z-index: 2;
+        }
+
+        .rating-card {
+            flex: 1;
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: var(--s-md) var(--s-lg);
+            display: flex;
+            align-items: center;
+            gap: var(--s-md);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .rating-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+        }
+
+        .rating-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.7rem;
+            flex-shrink: 0;
+        }
+
+        .rating-icon.google { background: #F1F3F4; color: #4285F4; }
+        .rating-icon.clinics { background: #E8F5E9; color: #2E7D32; }
+        .rating-icon.twogis { background: #E3F2FD; color: #1565C0; }
+
+        .rating-score {
+            font-size: 1.5rem;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .rating-stars {
+            color: var(--gold);
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+        }
+
+        .rating-source {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+        }
+
+        /* ═══════════════════════════════════════
+           03. SOCIAL PROOF (numbers)
+           ═══════════════════════════════════════ */
+        .proof {
+            padding: var(--s-3xl) 0;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .proof-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--s-xl);
+        }
+
+        .proof-item { text-align: center; }
+
+        .proof-num {
+            font-size: clamp(2.5rem, 5vw, 3.8rem);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            line-height: 1;
+            color: var(--accent);
+        }
+
+        .proof-label {
+            margin-top: var(--s-sm);
+            font-size: 0.9rem;
+            color: var(--text-soft);
+            font-weight: 500;
+        }
+
+        /* ═══════════════════════════════════════
+           04. SERVICES
+           ═══════════════════════════════════════ */
+        .services {
+            padding: var(--s-4xl) 0;
+        }
+
+        .section-header {
+            margin-bottom: var(--s-2xl);
+        }
+
+        .section-header .t-caption {
+            color: var(--gold);
+            margin-bottom: var(--s-sm);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--s-md);
+        }
+
+        .service-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: var(--s-xl) var(--s-lg);
+            transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--accent);
+            transform: scaleX(0);
+            transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .service-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.06);
+            border-color: transparent;
+        }
+
+        .service-card:hover::after { transform: scaleX(1); }
+
+        .service-num {
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            letter-spacing: 0.1em;
+            margin-bottom: var(--s-lg);
+        }
+
+        .service-card .t-h3 { margin-bottom: var(--s-sm); }
+
+        .service-card .t-body {
+            color: var(--text-soft);
+            font-size: 0.9rem;
+        }
+
+        /* ═══════════════════════════════════════
+           05. ABOUT
+           ═══════════════════════════════════════ */
+        .about {
+            padding: var(--s-4xl) 0;
+            background: var(--white);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 0.45fr 0.55fr;
+            gap: var(--s-3xl);
+            align-items: start;
+        }
+
+        .about-photo {
+            border-radius: var(--radius);
+            overflow: hidden;
+            position: sticky;
+            top: 100px;
+        }
+
+        .about-photo img {
+            width: 100%;
+            aspect-ratio: 3/4;
+            object-fit: cover;
+            object-position: top center;
+        }
+
+        .about-content { padding-top: var(--s-md); }
+
+        .about-text {
+            color: var(--text-soft);
+            margin-bottom: var(--s-xl);
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        .certs-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--s-sm);
+            margin-top: var(--s-xl);
+        }
+
+        .cert-tag {
+            padding: 8px 16px;
+            background: var(--bg);
+            border-radius: 100px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--text-soft);
+        }
+
+        /* ═══════════════════════════════════════
+           06. IN ACTION (surgery photos)
+           ═══════════════════════════════════════ */
+        .action {
+            padding: var(--s-4xl) 0;
+        }
+
+        .action-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--s-md);
+        }
+
+        .action-item {
+            border-radius: var(--radius);
+            overflow: hidden;
+            aspect-ratio: 3/4;
+            position: relative;
+        }
+
+        .action-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .action-item:hover img { transform: scale(1.05); }
+
+        .action-item::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(26,26,26,0.4) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        /* ═══════════════════════════════════════
+           07. APPROACH (philosophy/lifestyle)
+           ═══════════════════════════════════════ */
+        .approach {
+            padding: var(--s-4xl) 0;
+            background: var(--text);
+            color: var(--bg);
+        }
+
+        .approach-grid {
+            display: grid;
+            grid-template-columns: 0.55fr 0.45fr;
+            gap: var(--s-3xl);
+            align-items: center;
+        }
+
+        .approach-text {
+            color: rgba(245,240,232,0.7);
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: var(--s-xl);
+        }
+
+        .approach-list {
+            display: flex;
+            flex-direction: column;
+            gap: var(--s-md);
+        }
+
+        .approach-list li {
+            display: flex;
+            gap: var(--s-md);
+            align-items: flex-start;
+        }
+
+        .approach-list .num {
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--gold);
+            letter-spacing: 0.1em;
+            flex-shrink: 0;
+            padding-top: 4px;
+        }
+
+        .approach-list p {
+            color: rgba(245,240,232,0.8);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .approach-photo {
+            border-radius: var(--radius);
+            overflow: hidden;
+        }
+
+        .approach-photo img {
+            width: 100%;
+            aspect-ratio: 4/5;
+            object-fit: cover;
+        }
+
+        /* ═══════════════════════════════════════
+           08. TESTIMONIALS
+           ═══════════════════════════════════════ */
+        .testimonials {
+            padding: var(--s-4xl) 0;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--s-md);
+        }
+
+        .testimonial-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: var(--s-xl);
+        }
+
+        .testimonial-stars {
+            color: var(--gold);
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            margin-bottom: var(--s-md);
+        }
+
+        .testimonial-text {
+            color: var(--text-soft);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: var(--s-lg);
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: var(--s-md);
+        }
+
+        .testimonial-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--bg-deep);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.85rem;
+            color: var(--accent);
+        }
+
+        .testimonial-name { font-weight: 600; font-size: 0.9rem; }
+        .testimonial-date { font-size: 0.75rem; color: var(--text-muted); }
+
+        /* ═══════════════════════════════════════
+           09. FAQ
+           ═══════════════════════════════════════ */
+        .faq {
+            padding: var(--s-4xl) 0;
+            background: var(--white);
+        }
+
+        .faq-grid {
+            display: grid;
+            grid-template-columns: 0.4fr 0.6fr;
+            gap: var(--s-3xl);
+        }
+
+        .faq-list {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid var(--border);
+            overflow: hidden;
+        }
+
+        .faq-q {
+            width: 100%;
+            text-align: left;
+            padding: var(--s-lg) 0;
+            font-weight: 600;
+            font-size: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: var(--s-md);
+            color: var(--text);
+        }
+
+        .faq-q .icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 1.5px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .faq-item.open .faq-q .icon {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: var(--white);
+            transform: rotate(45deg);
+        }
+
+        .faq-a {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .faq-a-inner {
+            padding-bottom: var(--s-lg);
+            color: var(--text-soft);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* ═══════════════════════════════════════
+           10. CONTACT / CTA
+           ═══════════════════════════════════════ */
+        .contact {
+            padding: var(--s-4xl) 0;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--s-3xl);
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: var(--s-md);
+        }
+
+        .form-field {
+            width: 100%;
+            padding: 16px 20px;
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius-sm);
+            font-family: var(--font);
+            font-size: 0.95rem;
+            background: var(--white);
+            transition: border-color 0.2s;
+            color: var(--text);
+        }
+
+        .form-field:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .form-field::placeholder { color: var(--text-muted); }
+
+        .messenger-buttons {
+            display: flex;
+            gap: var(--s-sm);
+            margin-top: var(--s-md);
+        }
+
+        .msg-btn {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--s-sm);
+            padding: 14px;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+        }
+
+        .msg-btn.tg { background: #E3F2FD; color: #1976D2; }
+        .msg-btn.tg:hover { background: #BBDEFB; }
+        .msg-btn.wa { background: #E8F5E9; color: #2E7D32; }
+        .msg-btn.wa:hover { background: #C8E6C9; }
+        .msg-btn.phone { background: var(--bg-deep); color: var(--text); }
+        .msg-btn.phone:hover { background: var(--border); }
+
+        .contact-info h3 {
+            margin-bottom: var(--s-lg);
+        }
+
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: var(--s-lg);
+            margin-bottom: var(--s-xl);
+        }
+
+        .contact-detail {
+            display: flex;
+            gap: var(--s-md);
+        }
+
+        .contact-detail .label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 600;
+        }
+
+        .contact-detail .value {
+            font-weight: 500;
+            margin-top: 2px;
+        }
+
+        .map-placeholder {
+            width: 100%;
+            aspect-ratio: 16/10;
+            border-radius: var(--radius);
+            background: var(--bg-deep);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        /* ═══════════════════════════════════════
+           11. FOOTER
+           ═══════════════════════════════════════ */
+        .footer {
+            padding: var(--s-xl) 0;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--s-md);
+        }
+
+        .footer-copy {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: var(--s-lg);
+        }
+
+        .footer-links a {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            transition: color 0.2s;
+        }
+        .footer-links a:hover { color: var(--accent); }
+
+        /* ═══════════════════════════════════════
+           MOBILE CTA (sticky)
+           ═══════════════════════════════════════ */
+        .mobile-cta {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 99;
+            padding: var(--s-md);
+            background: rgba(245,240,232,0.95);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid var(--border);
+        }
+
+        .mobile-cta .btn {
+            width: 100%;
+            justify-content: center;
+        }
+
+        /* ═══════════════════════════════════════
+           SCROLL ANIMATIONS
+           ═══════════════════════════════════════ */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ═══════════════════════════════════════
+           RESPONSIVE
+           ═══════════════════════════════════════ */
+        @media (max-width: 1024px) {
+            .hero-grid { grid-template-columns: 1fr; }
+            .hero-content { padding-bottom: var(--s-xl); text-align: center; }
+            .hero-sub { margin-left: auto; margin-right: auto; }
+            .hero-ctas { justify-content: center; }
+            .hero-photo img { max-width: 400px; margin: 0 auto; }
+            .rating-cards { justify-content: center; }
+            .services-grid { grid-template-columns: 1fr; }
+            .about-grid { grid-template-columns: 1fr; }
+            .about-photo { position: static; max-width: 400px; }
+            .approach-grid { grid-template-columns: 1fr; }
+            .approach-photo { order: -1; max-width: 400px; }
+            .testimonials-grid { grid-template-columns: 1fr; }
+            .faq-grid { grid-template-columns: 1fr; }
+            .contact-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .nav { display: none; }
+            .header .btn-primary { display: none; }
+            .burger { display: flex; }
+            .mobile-cta { display: block; }
+            .hero { min-height: auto; padding-bottom: var(--s-2xl); }
+            .proof-grid { grid-template-columns: repeat(2, 1fr); gap: var(--s-xl) var(--s-md); }
+            .action-grid { grid-template-columns: repeat(2, 1fr); }
+            .rating-cards { flex-direction: column; }
+            .rating-card { max-width: 100%; }
+            body { padding-bottom: 80px; }
+
+            .services, .about, .action, .approach, .testimonials, .faq, .contact {
+                padding: var(--s-3xl) 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .proof-grid { grid-template-columns: repeat(2, 1fr); }
+            .action-grid { grid-template-columns: 1fr 1fr; }
+            .messenger-buttons { flex-direction: column; }
+            .hero-ctas { flex-direction: column; align-items: stretch; }
+            .hero-ctas .btn { justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════
+     01. HEADER
+     ═══════════════════════════════════════ -->
+<header class="header" id="header">
+    <div class="container">
+        <div class="header-inner">
+            <a href="#" class="logo">KAZIMOV<span>.</span></a>
+
+            <nav class="nav">
+                <a href="#services" data-i18n="nav.services">Услуги</a>
+                <a href="#about" data-i18n="nav.about">О враче</a>
+                <a href="#action" data-i18n="nav.results">В деле</a>
+                <a href="#testimonials" data-i18n="nav.reviews">Отзывы</a>
+                <a href="#contact" data-i18n="nav.contact">Контакты</a>
+            </nav>
+
+            <div class="header-actions">
+                <div class="lang-switch">
+                    <button class="active" data-lang="ru">RU</button>
+                    <button data-lang="uz">UZ</button>
+                    <button data-lang="en">EN</button>
+                </div>
+                <a href="#contact" class="btn btn-primary" data-i18n="nav.cta">Записаться</a>
+            </div>
+
+            <button class="burger" id="burger" aria-label="Меню" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </div>
+</header>
+
+<!-- Mobile nav overlay -->
+<div class="mobile-nav" id="mobileNav" role="dialog" aria-label="Навигация">
+    <button class="mobile-nav-close" id="mobileNavClose" aria-label="Закрыть меню">&times;</button>
+    <a href="#services" data-i18n="nav.services">Услуги</a>
+    <a href="#about" data-i18n="nav.about">О враче</a>
+    <a href="#action" data-i18n="nav.results">В деле</a>
+    <a href="#testimonials" data-i18n="nav.reviews">Отзывы</a>
+    <a href="#contact" data-i18n="nav.contact">Контакты</a>
+    <a href="#contact" class="btn btn-primary" data-i18n="nav.cta">Записаться</a>
+</div>
+
+<main>
+<!-- ═══════════════════════════════════════
+     02. HERO
+     ═══════════════════════════════════════ -->
+<section class="hero">
+    <div class="container">
+        <div class="hero-grid">
+            <div class="hero-content">
+                <div class="hero-label">
+                    <div class="dot"></div>
+                    <span class="t-caption" data-i18n="hero.label">Челюстно-лицевой хирург</span>
+                </div>
+                <h1 class="t-display hero-name" data-i18n="hero.name">Казимов<br>Алибек</h1>
+                <p class="hero-sub" data-i18n="hero.sub">Хирург головы и шеи. Harvard, NYU, Мюнхен. 10+ лет практики. Патент на авторскую методику. Ташкент.</p>
+                <div class="hero-ctas">
+                    <a href="#contact" class="btn btn-primary" data-i18n="hero.cta">Записаться на консультацию</a>
+                    <a href="#services" class="btn btn-ghost" data-i18n="hero.cta2">Подробнее <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+                </div>
+            </div>
+
+            <div class="hero-photo">
+                <img src="assets/img/hero.png" alt="Казимов Алибек — хирург" width="560" height="700" loading="eager">
+            </div>
+        </div>
+
+        <div class="rating-cards">
+            <div class="rating-card">
+                <div class="rating-icon google">G</div>
+                <div>
+                    <div class="rating-score">4.9</div>
+                    <div class="rating-stars">★★★★★</div>
+                    <div class="rating-source">Google Reviews</div>
+                </div>
+            </div>
+            <div class="rating-card">
+                <div class="rating-icon clinics">C</div>
+                <div>
+                    <div class="rating-score">5.0</div>
+                    <div class="rating-stars">★★★★★</div>
+                    <div class="rating-source">Clinics.uz</div>
+                </div>
+            </div>
+            <div class="rating-card">
+                <div class="rating-icon twogis">2G</div>
+                <div>
+                    <div class="rating-score">4.8</div>
+                    <div class="rating-stars">★★★★★</div>
+                    <div class="rating-source">2GIS</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     03. SOCIAL PROOF
+     ═══════════════════════════════════════ -->
+<section class="proof reveal">
+    <div class="container">
+        <div class="proof-grid">
+            <div class="proof-item">
+                <div class="proof-num" data-count="10">0</div>
+                <div class="proof-label" data-i18n="proof.exp">лет опыта</div>
+            </div>
+            <div class="proof-item">
+                <div class="proof-num" data-count="2000">0</div>
+                <div class="proof-label" data-i18n="proof.ops">операций</div>
+            </div>
+            <div class="proof-item">
+                <div class="proof-num" data-count="500">0</div>
+                <div class="proof-label" data-i18n="proof.foreign">пациентов из-за рубежа</div>
+            </div>
+            <div class="proof-item">
+                <div class="proof-num" data-count="98">0</div>
+                <div class="proof-label" data-i18n="proof.sat">% довольных пациентов</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     04. SERVICES
+     ═══════════════════════════════════════ -->
+<section class="services reveal" id="services">
+    <div class="container">
+        <div class="section-header">
+            <div class="t-caption" data-i18n="services.label">Специализации</div>
+            <h2 class="t-h1" data-i18n="services.title">Направления<br>практики</h2>
+        </div>
+
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-num">01</div>
+                <h3 class="t-h3" data-i18n="services.s1.title">Хирургия основания черепа</h3>
+                <p class="t-body" data-i18n="services.s1.desc">Операции на основании черепа и придаточных пазухах носа. Эндоскопические методики с минимальной травматичностью.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-num">02</div>
+                <h3 class="t-h3" data-i18n="services.s2.title">Образования головы и шеи</h3>
+                <p class="t-body" data-i18n="services.s2.desc">Хирургическое лечение новообразований челюстно-лицевой области, полости рта, гортани, щитовидной железы и слюнных желёз.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-num">03</div>
+                <h3 class="t-h3" data-i18n="services.s3.title">Реконструкция и травмы ЧЛО</h3>
+                <p class="t-body" data-i18n="services.s3.desc">Восстановление после травм лица, переломов костей лицевого скелета. Реконструктивные операции с восстановлением функции и эстетики.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-num">04</div>
+                <h3 class="t-h3" data-i18n="services.s4.title">Пластика и ринопластика</h3>
+                <p class="t-body" data-i18n="services.s4.desc">Ринопластика, отопластика, блефаропластика. Хирургия синдрома ночного апноэ. Авторская методика при врождённых пороках ЛОР-органов.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     05. ABOUT
+     ═══════════════════════════════════════ -->
+<section class="about reveal" id="about">
+    <div class="container">
+        <div class="about-grid">
+            <div class="about-photo">
+                <img src="assets/img/suit.png" alt="Казимов Алибек" width="480" height="640" loading="lazy">
+            </div>
+            <div class="about-content">
+                <div class="t-caption" style="color:var(--gold);margin-bottom:var(--s-sm);" data-i18n="about.label">О враче</div>
+                <h2 class="t-h1" style="margin-bottom:var(--s-xl);" data-i18n="about.title">Опыт, которому<br>доверяют</h2>
+                <p class="about-text" data-i18n="about.p1">Казимов Алибек — челюстно-лицевой хирург и хирург головы и шеи с более чем 10-летним клиническим опытом. Прошёл обучение и стажировки в ведущих клиниках США, Европы и Азии.</p>
+                <p class="about-text" data-i18n="about.p2">Разработал новую хирургическую методику и методы диагностики при врождённых пороках ЛОР-органов, получил патент. Член Американского и Европейского обществ челюстно-лицевых хирургов.</p>
+
+                <h4 style="margin-top:var(--s-xl);margin-bottom:var(--s-md);font-size:0.85rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;">Специализация</h4>
+                <div class="certs-grid">
+                    <span class="cert-tag">Хирургия основания черепа</span>
+                    <span class="cert-tag">Придаточные пазухи носа</span>
+                    <span class="cert-tag">Образования головы и шеи</span>
+                    <span class="cert-tag">Травмы ЧЛО</span>
+                    <span class="cert-tag">Реконструкция ЧЛО</span>
+                    <span class="cert-tag">Пластическая хирургия ЧЛО</span>
+                    <span class="cert-tag">Синдром ночного апноэ</span>
+                </div>
+
+                <h4 style="margin-top:var(--s-xl);margin-bottom:var(--s-md);font-size:0.85rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;">Членства</h4>
+                <div class="certs-grid">
+                    <span class="cert-tag" style="border:1px solid var(--gold);background:transparent;color:var(--gold);">AO CMF (Американское общество ЧЛХ)</span>
+                    <span class="cert-tag" style="border:1px solid var(--gold);background:transparent;color:var(--gold);">EACMFS (Европейское общество ЧЛХ)</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     05b. EDUCATION TIMELINE
+     ═══════════════════════════════════════ -->
+<section class="education reveal" id="education" style="padding:var(--s-4xl) 0;border-top:1px solid var(--border);">
+    <div class="container">
+        <div class="section-header">
+            <div class="t-caption" style="color:var(--gold);">Образование и стажировки</div>
+            <h2 class="t-h1">Международная<br>подготовка</h2>
+        </div>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:var(--s-md);">
+
+            <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:var(--s-lg);position:relative;overflow:hidden;">
+                <div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--accent);"></div>
+                <div style="font-size:0.7rem;font-weight:700;color:var(--text-muted);letter-spacing:0.1em;margin-bottom:var(--s-sm);">БАЗОВОЕ ОБРАЗОВАНИЕ</div>
+                <div class="t-h3" style="margin-bottom:4px;">ВолгГМУ</div>
+                <div style="color:var(--text-soft);font-size:0.9rem;">Первое высшее медицинское образование</div>
+            </div>
+
+            <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:var(--s-lg);position:relative;overflow:hidden;">
+                <div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--accent);"></div>
+                <div style="font-size:0.7rem;font-weight:700;color:var(--text-muted);letter-spacing:0.1em;margin-bottom:var(--s-sm);">СПЕЦИАЛИЗАЦИЯ</div>
+                <div class="t-h3" style="margin-bottom:4px;">СПбГМУ им. акад. Павлова</div>
+                <div style="color:var(--text-soft);font-size:0.9rem;">Челюстно-лицевая хирургия, Санкт-Петербург</div>
+            </div>
+
+            <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:var(--s-lg);position:relative;overflow:hidden;">
+                <div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--gold);"></div>
+                <div style="font-size:0.7rem;font-weight:700;color:var(--text-muted);letter-spacing:0.1em;margin-bottom:var(--s-sm);">ИНДИЯ</div>
+                <div class="t-h3" style="margin-bottom:4px;">Artemis Hospital</div>
+                <div style="color:var(--text-soft);font-size:0.9rem;">Хирургия головы и шеи</div>
+            </div>
+
+            <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:var(--s-lg);position:relative;overflow:hidden;">
+                <div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--gold);"></div>
+                <div style="font-size:0.7rem;font-weight:700;color:var(--text-muted);letter-spacing:0.1em;margin-bottom:var(--s-sm);">ГЕРМАНИЯ</div>
+                <div class="t-h3" style="margin-bottom:4px;">Ludwig-Maximilians-Universit&auml;t</div>
+                <div style="color:var(--text-soft);font-size:0.9rem;">Мюнхен</div>
+            </div>
+
+            <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:var(--s-lg);position:relative;overflow:hidden;">
+                <div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--gold);"></div>
+                <div style="font-size:0.7rem;font-weight:700;color:var(--text-muted);letter-spacing:0.1em;margin-bottom:var(--s-sm);">ВЕЛИКОБРИТАНИЯ</div>
+                <div class="t-h3" style="margin-bottom:4px;">Bizrah Academy</div>
+                <div style="color:var(--text-soft);font-size:0.9rem;">Ринопластика</div>
+            </div>
+
+            <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:var(--s-lg);position:relative;overflow:hidden;">
+                <div style="position:absolute;top:0;left:0;right:0;height:3px;background:#B22234;"></div>
+                <div style="font-size:0.7rem;font-weight:700;color:var(--text-muted);letter-spacing:0.1em;margin-bottom:var(--s-sm);">США</div>
+                <div class="t-h3" style="margin-bottom:4px;">Harvard Medical School</div>
+                <div style="color:var(--text-soft);font-size:0.9rem;">Surgical Leadership Program (SLP), 2022</div>
+            </div>
+
+            <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:var(--s-lg);position:relative;overflow:hidden;">
+                <div style="position:absolute;top:0;left:0;right:0;height:3px;background:#B22234;"></div>
+                <div style="font-size:0.7rem;font-weight:700;color:var(--text-muted);letter-spacing:0.1em;margin-bottom:var(--s-sm);">США</div>
+                <div class="t-h3" style="margin-bottom:4px;">NYU Grossman School of Medicine</div>
+                <div style="color:var(--text-soft);font-size:0.9rem;">Нью-Йорк</div>
+            </div>
+
+            <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:var(--s-lg);position:relative;overflow:hidden;">
+                <div style="position:absolute;top:0;left:0;right:0;height:3px;background:#B22234;"></div>
+                <div style="font-size:0.7rem;font-weight:700;color:var(--text-muted);letter-spacing:0.1em;margin-bottom:var(--s-sm);">США</div>
+                <div class="t-h3" style="margin-bottom:4px;">Rutgers University</div>
+                <div style="color:var(--text-soft);font-size:0.9rem;">Нью-Джерси</div>
+            </div>
+
+            <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:var(--s-lg);position:relative;overflow:hidden;">
+                <div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--gold);"></div>
+                <div style="font-size:0.7rem;font-weight:700;color:var(--text-muted);letter-spacing:0.1em;margin-bottom:var(--s-sm);">ИСПАНИЯ</div>
+                <div class="t-h3" style="margin-bottom:4px;">Hospital Universitario de Fuenlabrada</div>
+                <div style="color:var(--text-soft);font-size:0.9rem;">Мадрид</div>
+            </div>
+
+        </div>
+
+        <!-- Patent highlight -->
+        <div style="margin-top:var(--s-xl);padding:var(--s-xl);background:linear-gradient(135deg,var(--accent),#1a3f34);border-radius:var(--radius);color:var(--white);display:flex;align-items:center;gap:var(--s-xl);">
+            <div style="font-size:2.5rem;flex-shrink:0;">&#x1F4DC;</div>
+            <div>
+                <div style="font-weight:700;font-size:1.1rem;margin-bottom:4px;">Патент на хирургическую методику</div>
+                <div style="opacity:0.8;font-size:0.95rem;line-height:1.6;">Разработал новую хирургическую методику и методы диагностики при врождённых пороках ЛОР-органов. Запатентовано.</div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     06. IN ACTION
+     ═══════════════════════════════════════ -->
+<section class="action reveal" id="action">
+    <div class="container">
+        <div class="section-header">
+            <div class="t-caption" data-i18n="action.label">В операционной</div>
+            <h2 class="t-h1" data-i18n="action.title">В деле</h2>
+        </div>
+
+        <div class="action-grid">
+            <div class="action-item">
+                <img src="assets/img/surgery-1.jpg" alt="Хирургическая операция" loading="lazy">
+            </div>
+            <div class="action-item">
+                <img src="assets/img/surgery-2.jpg" alt="В операционной" loading="lazy">
+            </div>
+            <div class="action-item">
+                <img src="assets/img/surgery-3.jpg" alt="Команда хирургов" loading="lazy">
+            </div>
+            <div class="action-item">
+                <img src="assets/img/surgery-4.jpg" alt="Операция" loading="lazy">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     07. APPROACH
+     ═══════════════════════════════════════ -->
+<section class="approach reveal">
+    <div class="container">
+        <div class="approach-grid">
+            <div>
+                <div class="t-caption" style="color:var(--gold);margin-bottom:var(--s-sm);" data-i18n="approach.label">Подход</div>
+                <h2 class="t-h1" style="margin-bottom:var(--s-xl);" data-i18n="approach.title">Каждый пациент —<br>индивидуальный план</h2>
+                <p class="approach-text" data-i18n="approach.desc">Не существует двух одинаковых случаев. Каждая операция планируется индивидуально с учётом анатомии, пожеланий и ожиданий пациента.</p>
+                <ul class="approach-list">
+                    <li>
+                        <span class="num">01</span>
+                        <p data-i18n="approach.l1">Детальная диагностика и 3D-планирование перед каждой операцией</p>
+                    </li>
+                    <li>
+                        <span class="num">02</span>
+                        <p data-i18n="approach.l2">Современное эндоскопическое оборудование — минимальная травматичность</p>
+                    </li>
+                    <li>
+                        <span class="num">03</span>
+                        <p data-i18n="approach.l3">Персональное сопровождение на каждом этапе: от консультации до реабилитации</p>
+                    </li>
+                </ul>
+            </div>
+            <div class="approach-photo">
+                <img src="assets/img/lifestyle-4.jpg" alt="Казимов Алибек" loading="lazy">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     08. TESTIMONIALS
+     ═══════════════════════════════════════ -->
+<section class="testimonials reveal" id="testimonials">
+    <div class="container">
+        <div class="section-header">
+            <div class="t-caption" data-i18n="reviews.label">Отзывы</div>
+            <h2 class="t-h1" data-i18n="reviews.title">Что говорят<br>пациенты</h2>
+        </div>
+
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <div class="testimonial-stars">★★★★★</div>
+                <p class="testimonial-text" data-i18n="reviews.r1.text">«Доктор Казимов провёл мне септопластику. Результат превзошёл ожидания — дышу свободно впервые за 10 лет. Очень внимательный и профессиональный подход.»</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">М</div>
+                    <div>
+                        <div class="testimonial-name" data-i18n="reviews.r1.name">Мадина К.</div>
+                        <div class="testimonial-date" data-i18n="reviews.r1.date">Февраль 2026</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="testimonial-stars">★★★★★</div>
+                <p class="testimonial-text" data-i18n="reviews.r2.text">«Приехала из Казахстана по рекомендации. Операция на гайморовых пазухах прошла идеально. Клиника ProfMedService оснащена на уровне лучших клиник мира.»</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">А</div>
+                    <div>
+                        <div class="testimonial-name" data-i18n="reviews.r2.name">Айгуль Т.</div>
+                        <div class="testimonial-date" data-i18n="reviews.r2.date">Январь 2026</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="testimonial-stars">★★★★★</div>
+                <p class="testimonial-text" data-i18n="reviews.r3.text">«После удаления новообразования на шее доктор восстановил всё так, что шрама практически не видно. Огромная благодарность за ювелирную работу.»</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">Р</div>
+                    <div>
+                        <div class="testimonial-name" data-i18n="reviews.r3.name">Руслан М.</div>
+                        <div class="testimonial-date" data-i18n="reviews.r3.date">Декабрь 2025</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     09. FAQ
+     ═══════════════════════════════════════ -->
+<section class="faq reveal" id="faq">
+    <div class="container">
+        <div class="faq-grid">
+            <div>
+                <div class="t-caption" style="color:var(--gold);margin-bottom:var(--s-sm);" data-i18n="faq.label">FAQ</div>
+                <h2 class="t-h1" data-i18n="faq.title">Частые<br>вопросы</h2>
+            </div>
+
+            <div class="faq-list">
+                <div class="faq-item">
+                    <button class="faq-q" aria-expanded="false" aria-controls="faq-a1" data-i18n="faq.q1">Как записаться на консультацию? <span class="icon">+</span></button>
+                    <div class="faq-a" id="faq-a1" role="region"><div class="faq-a-inner" data-i18n="faq.a1">Заполните форму на сайте, напишите в Telegram или WhatsApp, или позвоните по телефону. Мы свяжемся с вами в течение 30 минут для подтверждения записи.</div></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-q" data-i18n="faq.q2">Сколько стоит первичная консультация? <span class="icon">+</span></button>
+                    <div class="faq-a"><div class="faq-a-inner" data-i18n="faq.a2">Стоимость первичной консультации зависит от направления. Точную стоимость уточняйте при записи. Мы предлагаем прозрачное ценообразование без скрытых платежей.</div></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-q" data-i18n="faq.q3">Принимаете ли пациентов из других стран? <span class="icon">+</span></button>
+                    <div class="faq-a"><div class="faq-a-inner" data-i18n="faq.a3">Да, у нас большой опыт работы с пациентами из Казахстана, Кыргызстана, Таджикистана и России. Мы помогаем с организацией визита: трансфер, проживание, переводчик.</div></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-q" data-i18n="faq.q4">Какой срок реабилитации после операции? <span class="icon">+</span></button>
+                    <div class="faq-a"><div class="faq-a-inner" data-i18n="faq.a4">Зависит от типа операции. Эндоскопические вмешательства — от 3-5 дней. Более сложные реконструктивные операции — от 2 недель. Подробный план реабилитации обсуждается индивидуально.</div></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-q" data-i18n="faq.q5">Возможна ли онлайн-консультация? <span class="icon">+</span></button>
+                    <div class="faq-a"><div class="faq-a-inner" data-i18n="faq.a5">Да. Первичную оценку можно провести онлайн через видеозвонок. Отправьте снимки и описание проблемы в Telegram — доктор даст предварительное заключение.</div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     10. CONTACT
+     ═══════════════════════════════════════ -->
+<section class="contact reveal" id="contact">
+    <div class="container">
+        <div class="section-header">
+            <div class="t-caption" data-i18n="contact.label">Контакты</div>
+            <h2 class="t-h1" data-i18n="contact.title">Запишитесь<br>на приём</h2>
+        </div>
+
+        <div class="contact-grid">
+            <div>
+                <form class="contact-form" id="contactForm">
+                    <label for="c-name" class="sr-only">Имя</label>
+                    <input type="text" id="c-name" name="name" class="form-field" placeholder="Ваше имя" data-i18n-placeholder="contact.name" required>
+                    <label for="c-phone" class="sr-only">Телефон</label>
+                    <input type="tel" id="c-phone" name="phone" class="form-field" placeholder="Телефон" data-i18n-placeholder="contact.phone" required>
+                    <label for="c-service" class="sr-only">Услуга</label>
+                    <select id="c-service" name="service" class="form-field">
+                        <option value="" disabled selected data-i18n="contact.service">Выберите услугу</option>
+                        <option value="maxillofacial" data-i18n="contact.opt1">Челюстно-лицевая хирургия</option>
+                        <option value="ent" data-i18n="contact.opt2">ЛОР-хирургия</option>
+                        <option value="oncology" data-i18n="contact.opt3">Онкология</option>
+                        <option value="plastic" data-i18n="contact.opt4">Пластическая хирургия</option>
+                        <option value="online" data-i18n="contact.opt5">Онлайн-консультация</option>
+                    </select>
+                    <button type="submit" class="btn btn-primary" style="justify-content:center;" data-i18n="contact.submit">Отправить заявку</button>
+                    <div id="formSuccess" style="display:none;padding:16px;background:#E8F5E9;border-radius:8px;color:#2E7D32;font-weight:500;text-align:center;" data-i18n="contact.success">Заявка отправлена! Мы свяжемся с вами в течение 30 минут.</div>
+                </form>
+
+                <div class="messenger-buttons">
+                    <a href="#" class="msg-btn tg">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm5.94 8.13l-1.97 9.3c-.15.67-.54.83-1.09.52l-3.02-2.22-1.46 1.4c-.16.16-.3.3-.61.3l.22-3.06 5.56-5.02c.24-.22-.05-.34-.38-.13L8.69 13.7l-2.93-.91c-.64-.2-.65-.64.13-.95l11.45-4.41c.53-.2 1 .13.82.95l-.22-.25z"/></svg>
+                        Telegram
+                    </a>
+                    <a href="#" class="msg-btn wa">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 2.12.55 4.11 1.51 5.85L0 24l6.33-1.66A11.94 11.94 0 0012 24c6.63 0 12-5.37 12-12S18.63 0 12 0zm5.8 16.97c-.24.67-1.41 1.28-1.95 1.36-.5.07-1.13.1-1.83-.11-.42-.13-.96-.31-1.65-.61-2.9-1.26-4.79-4.19-4.94-4.39-.14-.19-1.17-1.56-1.17-2.97 0-1.41.74-2.11 1-2.39.27-.28.58-.35.78-.35.19 0 .39 0 .56.01.18.01.42-.07.66.5.24.58.82 2 .89 2.15.07.14.12.31.02.5-.1.19-.14.31-.28.47-.14.17-.3.38-.42.51-.14.14-.29.3-.12.58.17.28.73 1.21 1.57 1.96 1.08.96 1.99 1.26 2.27 1.4.28.14.44.12.61-.07.17-.19.71-.83.9-1.11.19-.28.38-.24.64-.14.26.1 1.63.77 1.91.91.28.14.47.21.54.33.07.12.07.67-.17 1.34z"/></svg>
+                        WhatsApp
+                    </a>
+                    <a href="tel:+998XXXXXXXXX" class="msg-btn phone">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.13.81.36 1.6.68 2.36a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.76.32 1.55.55 2.36.68A2 2 0 0122 16.92z"/></svg>
+                        <span data-i18n="contact.call">Позвонить</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="contact-info">
+                <h3 class="t-h3" style="margin-bottom:var(--s-xl);" data-i18n="contact.info">Как нас найти</h3>
+                <div class="contact-details">
+                    <div class="contact-detail">
+                        <div>
+                            <div class="label" data-i18n="contact.addr_label">Адрес</div>
+                            <div class="value" data-i18n="contact.addr">Клиника ProfMedService, Ташкент</div>
+                        </div>
+                    </div>
+                    <div class="contact-detail">
+                        <div>
+                            <div class="label" data-i18n="contact.hours_label">Часы работы</div>
+                            <div class="value" data-i18n="contact.hours">Пн — Сб: 09:00 — 18:00</div>
+                        </div>
+                    </div>
+                    <div class="contact-detail">
+                        <div>
+                            <div class="label" data-i18n="contact.tel_label">Телефон</div>
+                            <div class="value">+998 XX XXX XX XX</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="map-placeholder" data-i18n="contact.map">Google Maps — будет подключена</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+</main>
+
+<!-- ═══════════════════════════════════════
+     11. FOOTER
+     ═══════════════════════════════════════ -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-inner">
+            <div class="footer-copy">© 2026 Казимов Алибек. <span data-i18n="footer.rights">Все права защищены.</span></div>
+            <div class="footer-links">
+                <a href="#" data-i18n="footer.privacy">Политика конфиденциальности</a>
+                <a href="#">Instagram</a>
+                <a href="#">Telegram</a>
+                <a href="#">YouTube</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- ═══════════════════════════════════════
+     MOBILE CTA
+     ═══════════════════════════════════════ -->
+<div class="mobile-cta">
+    <a href="#contact" class="btn btn-primary" data-i18n="nav.cta">Записаться на приём</a>
+</div>
+
+<!-- ═══════════════════════════════════════
+     SCRIPTS
+     ═══════════════════════════════════════ -->
+<script>
+/* Header scroll effect */
+const header = document.getElementById('header');
+window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 40);
+});
+
+/* Mobile menu */
+const burger = document.getElementById('burger');
+const mobileNav = document.getElementById('mobileNav');
+const mobileNavClose = document.getElementById('mobileNavClose');
+
+burger.addEventListener('click', () => {
+    mobileNav.classList.add('open');
+    burger.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+});
+
+const closeMobileNav = () => {
+    mobileNav.classList.remove('open');
+    burger.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+};
+
+mobileNavClose.addEventListener('click', closeMobileNav);
+mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMobileNav));
+
+/* Smooth scroll for anchor links (exclude bare # links) */
+document.querySelectorAll('a[href^="#"]:not([href="#"])').forEach(a => {
+    a.addEventListener('click', e => {
+        e.preventDefault();
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+            const offset = 80;
+            window.scrollTo({ top: target.offsetTop - offset, behavior: 'smooth' });
+        }
+    });
+});
+
+/* FAQ accordion */
+document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const item = btn.parentElement;
+        const answer = item.querySelector('.faq-a');
+        const isOpen = item.classList.contains('open');
+
+        document.querySelectorAll('.faq-item.open').forEach(i => {
+            i.classList.remove('open');
+            i.querySelector('.faq-a').style.maxHeight = '0';
+            i.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+        });
+
+        if (!isOpen) {
+            item.classList.add('open');
+            answer.style.maxHeight = answer.scrollHeight + 'px';
+            btn.setAttribute('aria-expanded', 'true');
+        }
+    });
+});
+
+/* Form submission handler */
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const name = document.getElementById('c-name').value;
+    const phone = document.getElementById('c-phone').value;
+    const service = document.getElementById('c-service').value;
+
+    /* Option 1: Open pre-filled WhatsApp message */
+    const text = encodeURIComponent(`Здравствуйте! Меня зовут ${name}. Хочу записаться на приём.\nТелефон: ${phone}\nУслуга: ${service}`);
+    window.open(`https://wa.me/?text=${text}`, '_blank');
+
+    /* Show success message */
+    this.querySelector('button[type="submit"]').style.display = 'none';
+    document.getElementById('formSuccess').style.display = 'block';
+});
+
+/* Scroll reveal */
+const revealElements = document.querySelectorAll('.reveal');
+const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            revealObserver.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.1 });
+
+revealElements.forEach(el => revealObserver.observe(el));
+
+/* Counter animation */
+const countObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const el = entry.target;
+            const target = parseInt(el.dataset.count);
+            const duration = 2000;
+            const start = performance.now();
+            const format = (n) => {
+                if (n >= 1000) {
+                    const rem = n % 1000;
+                    return Math.floor(n / 1000) + ' ' + String(rem).padStart(3, '0') + '+';
+                }
+                return n + (target > 50 && target < 100 ? '' : '+');
+            };
+
+            const animate = (now) => {
+                const progress = Math.min((now - start) / duration, 1);
+                const eased = 1 - Math.pow(1 - progress, 4);
+                const current = Math.floor(eased * target);
+                el.textContent = format(current);
+                if (progress < 1) requestAnimationFrame(animate);
+                else el.textContent = format(target);
+            };
+            requestAnimationFrame(animate);
+            countObserver.unobserve(el);
+        }
+    });
+}, { threshold: 0.5 });
+
+document.querySelectorAll('.proof-num').forEach(el => countObserver.observe(el));
+
+/* Multilingual system */
+const translations = {
+    ru: {}, /* Default — already in HTML */
+    uz: {
+        'nav.services': 'Xizmatlar',
+        'nav.about': 'Shifokor haqida',
+        'nav.results': 'Amaliyotda',
+        'nav.reviews': 'Sharhlar',
+        'nav.contact': 'Aloqa',
+        'nav.cta': 'Yozilish',
+        'hero.label': 'Jag\'-yuz jarrohi',
+        'hero.name': 'Qozimov<br>Alibek',
+        'hero.sub': 'Jag\'-yuz jarrohligi, LOR, onkologiya va plastik jarrohlik. Toshkentda xalqaro darajada.',
+        'hero.cta': 'Konsultatsiyaga yozilish',
+        'hero.cta2': 'Batafsil',
+        'proof.exp': 'yillik tajriba',
+        'proof.ops': 'operatsiyalar',
+        'proof.foreign': 'xorijiy bemorlar',
+        'proof.sat': '% mamnun bemorlar',
+        'services.label': 'Ixtisosliklar',
+        'services.title': 'Amaliyot<br>yo\'nalishlari',
+        'services.s1.title': 'Jag\'-yuz jarrohligi',
+        'services.s1.desc': 'Yuz suyaklari va yumshoq to\'qimalarida rekonstruktiv va estetik operatsiyalar.',
+        'services.s2.title': 'LOR jarrohligi',
+        'services.s2.desc': 'Burun va burun bo\'shliqlari endoskopik jarrohligi, septoplastika.',
+        'services.s3.title': 'Bosh va bo\'yin onkologiyasi',
+        'services.s3.desc': 'Jag\'-yuz sohasidagi yangi o\'smalarni jarrohlik bilan davolash.',
+        'services.s4.title': 'Plastik jarrohlik',
+        'services.s4.desc': 'Rinoplastika, otoplastika, blefaroplastika va boshqa estetik operatsiyalar.',
+        'about.label': 'Shifokor haqida',
+        'about.title': 'Ishonchli<br>tajriba',
+        'about.p1': 'Qozimov Alibek — rekonstruktiv va estetik jarrohlikda ko\'p yillik tajribaga ega jag\'-yuz jarrohi.',
+        'about.p2': 'Murakkab holatlar bo\'yicha ixtisoslashgan: yangi o\'smalarni olib tashlashdan yuz funksiyasi va estetikasini tiklashgacha.',
+        'contact.title': 'Qabulga<br>yoziling',
+        'contact.submit': 'So\'rov yuborish',
+        'contact.call': 'Qo\'ng\'iroq',
+        'faq.title': 'Ko\'p beriladigan<br>savollar',
+        'footer.rights': 'Barcha huquqlar himoyalangan.',
+    },
+    en: {
+        'nav.services': 'Services',
+        'nav.about': 'About',
+        'nav.results': 'In Action',
+        'nav.reviews': 'Reviews',
+        'nav.contact': 'Contact',
+        'nav.cta': 'Book Now',
+        'hero.label': 'Maxillofacial Surgeon',
+        'hero.name': 'Kazimov<br>Alibek',
+        'hero.sub': 'Maxillofacial surgery, ENT, oncology and plastic surgery. International standards in Tashkent.',
+        'hero.cta': 'Book a Consultation',
+        'hero.cta2': 'Learn More',
+        'proof.exp': 'years of experience',
+        'proof.ops': 'surgeries performed',
+        'proof.foreign': 'international patients',
+        'proof.sat': '% patient satisfaction',
+        'services.label': 'Specializations',
+        'services.title': 'Areas of<br>Practice',
+        'services.s1.title': 'Maxillofacial Surgery',
+        'services.s1.desc': 'Reconstructive and aesthetic surgery of facial bones and soft tissues.',
+        'services.s2.title': 'ENT Surgery',
+        'services.s2.desc': 'Endoscopic sinus surgery, septoplasty, tympanoplasty and laryngeal surgery.',
+        'services.s3.title': 'Head & Neck Oncology',
+        'services.s3.desc': 'Surgical treatment of tumors in the maxillofacial region, oral cavity, and thyroid.',
+        'services.s4.title': 'Plastic Surgery',
+        'services.s4.desc': 'Rhinoplasty, otoplasty, blepharoplasty and other facial aesthetic procedures.',
+        'about.label': 'About',
+        'about.title': 'Experience<br>you can trust',
+        'about.p1': 'Kazimov Alibek is a maxillofacial surgeon with extensive experience in reconstructive and aesthetic surgery.',
+        'about.p2': 'Specializes in complex cases requiring multidisciplinary approach: from tumor removal to restoring facial function and aesthetics.',
+        'contact.title': 'Book an<br>Appointment',
+        'contact.submit': 'Submit Request',
+        'contact.call': 'Call',
+        'faq.title': 'Frequently<br>Asked Questions',
+        'footer.rights': 'All rights reserved.',
+    }
+};
+
+/* Store original RU content on init */
+const originalContent = {};
+document.querySelectorAll('[data-i18n]').forEach(el => {
+    originalContent[el.getAttribute('data-i18n')] = el.innerHTML;
+});
+const originalPlaceholders = {};
+document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+    originalPlaceholders[el.getAttribute('data-i18n-placeholder')] = el.placeholder;
+});
+translations.ru = originalContent;
+
+/* Language switcher */
+document.querySelectorAll('.lang-switch button').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const lang = btn.dataset.lang;
+        document.documentElement.setAttribute('data-lang', lang);
+        document.documentElement.lang = lang === 'uz' ? 'uz' : lang;
+
+        document.querySelectorAll('.lang-switch button').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const dict = translations[lang] || originalContent;
+
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            el.innerHTML = dict[key] || originalContent[key] || el.innerHTML;
+        });
+
+        document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+            const key = el.getAttribute('data-i18n-placeholder');
+            if (dict[key]) el.placeholder = dict[key];
+            else if (originalPlaceholders[key]) el.placeholder = originalPlaceholders[key];
+        });
+    });
+});
+</script>
+
+</body>
+</html>
