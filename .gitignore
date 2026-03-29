@@ -12,3 +12,8 @@ node_modules/
 
 # Build
 .vercel/
+
+# Environment
+.env
+.env.*
+.env.local

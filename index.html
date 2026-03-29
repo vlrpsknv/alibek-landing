@@ -13,7 +13,7 @@
     <noscript><style>.reveal{opacity:1;transform:none;}</style></noscript>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Lora:wght@500;600;700&display=swap" rel="stylesheet">
 
     <!-- Schema.org -->
     <script type="application/ld+json">
@@ -38,18 +38,18 @@
            ═══════════════════════════════════════ */
         :root {
             /* Colors */
-            --bg:        #F5F0E8;
-            --bg-deep:   #EBE4D8;
+            --bg:        #F1F1F1;
+            --bg-deep:   #E8E8E8;
             --surface:   #FFFFFF;
             --text:      #1A1A1A;
             --text-soft: #4A4A4A;
             --text-muted:#6B6155;
-            --accent:    #2A5C4E;
-            --accent-l:  #3A7A68;
-            --gold:      #C4A265;
-            --gold-l:    #D4B87A;
-            --border:    #D8D0C4;
-            --white:     #FEFCF9;
+            --accent:    #1A1A1A;
+            --accent-l:  #333333;
+            --gold:      #B8976A;
+            --gold-l:    #C9A97D;
+            --border:    #DCDCDC;
+            --white:     #FFFFFF;
 
             /* Typography */
             --font: 'Inter', -apple-system, sans-serif;
@@ -79,6 +79,7 @@
             scroll-behavior: smooth;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
         }
 
         body {
@@ -99,7 +100,7 @@
             width: 100%;
             max-width: var(--max-w);
             margin: 0 auto;
-            padding: 0 var(--s-lg);
+            padding: 0 var(--s-md);
         }
 
         /* ═══════════════════════════════════════
@@ -113,10 +114,15 @@
         }
 
         .t-h1 {
-            font-size: clamp(2rem, 4vw, 3.2rem);
+            font-size: clamp(1.8rem, 3.5vw, 2.25rem);
             font-weight: 700;
-            line-height: 1.1;
+            line-height: 1.15;
             letter-spacing: -0.02em;
+        }
+
+        .t-h1 .muted,
+        .section-title .muted {
+            opacity: 0.5;
         }
 
         .t-h2 {
@@ -155,7 +161,7 @@
             background: var(--accent);
             color: var(--white);
         }
-        .btn-primary:hover { background: var(--accent-l); transform: translateY(-1px); }
+        .btn-primary:hover { background: #333; transform: translateY(-1px); }
 
         .btn-gold {
             background: var(--gold);
@@ -192,7 +198,7 @@
         }
 
         .header.scrolled {
-            background: rgba(245, 240, 232, 0.92);
+            background: rgba(241, 241, 241, 0.95);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border);
@@ -225,30 +231,81 @@
 
         .header-actions { display: flex; align-items: center; gap: var(--s-md); }
 
-        .lang-switch {
-            display: flex;
-            gap: 2px;
-            background: rgba(0,0,0,0.05);
-            border-radius: 8px;
-            padding: 2px;
-        }
+        /* Language dropdown */
+        .lang-dropdown { position: relative; flex-shrink: 0; }
 
-        .lang-switch button {
-            padding: 6px 10px;
-            border-radius: 6px;
+        .lang-dropdown-trigger {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            height: 36px;
+            border-radius: 8px;
+            background: rgba(0,0,0,0.05);
+            cursor: pointer;
+            transition: background 0.2s;
+            padding: 0 10px;
+        }
+        .lang-dropdown-trigger:hover { background: rgba(0,0,0,0.08); }
+        .lang-dropdown-trigger svg { width: 20px; height: 20px; display: block; border-radius: 50%; flex-shrink: 0; }
+        .lang-dropdown-trigger .lang-code {
             font-size: 0.75rem;
             font-weight: 600;
-            color: var(--text-muted);
-            transition: all 0.2s;
-        }
-
-        .lang-switch button.active {
-            background: var(--white);
             color: var(--text);
-            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            line-height: 1;
         }
 
-        .header .btn { padding: 10px 24px; font-size: 0.85rem; }
+        .lang-dropdown-menu {
+            position: absolute;
+            top: calc(100% + 8px);
+            right: 0;
+            background: var(--surface);
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12), 0 0 0 1px rgba(0,0,0,0.04);
+            padding: 6px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-8px) scale(0.96);
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 110;
+            min-width: 120px;
+        }
+        .lang-dropdown.open .lang-dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+        }
+
+        .lang-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--text-soft);
+            white-space: nowrap;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        .lang-option:hover { background: rgba(0,0,0,0.05); }
+        .lang-option.active { color: var(--text); font-weight: 600; background: rgba(0,0,0,0.03); }
+        .lang-option svg { width: 22px; height: 22px; border-radius: 50%; flex-shrink: 0; }
+
+        /* Fixed header sizes — prevent layout shift on lang change */
+        .nav { min-width: 440px; justify-content: center; }
+        .nav a { flex: 1; text-align: center; white-space: nowrap; }
+
+        .header .btn {
+            padding: 10px 24px;
+            font-size: 0.85rem;
+            min-width: 152px;
+            text-align: center;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
 
         .burger {
             display: none;
@@ -273,7 +330,7 @@
             right: 0;
             bottom: 0;
             z-index: 99;
-            background: rgba(245,240,232,0.98);
+            background: rgba(241,241,241,0.98);
             backdrop-filter: blur(20px);
             flex-direction: column;
             align-items: center;
@@ -320,23 +377,25 @@
            02. HERO
            ═══════════════════════════════════════ */
         .hero {
-            padding-top: clamp(100px, 14vh, 160px);
+            padding-top: clamp(80px, 10vh, 100px);
             padding-bottom: var(--s-xl);
-            min-height: 100vh;
+            min-height: auto;
             display: flex;
             flex-direction: column;
             justify-content: center;
+            overflow: visible;
         }
 
         .hero-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: var(--s-xl);
-            align-items: end;
+            align-items: center;
         }
 
         .hero-content {
-            padding-bottom: var(--s-3xl);
+            padding-bottom: var(--s-lg);
+            padding-left: clamp(24px, 6vw, 80px);
         }
 
         .hero-label {
@@ -344,7 +403,7 @@
             align-items: center;
             gap: var(--s-sm);
             padding: 6px 14px;
-            background: rgba(42, 92, 78, 0.08);
+            background: rgba(26, 26, 26, 0.06);
             border-radius: 100px;
             margin-bottom: var(--s-lg);
         }
@@ -353,7 +412,7 @@
             width: 6px;
             height: 6px;
             border-radius: 50%;
-            background: var(--accent);
+            background: var(--gold);
         }
 
         .hero-name {
@@ -377,6 +436,15 @@
 
         .hero-photo {
             position: relative;
+            overflow: visible;
+        }
+
+        .hero-img-wrap {
+            position: relative;
+            -webkit-mask-image: linear-gradient(to bottom, black 0%, black 83%, transparent 100%);
+            mask-image: linear-gradient(to bottom, black 0%, black 83%, transparent 100%);
+            pointer-events: none;
+            z-index: 1;
         }
 
         .hero-photo img {
@@ -384,74 +452,92 @@
             max-width: 560px;
             margin-left: auto;
             object-fit: contain;
+            object-position: top center;
+            -webkit-user-select: none;
+            user-select: none;
+            pointer-events: none;
+            -webkit-user-drag: none;
         }
 
         /* Rating cards */
         .rating-cards {
             display: flex;
-            gap: var(--s-md);
-            margin-top: calc(-1 * var(--s-xl));
+            gap: 8px;
+            justify-content: center;
+            margin-top: -48px;
             position: relative;
             z-index: 2;
         }
 
         .rating-card {
-            flex: 1;
-            background: var(--white);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: var(--s-md) var(--s-lg);
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.45);
+            border-radius: 16px;
+            padding: 12px 18px 12px 12px;
             display: flex;
             align-items: center;
-            gap: var(--s-md);
+            gap: 12px;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            white-space: nowrap;
         }
 
         .rating-card:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
         }
 
         .rating-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: var(--radius-sm);
+            flex-shrink: 0;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 700;
-            font-size: 0.7rem;
-            flex-shrink: 0;
         }
 
-        .rating-icon.google { background: #F1F3F4; color: #4285F4; }
-        .rating-icon.clinics { background: #E8F5E9; color: #2E7D32; }
-        .rating-icon.twogis { background: #E3F2FD; color: #1565C0; }
+        .rating-icon svg {
+            width: 48px;
+            height: 48px;
+            display: block;
+            border-radius: 10px;
+        }
+
+        .rating-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1px;
+        }
 
         .rating-score {
-            font-size: 1.5rem;
+            font-size: 1.25rem;
             font-weight: 700;
             line-height: 1;
         }
 
         .rating-stars {
-            color: var(--gold);
-            font-size: 0.7rem;
-            letter-spacing: 1px;
+            display: flex;
+            gap: 2px;
+            margin-top: 2px;
+        }
+
+        .rating-stars svg {
+            width: 14px;
+            height: 14px;
         }
 
         .rating-source {
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             color: var(--text-muted);
+            line-height: 1;
+            margin-top: 2px;
         }
 
         /* ═══════════════════════════════════════
            03. SOCIAL PROOF (numbers)
            ═══════════════════════════════════════ */
         .proof {
-            padding: var(--s-3xl) 0;
-            border-top: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
+            padding: var(--s-4xl) 0;
         }
 
         .proof-grid {
@@ -467,7 +553,7 @@
             font-weight: 800;
             letter-spacing: -0.03em;
             line-height: 1;
-            color: var(--accent);
+            color: var(--text);
         }
 
         .proof-label {
@@ -495,7 +581,7 @@
 
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             gap: var(--s-md);
         }
 
@@ -504,31 +590,15 @@
             border: 1px solid var(--border);
             border-radius: var(--radius);
             padding: var(--s-xl) var(--s-lg);
-            transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+            transition: border-color 0.5s ease, box-shadow 0.5s ease, transform 0.5s ease;
             cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .service-card::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: var(--accent);
-            transform: scaleX(0);
-            transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
         }
 
         .service-card:hover {
             transform: translateY(-4px);
-            box-shadow: 0 12px 40px rgba(0,0,0,0.06);
-            border-color: transparent;
+            border-color: var(--gold);
+            box-shadow: 0 16px 48px rgba(184, 151, 106, 0.12), 0 4px 16px rgba(0,0,0,0.04);
         }
-
-        .service-card:hover::after { transform: scaleX(1); }
 
         .service-num {
             font-size: 0.7rem;
@@ -935,8 +1005,7 @@
            11. FOOTER
            ═══════════════════════════════════════ */
         .footer {
-            padding: var(--s-xl) 0;
-            border-top: 1px solid var(--border);
+            padding: var(--s-2xl) 0;
         }
 
         .footer-inner {
@@ -975,7 +1044,7 @@
             right: 0;
             z-index: 99;
             padding: var(--s-md);
-            background: rgba(245,240,232,0.95);
+            background: rgba(241,241,241,0.95);
             backdrop-filter: blur(20px);
             border-top: 1px solid var(--border);
         }
@@ -1000,15 +1069,105 @@
         }
 
         /* ═══════════════════════════════════════
+           SECTION TITLES — shared pattern
+           ═══════════════════════════════════════ */
+        .section-title {
+            font-size: clamp(1.8rem, 3.5vw, 2.25rem);
+            font-weight: 700;
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+            text-align: center;
+        }
+
+        /* ═══════════════════════════════════════
+           MARQUEE / LOGO TICKER
+           ═══════════════════════════════════════ */
+        .marquee-section {
+            padding: var(--s-3xl) 0;
+            overflow: hidden;
+        }
+
+        .marquee-heading {
+            text-align: center;
+            margin-bottom: var(--s-2xl);
+            padding: 0 var(--s-lg);
+        }
+
+        .marquee {
+            --gap: 4rem;
+            --duration: 30s;
+            display: flex;
+            overflow: hidden;
+            user-select: none;
+            gap: var(--gap);
+            mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+        }
+
+        .marquee__content {
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            min-width: 100%;
+            gap: var(--gap);
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            animation: marquee-scroll var(--duration) linear infinite;
+        }
+
+        .marquee__content li {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .marquee__content img {
+            display: block;
+            height: 52px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .marquee__content img.logo-round {
+            height: 64px;
+        }
+
+        .marquee-labeled {
+            display: flex;
+            align-items: center;
+            gap: var(--s-sm);
+        }
+
+        .marquee-name {
+            font-family: 'Lora', Georgia, serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text);
+            line-height: 1.2;
+        }
+
+        @keyframes marquee-scroll {
+            from { transform: translateX(0); }
+            to { transform: translateX(calc(-100% - var(--gap))); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .marquee__content { --duration: 60s; }
+        }
+
+        /* ═══════════════════════════════════════
            RESPONSIVE
            ═══════════════════════════════════════ */
-        @media (max-width: 1024px) {
+        @media (max-width: 768px) {
             .hero-grid { grid-template-columns: 1fr; }
-            .hero-content { padding-bottom: var(--s-xl); text-align: center; }
-            .hero-sub { margin-left: auto; margin-right: auto; }
+            .hero-content { padding-bottom: var(--s-md); text-align: center; padding-left: 0 !important; }
+            .hero-sub { margin-left: auto; margin-right: auto; max-width: 100%; }
             .hero-ctas { justify-content: center; }
-            .hero-photo img { max-width: 400px; margin: 0 auto; }
-            .rating-cards { justify-content: center; }
+            .hero-photo { max-width: 400px; margin: 0 auto; }
+            .hero-photo img { max-width: 100%; max-height: 420px; }
             .services-grid { grid-template-columns: 1fr; }
             .about-grid { grid-template-columns: 1fr; }
             .about-photo { position: static; max-width: 400px; }
@@ -1017,23 +1176,60 @@
             .testimonials-grid { grid-template-columns: 1fr; }
             .faq-grid { grid-template-columns: 1fr; }
             .contact-grid { grid-template-columns: 1fr; }
+            .marquee__content img { height: 44px; }
+            .marquee__content img.logo-round { height: 54px; }
         }
 
         @media (max-width: 768px) {
+            /* Layout */
+            [style*="grid-template-columns: repeat(3"] { grid-template-columns: 1fr !important; }
+            .container { padding: 0 16px; }
+            body { padding-bottom: 80px; }
+
+            /* Nav */
             .nav { display: none; }
             .header .btn-primary { display: none; }
             .burger { display: flex; }
             .mobile-cta { display: block; }
-            .hero { min-height: auto; padding-bottom: var(--s-2xl); }
+
+            /* Hero: use display:contents to reorder children across grid/flex boundary */
+            .hero { min-height: auto; padding-bottom: var(--s-lg); padding-top: 72px; }
+            .hero-grid { display: flex; flex-direction: column; gap: 0; }
+            .hero-content { display: contents; }
+            .hero-label { order: 1; display: flex; justify-content: center; margin-bottom: 16px; }
+            .hero-name { order: 2; text-align: center; font-size: 2rem !important; line-height: 1.1 !important; margin-bottom: 16px; }
+            .hero-name br { display: none; }
+            .hero-sub { order: 3; text-align: center; max-width: 100% !important; margin: 0 0 16px !important; font-size: 1rem !important; padding: 0; }
+            .hero-photo { order: 4; padding: 16px 0 24px; }
+            .hero-photo img { max-width: 100% !important; margin: 0 auto; }
+            .hero-img-wrap { background: var(--bg); }
+            .hero-ctas { order: 5; display: flex; flex-direction: column; align-items: stretch; gap: 12px; padding: 0; margin-bottom: 16px; }
+            .hero-ctas .btn { justify-content: center; }
+            .hero-content { padding-left: 0 !important; }
+
+            /* Rating cards: two columns on mobile */
+            .rating-cards { margin-top: -44px; gap: 6px; justify-content: center; flex-wrap: nowrap; }
+            .rating-card { flex: 1 1 0; min-width: 0; white-space: normal; padding: 8px 10px 8px 8px; gap: 8px; }
+            .rating-icon svg { width: 36px; height: 36px; }
+            .rating-score { font-size: 0.95rem; }
+            .rating-stars svg { width: 12px; height: 12px; }
+            .rating-source { font-size: 0.7rem; }
+
+            /* Sections */
             .proof-grid { grid-template-columns: repeat(2, 1fr); gap: var(--s-xl) var(--s-md); }
             .action-grid { grid-template-columns: repeat(2, 1fr); }
-            .rating-cards { flex-direction: column; }
-            .rating-card { max-width: 100%; }
-            body { padding-bottom: 80px; }
-
             .services, .about, .action, .approach, .testimonials, .faq, .contact {
                 padding: var(--s-3xl) 0;
             }
+
+            /* Marquee */
+            .marquee-section { padding: var(--s-2xl) 0; }
+            .marquee-section .marquee-heading { margin-bottom: var(--s-xl); }
+            .marquee-section .section-title { font-size: 1.45rem; }
+            .marquee { --gap: 2.5rem; --duration: 25s; }
+            .marquee__content img { height: 36px; }
+            .marquee__content img.logo-round { height: 44px; }
+            .marquee-name { font-size: 0.75rem; }
         }
 
         @media (max-width: 480px) {
@@ -1042,6 +1238,7 @@
             .messenger-buttons { flex-direction: column; }
             .hero-ctas { flex-direction: column; align-items: stretch; }
             .hero-ctas .btn { justify-content: center; }
+            [style*="minmax(340px"] { grid-template-columns: 1fr !important; }
         }
     </style>
 </head>
@@ -1053,7 +1250,7 @@
 <header class="header" id="header">
     <div class="container">
         <div class="header-inner">
-            <a href="#" class="logo">KAZIMOV<span>.</span></a>
+            <a href="#" class="logo">DR<span>.</span> KAZIMOV<span>.</span></a>
 
             <nav class="nav">
                 <a href="#services" data-i18n="nav.services">Услуги</a>
@@ -1064,10 +1261,25 @@
             </nav>
 
             <div class="header-actions">
-                <div class="lang-switch">
-                    <button class="active" data-lang="ru">RU</button>
-                    <button data-lang="uz">UZ</button>
-                    <button data-lang="en">EN</button>
+                <div class="lang-dropdown" id="langDropdown">
+                    <button class="lang-dropdown-trigger" aria-expanded="false" aria-label="Выбор языка">
+                        <svg viewBox="0 0 36 36"><defs><clipPath id="fc"><circle cx="18" cy="18" r="18"/></clipPath></defs><g clip-path="url(#fc)"><rect y="0" width="36" height="12" fill="#fff"/><rect y="12" width="36" height="12" fill="#0039A6"/><rect y="24" width="36" height="12" fill="#D52B1E"/></g></svg>
+                        <span class="lang-code">RU</span>
+                    </button>
+                    <div class="lang-dropdown-menu">
+                        <button class="lang-option active" data-lang="ru">
+                            <svg viewBox="0 0 36 36"><defs><clipPath id="fru"><circle cx="18" cy="18" r="18"/></clipPath></defs><g clip-path="url(#fru)"><rect y="0" width="36" height="12" fill="#fff"/><rect y="12" width="36" height="12" fill="#0039A6"/><rect y="24" width="36" height="12" fill="#D52B1E"/></g></svg>
+                            RU
+                        </button>
+                        <button class="lang-option" data-lang="uz">
+                            <svg viewBox="0 0 36 36"><defs><clipPath id="fuz"><circle cx="18" cy="18" r="18"/></clipPath></defs><g clip-path="url(#fuz)"><rect y="0" width="36" height="7.2" fill="#0099B5"/><rect y="7.2" width="36" height="1.8" fill="#CE1126"/><rect y="9" width="36" height="18" fill="#fff"/><rect y="27" width="36" height="1.8" fill="#CE1126"/><rect y="28.8" width="36" height="7.2" fill="#1EB53A"/><circle cx="11" cy="4" r="2.8" fill="#fff"/><circle cx="12.2" cy="4" r="2.8" fill="#0099B5"/></g></svg>
+                            UZ
+                        </button>
+                        <button class="lang-option" data-lang="en">
+                            <svg viewBox="0 0 36 36"><defs><clipPath id="fen"><circle cx="18" cy="18" r="18"/></clipPath></defs><g clip-path="url(#fen)"><rect width="36" height="36" fill="#012169"/><path d="M0 0L36 36M36 0L0 36" stroke="#fff" stroke-width="6"/><path d="M0 0L36 36M36 0L0 36" stroke="#C8102E" stroke-width="2"/><path d="M18 0V36M0 18H36" stroke="#fff" stroke-width="10"/><path d="M18 0V36M0 18H36" stroke="#C8102E" stroke-width="6"/></g></svg>
+                            EN
+                        </button>
+                    </div>
                 </div>
                 <a href="#contact" class="btn btn-primary" data-i18n="nav.cta">Записаться</a>
             </div>
@@ -1102,47 +1314,63 @@
                     <div class="dot"></div>
                     <span class="t-caption" data-i18n="hero.label">Челюстно-лицевой хирург</span>
                 </div>
-                <h1 class="t-display hero-name" data-i18n="hero.name">Казимов<br>Алибек</h1>
-                <p class="hero-sub" data-i18n="hero.sub">Хирург головы и шеи. Harvard, NYU, Мюнхен. 10+ лет практики. Патент на авторскую методику. Ташкент.</p>
+                <h1 class="t-display hero-name" data-i18n="hero.name">Казимов <br>Алибек</h1>
+                <p class="hero-sub" data-i18n="hero.sub">Хирург головы и шеи. Гарвард. Нью-Йорк. Мюнхен. 10+ лет практики. Патент на авторскую методику. Ташкент.</p>
                 <div class="hero-ctas">
                     <a href="#contact" class="btn btn-primary" data-i18n="hero.cta">Записаться на консультацию</a>
-                    <a href="#services" class="btn btn-ghost" data-i18n="hero.cta2">Подробнее <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+                    <a href="#services" class="btn btn-ghost" data-i18n="hero.cta2">Узнать больше <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
                 </div>
             </div>
 
             <div class="hero-photo">
-                <img src="assets/img/hero.png" alt="Казимов Алибек — хирург" width="560" height="700" loading="eager">
-            </div>
-        </div>
-
-        <div class="rating-cards">
-            <div class="rating-card">
-                <div class="rating-icon google">G</div>
-                <div>
-                    <div class="rating-score">4.9</div>
-                    <div class="rating-stars">★★★★★</div>
-                    <div class="rating-source">Google Reviews</div>
+                <div class="hero-img-wrap">
+                    <img src="assets/img/hero.png" alt="Казимов Алибек — хирург" width="560" height="700" loading="eager">
                 </div>
-            </div>
-            <div class="rating-card">
-                <div class="rating-icon clinics">C</div>
-                <div>
-                    <div class="rating-score">5.0</div>
-                    <div class="rating-stars">★★★★★</div>
-                    <div class="rating-source">Clinics.uz</div>
+                <div class="rating-cards">
+                    <a href="https://med24.uz/doctor/kazimov-alibek-bakhtiyerovich" target="_blank" rel="noopener" class="rating-card" style="text-decoration:none;color:inherit;">
+                        <div class="rating-icon"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="none" viewBox="0 0 48 48"><rect width="48" height="48" fill="#0166FF" rx="10"/><path fill="#fff" d="M24.321 42h-.7c-2.083 0-3.777-1.716-3.777-3.822v-5.295c0-2.108 1.694-3.822 3.776-3.822h.701c2.082 0 3.776 1.715 3.776 3.822v5.294c0 2.107-1.694 3.823-3.776 3.823Zm-.7-11.355c-1.22 0-2.213 1.005-2.213 2.24v5.295c0 1.234.992 2.238 2.212 2.238h.701c1.22 0 2.212-1.004 2.212-2.238v-5.296c0-1.234-.992-2.239-2.212-2.239h-.7Zm.7-11.706h-.7c-2.083 0-3.777-1.715-3.777-3.822V9.823C19.844 7.716 21.538 6 23.62 6h.701c2.082 0 3.776 1.716 3.776 3.823v5.294c0 2.107-1.694 3.822-3.776 3.822Zm-.7-11.353c-1.22 0-2.213 1.003-2.213 2.239v5.294c0 1.235.992 2.238 2.212 2.238h.701c1.22 0 2.212-1.003 2.212-2.238V9.825c0-1.236-.992-2.239-2.212-2.239h-.7ZM12.135 35.171a3.786 3.786 0 0 1-2.302-.785 3.816 3.816 0 0 1-.974-1.128l-.35-.613a3.844 3.844 0 0 1-.379-2.902c.129-.489.35-.946.653-1.344a3.71 3.71 0 0 1 1.108-.977l4.53-2.647c1.804-1.055 4.117-.427 5.159 1.4l.35.614c1.043 1.825.422 4.168-1.382 5.222l-4.53 2.648a3.719 3.719 0 0 1-1.883.512Zm4.169-9.324a2.19 2.19 0 0 0-1.102.3l-4.531 2.647c-.25.144-.471.338-.648.572a2.263 2.263 0 0 0-.164 2.486l.351.613a2.197 2.197 0 0 0 3.022.82l4.53-2.647c.25-.143.47-.337.647-.569.177-.232.306-.499.382-.784a2.287 2.287 0 0 0-.22-1.705l-.35-.615a2.242 2.242 0 0 0-.571-.66 2.182 2.182 0 0 0-1.346-.459Zm-.001-2.11c-.64 0-1.29-.164-1.883-.51l-4.53-2.648a3.724 3.724 0 0 1-1.107-.977 3.862 3.862 0 0 1-.276-4.244l.35-.615c.25-.438.582-.82.975-1.126a3.694 3.694 0 0 1 1.318-.655 3.717 3.717 0 0 1 2.866.384l4.53 2.646c.428.245.803.575 1.105.972.301.396.523.852.652 1.338a3.904 3.904 0 0 1-.374 2.912l-.35.614a3.863 3.863 0 0 1-1.393 1.404 3.706 3.706 0 0 1-1.883.507v-.001Zm-4.171-9.32c-.766 0-1.51.4-1.92 1.118l-.35.616a2.238 2.238 0 0 0-.22 1.699c.152.576.518 1.06 1.03 1.358l4.531 2.647a2.2 2.2 0 0 0 3.02-.82l.35-.615a2.27 2.27 0 0 0 .218-1.705 2.25 2.25 0 0 0-.38-.783 2.168 2.168 0 0 0-.646-.57l-4.53-2.645a2.207 2.207 0 0 0-1.103-.3Zm19.564 9.32a3.786 3.786 0 0 1-2.302-.785 3.817 3.817 0 0 1-.974-1.127l-.35-.614a3.844 3.844 0 0 1-.379-2.902c.129-.488.35-.945.653-1.343a3.71 3.71 0 0 1 1.106-.977l4.531-2.648c1.804-1.053 4.117-.425 5.159 1.4l.35.614a3.84 3.84 0 0 1 .38 2.902 3.848 3.848 0 0 1-.654 1.344 3.71 3.71 0 0 1-1.108.977l-4.53 2.647a3.721 3.721 0 0 1-1.883.514l.001-.001Zm4.17-9.32a2.18 2.18 0 0 0-1.103.299l-4.531 2.647c-.25.145-.47.339-.648.572a2.265 2.265 0 0 0-.163 2.485l.35.615c.302.515.786.89 1.35 1.042a2.18 2.18 0 0 0 1.67-.222l4.533-2.647a2.223 2.223 0 0 0 1.028-1.353 2.287 2.287 0 0 0-.218-1.705l-.35-.614a2.256 2.256 0 0 0-.816-.823 2.159 2.159 0 0 0-1.103-.297Zm-.002 20.753c-.64 0-1.29-.165-1.883-.511l-4.53-2.648a3.725 3.725 0 0 1-1.107-.977 3.86 3.86 0 0 1-.276-4.244l.35-.615c1.042-1.825 3.356-2.453 5.16-1.4l4.53 2.647a3.796 3.796 0 0 1 1.76 2.321c.26.986.127 2.015-.379 2.899l-.35.615a3.863 3.863 0 0 1-1.394 1.403 3.706 3.706 0 0 1-1.883.507l.002.003Zm-6.439-7.59a2.26 2.26 0 0 0-.22 1.698 2.205 2.205 0 0 0 1.031 1.359l4.53 2.647c.511.3 1.108.38 1.679.224a2.207 2.207 0 0 0 1.342-1.043l.35-.615a2.24 2.24 0 0 0 .22-1.698 2.262 2.262 0 0 0-.383-.786 2.182 2.182 0 0 0-.647-.572l-4.531-2.65a2.176 2.176 0 0 0-1.672-.222 2.249 2.249 0 0 0-1.349 1.043l-.35.615Z"/></svg></div>
+                        <div class="rating-info">
+                            <div class="rating-score">5.0</div>
+                            <div class="rating-stars"><svg viewBox="0 0 24 24" fill="#F5C518"><path d="M12 2.5c.4 0 .7.2.9.6l2.2 4.5 5 .7c.4.1.7.3.8.7.1.4 0 .7-.3 1l-3.6 3.5.9 5c.1.4-.1.7-.4.9-.3.2-.7.2-1 0L12 16.8l-4.5 2.4c-.3.2-.7.1-1 0-.3-.2-.5-.5-.4-.9l.9-5L3.4 10c-.3-.3-.4-.6-.3-1 .1-.4.4-.6.8-.7l5-.7 2.2-4.5c.2-.4.5-.6.9-.6Z" stroke="rgba(255,255,255,0.3)" stroke-width="1" stroke-linejoin="round"/></svg><svg viewBox="0 0 24 24" fill="#F5C518"><path d="M12 2.5c.4 0 .7.2.9.6l2.2 4.5 5 .7c.4.1.7.3.8.7.1.4 0 .7-.3 1l-3.6 3.5.9 5c.1.4-.1.7-.4.9-.3.2-.7.2-1 0L12 16.8l-4.5 2.4c-.3.2-.7.1-1 0-.3-.2-.5-.5-.4-.9l.9-5L3.4 10c-.3-.3-.4-.6-.3-1 .1-.4.4-.6.8-.7l5-.7 2.2-4.5c.2-.4.5-.6.9-.6Z" stroke="rgba(255,255,255,0.3)" stroke-width="1" stroke-linejoin="round"/></svg><svg viewBox="0 0 24 24" fill="#F5C518"><path d="M12 2.5c.4 0 .7.2.9.6l2.2 4.5 5 .7c.4.1.7.3.8.7.1.4 0 .7-.3 1l-3.6 3.5.9 5c.1.4-.1.7-.4.9-.3.2-.7.2-1 0L12 16.8l-4.5 2.4c-.3.2-.7.1-1 0-.3-.2-.5-.5-.4-.9l.9-5L3.4 10c-.3-.3-.4-.6-.3-1 .1-.4.4-.6.8-.7l5-.7 2.2-4.5c.2-.4.5-.6.9-.6Z" stroke="rgba(255,255,255,0.3)" stroke-width="1" stroke-linejoin="round"/></svg><svg viewBox="0 0 24 24" fill="#F5C518"><path d="M12 2.5c.4 0 .7.2.9.6l2.2 4.5 5 .7c.4.1.7.3.8.7.1.4 0 .7-.3 1l-3.6 3.5.9 5c.1.4-.1.7-.4.9-.3.2-.7.2-1 0L12 16.8l-4.5 2.4c-.3.2-.7.1-1 0-.3-.2-.5-.5-.4-.9l.9-5L3.4 10c-.3-.3-.4-.6-.3-1 .1-.4.4-.6.8-.7l5-.7 2.2-4.5c.2-.4.5-.6.9-.6Z" stroke="rgba(255,255,255,0.3)" stroke-width="1" stroke-linejoin="round"/></svg><svg viewBox="0 0 24 24" fill="#F5C518"><path d="M12 2.5c.4 0 .7.2.9.6l2.2 4.5 5 .7c.4.1.7.3.8.7.1.4 0 .7-.3 1l-3.6 3.5.9 5c.1.4-.1.7-.4.9-.3.2-.7.2-1 0L12 16.8l-4.5 2.4c-.3.2-.7.1-1 0-.3-.2-.5-.5-.4-.9l.9-5L3.4 10c-.3-.3-.4-.6-.3-1 .1-.4.4-.6.8-.7l5-.7 2.2-4.5c.2-.4.5-.6.9-.6Z" stroke="rgba(255,255,255,0.3)" stroke-width="1" stroke-linejoin="round"/></svg></div>
+                            <div class="rating-source">Med24.uz</div>
+                        </div>
+                    </a>
+                    <a href="https://clinics.uz/catalog/medical-centers/prof-med-service/doc/kazimov-alibek-bahtierovich" target="_blank" rel="noopener" class="rating-card" style="text-decoration:none;color:inherit;">
+                        <div class="rating-icon"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="none" viewBox="0 0 48 48"><rect width="48" height="48" fill="#FF004A" rx="10"/><path fill="#fff" fill-rule="evenodd" d="M16.96 15.517V8h14.08v6.514a7.28 7.28 0 0 1 1.28-.114c2.22 0 4.172.986 5.454 2.56H40v14.08h-5.933a93 93 0 0 1-3.027 2.922V40H16.96v-8.96H8V16.96h7.346a6.913 6.913 0 0 1 1.614-1.443Zm15.36-.477c-2.032 0-3.994.957-5.273 2.459l-.487.572-.487-.572c-1.28-1.502-3.241-2.459-5.273-2.459-3.585 0-6.4 2.82-6.4 6.457 0 2.224.989 4.298 2.857 6.602 1.64 2.024 3.91 4.166 6.667 6.696l1.212 1.11 1.424 1.306 1.423-1.306h.001c3.309-3.025 6.004-5.493 7.88-7.806 1.867-2.304 2.856-4.378 2.856-6.602 0-3.638-2.815-6.457-6.4-6.457Z" clip-rule="evenodd"/></svg></div>
+                        <div class="rating-info">
+                            <div class="rating-score">5.0</div>
+                            <div class="rating-stars"><svg viewBox="0 0 24 24" fill="#F5C518"><path d="M12 2.5c.4 0 .7.2.9.6l2.2 4.5 5 .7c.4.1.7.3.8.7.1.4 0 .7-.3 1l-3.6 3.5.9 5c.1.4-.1.7-.4.9-.3.2-.7.2-1 0L12 16.8l-4.5 2.4c-.3.2-.7.1-1 0-.3-.2-.5-.5-.4-.9l.9-5L3.4 10c-.3-.3-.4-.6-.3-1 .1-.4.4-.6.8-.7l5-.7 2.2-4.5c.2-.4.5-.6.9-.6Z" stroke="rgba(255,255,255,0.3)" stroke-width="1" stroke-linejoin="round"/></svg><svg viewBox="0 0 24 24" fill="#F5C518"><path d="M12 2.5c.4 0 .7.2.9.6l2.2 4.5 5 .7c.4.1.7.3.8.7.1.4 0 .7-.3 1l-3.6 3.5.9 5c.1.4-.1.7-.4.9-.3.2-.7.2-1 0L12 16.8l-4.5 2.4c-.3.2-.7.1-1 0-.3-.2-.5-.5-.4-.9l.9-5L3.4 10c-.3-.3-.4-.6-.3-1 .1-.4.4-.6.8-.7l5-.7 2.2-4.5c.2-.4.5-.6.9-.6Z" stroke="rgba(255,255,255,0.3)" stroke-width="1" stroke-linejoin="round"/></svg><svg viewBox="0 0 24 24" fill="#F5C518"><path d="M12 2.5c.4 0 .7.2.9.6l2.2 4.5 5 .7c.4.1.7.3.8.7.1.4 0 .7-.3 1l-3.6 3.5.9 5c.1.4-.1.7-.4.9-.3.2-.7.2-1 0L12 16.8l-4.5 2.4c-.3.2-.7.1-1 0-.3-.2-.5-.5-.4-.9l.9-5L3.4 10c-.3-.3-.4-.6-.3-1 .1-.4.4-.6.8-.7l5-.7 2.2-4.5c.2-.4.5-.6.9-.6Z" stroke="rgba(255,255,255,0.3)" stroke-width="1" stroke-linejoin="round"/></svg><svg viewBox="0 0 24 24" fill="#F5C518"><path d="M12 2.5c.4 0 .7.2.9.6l2.2 4.5 5 .7c.4.1.7.3.8.7.1.4 0 .7-.3 1l-3.6 3.5.9 5c.1.4-.1.7-.4.9-.3.2-.7.2-1 0L12 16.8l-4.5 2.4c-.3.2-.7.1-1 0-.3-.2-.5-.5-.4-.9l.9-5L3.4 10c-.3-.3-.4-.6-.3-1 .1-.4.4-.6.8-.7l5-.7 2.2-4.5c.2-.4.5-.6.9-.6Z" stroke="rgba(255,255,255,0.3)" stroke-width="1" stroke-linejoin="round"/></svg><svg viewBox="0 0 24 24" fill="#F5C518"><path d="M12 2.5c.4 0 .7.2.9.6l2.2 4.5 5 .7c.4.1.7.3.8.7.1.4 0 .7-.3 1l-3.6 3.5.9 5c.1.4-.1.7-.4.9-.3.2-.7.2-1 0L12 16.8l-4.5 2.4c-.3.2-.7.1-1 0-.3-.2-.5-.5-.4-.9l.9-5L3.4 10c-.3-.3-.4-.6-.3-1 .1-.4.4-.6.8-.7l5-.7 2.2-4.5c.2-.4.5-.6.9-.6Z" stroke="rgba(255,255,255,0.3)" stroke-width="1" stroke-linejoin="round"/></svg></div>
+                            <div class="rating-source">Clinics.uz</div>
+                        </div>
+                    </a>
                 </div>
-            </div>
-            <div class="rating-card">
-                <div class="rating-icon twogis">2G</div>
-                <div>
-                    <div class="rating-score">4.8</div>
-                    <div class="rating-stars">★★★★★</div>
-                    <div class="rating-source">2GIS</div>
-                </div>
-            </div>
-        </div>
     </div>
 </section>
+
+<!-- Trust bar — infinite marquee -->
+<div class="marquee-section">
+    <div class="marquee-heading">
+        <h2 class="section-title" data-i18n="trust.title">Обучение и стажировки</h2>
+    </div>
+    <div class="marquee">
+        <ul class="marquee__content">
+            <li><img src="assets/img/logos/harvard.svg" alt="Harvard University"></li>
+            <li class="marquee-labeled"><img src="assets/img/logos/nyu.svg" alt="New York University" class="logo-round"><span class="marquee-name">New York<br>University</span></li>
+            <li><img src="assets/img/logos/rutgers.svg" alt="Rutgers University"></li>
+            <li><img src="assets/img/logos/lmu.svg" alt="LMU Munich"></li>
+            <li class="marquee-labeled"><img src="assets/img/logos/spbgmu.svg" alt="СПбГМУ им. Павлова" class="logo-round"><span class="marquee-name">СПбГМУ<br>им. Павлова</span></li>
+            <li><img src="assets/img/logos/bizrah.png" alt="Bizrah Academy"></li>
+        </ul>
+        <ul class="marquee__content" aria-hidden="true">
+            <li><img src="assets/img/logos/harvard.svg" alt=""></li>
+            <li class="marquee-labeled"><img src="assets/img/logos/nyu.svg" alt="" class="logo-round"><span class="marquee-name">New York<br>University</span></li>
+            <li><img src="assets/img/logos/rutgers.svg" alt=""></li>
+            <li><img src="assets/img/logos/lmu.svg" alt=""></li>
+            <li class="marquee-labeled"><img src="assets/img/logos/spbgmu.svg" alt="" class="logo-round"><span class="marquee-name">СПбГМУ<br>им. Павлова</span></li>
+            <li><img src="assets/img/logos/bizrah.png" alt=""></li>
+        </ul>
+    </div>
+</div>
 
 <!-- ═══════════════════════════════════════
      03. SOCIAL PROOF
@@ -1151,20 +1379,20 @@
     <div class="container">
         <div class="proof-grid">
             <div class="proof-item">
-                <div class="proof-num" data-count="10">0</div>
-                <div class="proof-label" data-i18n="proof.exp">лет опыта</div>
+                <div class="proof-num" data-count="10">10+</div>
+                <div class="proof-label" data-i18n="proof.exp">лет клинической практики</div>
             </div>
             <div class="proof-item">
-                <div class="proof-num" data-count="2000">0</div>
-                <div class="proof-label" data-i18n="proof.ops">операций</div>
+                <div class="proof-num" data-count="2000">2 000+</div>
+                <div class="proof-label" data-i18n="proof.ops">проведённых операций</div>
             </div>
             <div class="proof-item">
-                <div class="proof-num" data-count="500">0</div>
-                <div class="proof-label" data-i18n="proof.foreign">пациентов из-за рубежа</div>
+                <div class="proof-num" data-count="9">9</div>
+                <div class="proof-label" data-i18n="proof.countries">стран обучения и стажировок</div>
             </div>
             <div class="proof-item">
-                <div class="proof-num" data-count="98">0</div>
-                <div class="proof-label" data-i18n="proof.sat">% довольных пациентов</div>
+                <div class="proof-num" data-count="1">1</div>
+                <div class="proof-label" data-i18n="proof.patent">запатентованная методика</div>
             </div>
         </div>
     </div>
@@ -1176,30 +1404,46 @@
 <section class="services reveal" id="services">
     <div class="container">
         <div class="section-header">
-            <div class="t-caption" data-i18n="services.label">Специализации</div>
-            <h2 class="t-h1" data-i18n="services.title">Направления<br>практики</h2>
+            <div class="t-caption" data-i18n="services.label">Когда ко мне приходят</div>
+            <h2 class="t-h1" data-i18n="services.title">Вы здесь, <span class="muted">потому что<br>что-то не так</span></h2>
         </div>
 
         <div class="services-grid">
-            <div class="service-card">
+            <div class="service-card" style="cursor:default;">
                 <div class="service-num">01</div>
-                <h3 class="t-h3" data-i18n="services.s1.title">Хирургия основания черепа</h3>
-                <p class="t-body" data-i18n="services.s1.desc">Операции на основании черепа и придаточных пазухах носа. Эндоскопические методики с минимальной травматичностью.</p>
+                <h3 class="t-h3" data-i18n="services.s1.title">Нос не дышит. Годами.</h3>
+                <p class="t-body" data-i18n="services.s1.desc">Искривление перегородки, полипы, хронический синусит. Эндоскопическая операция через ноздрю, без разрезов на лице. Восстановление 3–5 дней.</p>
+                <a href="#contact" style="display:inline-block;margin-top:var(--s-md);font-size:0.85rem;font-weight:600;color:var(--accent);">Записаться &rarr;</a>
             </div>
-            <div class="service-card">
+            <div class="service-card" style="cursor:default;">
                 <div class="service-num">02</div>
-                <h3 class="t-h3" data-i18n="services.s2.title">Образования головы и шеи</h3>
-                <p class="t-body" data-i18n="services.s2.desc">Хирургическое лечение новообразований челюстно-лицевой области, полости рта, гортани, щитовидной железы и слюнных желёз.</p>
+                <h3 class="t-h3" data-i18n="services.s2.title">Нашли образование</h3>
+                <p class="t-body" data-i18n="services.s2.desc">Опухоли лица, шеи, полости рта, гортани, щитовидной железы. Убираю с минимальным следом и максимальным контролем.</p>
+                <a href="#contact" style="display:inline-block;margin-top:var(--s-md);font-size:0.85rem;font-weight:600;color:var(--accent);">Записаться &rarr;</a>
             </div>
-            <div class="service-card">
+            <div class="service-card" style="cursor:default;">
                 <div class="service-num">03</div>
-                <h3 class="t-h3" data-i18n="services.s3.title">Реконструкция и травмы ЧЛО</h3>
-                <p class="t-body" data-i18n="services.s3.desc">Восстановление после травм лица, переломов костей лицевого скелета. Реконструктивные операции с восстановлением функции и эстетики.</p>
+                <h3 class="t-h3" data-i18n="services.s3.title">Сломали лицо</h3>
+                <p class="t-body" data-i18n="services.s3.desc">Переломы скул, челюсти, носа, орбиты. Восстанавливаю кости и ткани так, чтобы через полгода вы забыли об этом.</p>
+                <a href="#contact" style="display:inline-block;margin-top:var(--s-md);font-size:0.85rem;font-weight:600;color:var(--accent);">Записаться &rarr;</a>
             </div>
-            <div class="service-card">
+            <div class="service-card" style="cursor:default;">
                 <div class="service-num">04</div>
-                <h3 class="t-h3" data-i18n="services.s4.title">Пластика и ринопластика</h3>
-                <p class="t-body" data-i18n="services.s4.desc">Ринопластика, отопластика, блефаропластика. Хирургия синдрома ночного апноэ. Авторская методика при врождённых пороках ЛОР-органов.</p>
+                <h3 class="t-h3" data-i18n="services.s4.title">Хотите другой нос</h3>
+                <p class="t-body" data-i18n="services.s4.desc">Ринопластика — функциональная и эстетическая. Если нос не только не нравится, но и не дышит — решаю обе проблемы за одну операцию.</p>
+                <a href="#contact" style="display:inline-block;margin-top:var(--s-md);font-size:0.85rem;font-weight:600;color:var(--accent);">Записаться &rarr;</a>
+            </div>
+            <div class="service-card" style="cursor:default;">
+                <div class="service-num">05</div>
+                <h3 class="t-h3" data-i18n="services.s5.title">Храпите. И это не шутка.</h3>
+                <p class="t-body" data-i18n="services.s5.desc">Синдром ночного апноэ — остановки дыхания во сне. Это опасно. Хирургия убирает причину, а не маску CPAP.</p>
+                <a href="#contact" style="display:inline-block;margin-top:var(--s-md);font-size:0.85rem;font-weight:600;color:var(--accent);">Записаться &rarr;</a>
+            </div>
+            <div class="service-card" style="cursor:default;">
+                <div class="service-num">06</div>
+                <h3 class="t-h3" data-i18n="services.s6.title">Ребёнок с пороком ЛОР-органов</h3>
+                <p class="t-body" data-i18n="services.s6.desc">Я разработал и запатентовал собственную методику для этих случаев. Это то, ради чего я ездил в 9 стран.</p>
+                <a href="#contact" style="display:inline-block;margin-top:var(--s-md);font-size:0.85rem;font-weight:600;color:var(--accent);">Записаться &rarr;</a>
             </div>
         </div>
     </div>
@@ -1215,26 +1459,18 @@
                 <img src="assets/img/suit.png" alt="Казимов Алибек" width="480" height="640" loading="lazy">
             </div>
             <div class="about-content">
-                <div class="t-caption" style="color:var(--gold);margin-bottom:var(--s-sm);" data-i18n="about.label">О враче</div>
-                <h2 class="t-h1" style="margin-bottom:var(--s-xl);" data-i18n="about.title">Опыт, которому<br>доверяют</h2>
-                <p class="about-text" data-i18n="about.p1">Казимов Алибек — челюстно-лицевой хирург и хирург головы и шеи с более чем 10-летним клиническим опытом. Прошёл обучение и стажировки в ведущих клиниках США, Европы и Азии.</p>
-                <p class="about-text" data-i18n="about.p2">Разработал новую хирургическую методику и методы диагностики при врождённых пороках ЛОР-органов, получил патент. Член Американского и Европейского обществ челюстно-лицевых хирургов.</p>
+                <div class="t-caption" style="color:var(--gold);margin-bottom:var(--s-sm);" data-i18n="about.label">Обо мне</div>
+                <h2 class="t-h1" style="margin-bottom:var(--s-xl);" data-i18n="about.title">Опыт 9 стран — <span class="muted"><br>для пациентов Ташкента</span></h2>
+                <p class="about-text" data-i18n="about.p1">Высшее медицинское образование в ВолгГМУ. Специализация по челюстно-лицевой хирургии в СПбГМУ им. акад. Павлова. Стажировки и обучение в Harvard, NYU, Rutgers (США), Ludwig-Maximilians-Universit&auml;t (Мюнхен), Bizrah Academy (Лондон), Artemis Hospital (Индия), Hospital Universitario de Fuenlabrada (Испания).</p>
+                <p class="about-text" data-i18n="about.p2">Автор запатентованной хирургической методики при врождённых пороках ЛОР-органов. Единственный специалист в регионе с двойным членством: Американское (AO CMF) и Европейское (EACMFS) общества челюстно-лицевых хирургов.</p>
 
-                <h4 style="margin-top:var(--s-xl);margin-bottom:var(--s-md);font-size:0.85rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;">Специализация</h4>
+                <h4 style="margin-top:var(--s-xl);margin-bottom:var(--s-md);font-size:0.85rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;">Членства и признание</h4>
                 <div class="certs-grid">
-                    <span class="cert-tag">Хирургия основания черепа</span>
-                    <span class="cert-tag">Придаточные пазухи носа</span>
-                    <span class="cert-tag">Образования головы и шеи</span>
-                    <span class="cert-tag">Травмы ЧЛО</span>
-                    <span class="cert-tag">Реконструкция ЧЛО</span>
-                    <span class="cert-tag">Пластическая хирургия ЧЛО</span>
-                    <span class="cert-tag">Синдром ночного апноэ</span>
-                </div>
-
-                <h4 style="margin-top:var(--s-xl);margin-bottom:var(--s-md);font-size:0.85rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;">Членства</h4>
-                <div class="certs-grid">
-                    <span class="cert-tag" style="border:1px solid var(--gold);background:transparent;color:var(--gold);">AO CMF (Американское общество ЧЛХ)</span>
-                    <span class="cert-tag" style="border:1px solid var(--gold);background:transparent;color:var(--gold);">EACMFS (Европейское общество ЧЛХ)</span>
+                    <span class="cert-tag" style="border:1px solid var(--gold);background:transparent;color:var(--gold);">AO CMF — Американское общество ЧЛХ</span>
+                    <span class="cert-tag" style="border:1px solid var(--gold);background:transparent;color:var(--gold);">EACMFS — Европейское общество ЧЛХ</span>
+                    <span class="cert-tag">Патент на авторскую методику</span>
+                    <span class="cert-tag">10+ лет клинической практики</span>
+                    <span class="cert-tag">2 000+ операций</span>
                 </div>
             </div>
         </div>
@@ -1244,24 +1480,24 @@
 <!-- ═══════════════════════════════════════
      05b. EDUCATION TIMELINE
      ═══════════════════════════════════════ -->
-<section class="education reveal" id="education" style="padding:var(--s-4xl) 0;border-top:1px solid var(--border);">
+<section class="education reveal" id="education" style="padding:var(--s-4xl) 0;">
     <div class="container">
         <div class="section-header">
             <div class="t-caption" style="color:var(--gold);">Образование и стажировки</div>
-            <h2 class="t-h1">Международная<br>подготовка</h2>
+            <h2 class="t-h1">Международная <span class="muted"><br>подготовка</span></h2>
         </div>
 
         <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:var(--s-md);">
 
             <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:var(--s-lg);position:relative;overflow:hidden;">
-                <div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--accent);"></div>
+                <div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--gold);"></div>
                 <div style="font-size:0.7rem;font-weight:700;color:var(--text-muted);letter-spacing:0.1em;margin-bottom:var(--s-sm);">БАЗОВОЕ ОБРАЗОВАНИЕ</div>
                 <div class="t-h3" style="margin-bottom:4px;">ВолгГМУ</div>
                 <div style="color:var(--text-soft);font-size:0.9rem;">Первое высшее медицинское образование</div>
             </div>
 
             <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:var(--s-lg);position:relative;overflow:hidden;">
-                <div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--accent);"></div>
+                <div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--gold);"></div>
                 <div style="font-size:0.7rem;font-weight:700;color:var(--text-muted);letter-spacing:0.1em;margin-bottom:var(--s-sm);">СПЕЦИАЛИЗАЦИЯ</div>
                 <div class="t-h3" style="margin-bottom:4px;">СПбГМУ им. акад. Павлова</div>
                 <div style="color:var(--text-soft);font-size:0.9rem;">Челюстно-лицевая хирургия, Санкт-Петербург</div>
@@ -1289,21 +1525,21 @@
             </div>
 
             <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:var(--s-lg);position:relative;overflow:hidden;">
-                <div style="position:absolute;top:0;left:0;right:0;height:3px;background:#B22234;"></div>
+                <div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--gold);"></div>
                 <div style="font-size:0.7rem;font-weight:700;color:var(--text-muted);letter-spacing:0.1em;margin-bottom:var(--s-sm);">США</div>
                 <div class="t-h3" style="margin-bottom:4px;">Harvard Medical School</div>
                 <div style="color:var(--text-soft);font-size:0.9rem;">Surgical Leadership Program (SLP), 2022</div>
             </div>
 
             <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:var(--s-lg);position:relative;overflow:hidden;">
-                <div style="position:absolute;top:0;left:0;right:0;height:3px;background:#B22234;"></div>
+                <div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--gold);"></div>
                 <div style="font-size:0.7rem;font-weight:700;color:var(--text-muted);letter-spacing:0.1em;margin-bottom:var(--s-sm);">США</div>
                 <div class="t-h3" style="margin-bottom:4px;">NYU Grossman School of Medicine</div>
                 <div style="color:var(--text-soft);font-size:0.9rem;">Нью-Йорк</div>
             </div>
 
             <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:var(--s-lg);position:relative;overflow:hidden;">
-                <div style="position:absolute;top:0;left:0;right:0;height:3px;background:#B22234;"></div>
+                <div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--gold);"></div>
                 <div style="font-size:0.7rem;font-weight:700;color:var(--text-muted);letter-spacing:0.1em;margin-bottom:var(--s-sm);">США</div>
                 <div class="t-h3" style="margin-bottom:4px;">Rutgers University</div>
                 <div style="color:var(--text-soft);font-size:0.9rem;">Нью-Джерси</div>
@@ -1319,7 +1555,7 @@
         </div>
 
         <!-- Patent highlight -->
-        <div style="margin-top:var(--s-xl);padding:var(--s-xl);background:linear-gradient(135deg,var(--accent),#1a3f34);border-radius:var(--radius);color:var(--white);display:flex;align-items:center;gap:var(--s-xl);">
+        <div style="margin-top:var(--s-xl);padding:var(--s-xl);background:linear-gradient(135deg,#1A1A1A,#333);border-radius:var(--radius);color:var(--white);display:flex;align-items:center;gap:var(--s-xl);">
             <div style="font-size:2.5rem;flex-shrink:0;">&#x1F4DC;</div>
             <div>
                 <div style="font-weight:700;font-size:1.1rem;margin-bottom:4px;">Патент на хирургическую методику</div>
@@ -1337,21 +1573,17 @@
     <div class="container">
         <div class="section-header">
             <div class="t-caption" data-i18n="action.label">В операционной</div>
-            <h2 class="t-h1" data-i18n="action.title">В деле</h2>
+            <h2 class="t-h1" data-i18n="action.title">В деле</h2><!-- short title, no muted needed -->
         </div>
 
-        <div class="action-grid">
-            <div class="action-item">
-                <img src="assets/img/surgery-1.jpg" alt="Хирургическая операция" loading="lazy">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--s-md);">
+            <div class="action-item" style="position:relative;">
+                <img src="assets/img/surgery-1.jpg" alt="Эндоскопическая операция" loading="lazy">
+                <div style="position:absolute;bottom:16px;left:16px;color:#fff;font-size:0.8rem;font-weight:600;text-shadow:0 1px 4px rgba(0,0,0,0.5);z-index:2;">Эндоскопическая хирургия</div>
             </div>
-            <div class="action-item">
-                <img src="assets/img/surgery-2.jpg" alt="В операционной" loading="lazy">
-            </div>
-            <div class="action-item">
-                <img src="assets/img/surgery-3.jpg" alt="Команда хирургов" loading="lazy">
-            </div>
-            <div class="action-item">
-                <img src="assets/img/surgery-4.jpg" alt="Операция" loading="lazy">
+            <div class="action-item" style="position:relative;">
+                <img src="assets/img/surgery-3.jpg" alt="Работа с командой" loading="lazy">
+                <div style="position:absolute;bottom:16px;left:16px;color:#fff;font-size:0.8rem;font-weight:600;text-shadow:0 1px 4px rgba(0,0,0,0.5);z-index:2;">Работа с командой ProfMedService</div>
             </div>
         </div>
     </div>
@@ -1365,20 +1597,20 @@
         <div class="approach-grid">
             <div>
                 <div class="t-caption" style="color:var(--gold);margin-bottom:var(--s-sm);" data-i18n="approach.label">Подход</div>
-                <h2 class="t-h1" style="margin-bottom:var(--s-xl);" data-i18n="approach.title">Каждый пациент —<br>индивидуальный план</h2>
-                <p class="approach-text" data-i18n="approach.desc">Не существует двух одинаковых случаев. Каждая операция планируется индивидуально с учётом анатомии, пожеланий и ожиданий пациента.</p>
+                <h2 class="t-h1" style="margin-bottom:var(--s-xl);" data-i18n="approach.title">Что будет, <span class="muted">если<br>вы запишетесь</span></h2>
+                <p class="approach-text" data-i18n="approach.desc">Три вещи, которые отличают мой подход от стандартного.</p>
                 <ul class="approach-list">
                     <li>
                         <span class="num">01</span>
-                        <p data-i18n="approach.l1">Детальная диагностика и 3D-планирование перед каждой операцией</p>
+                        <p data-i18n="approach.l1">Перед операцией вы видите план на 3D-модели и точно понимаете, что будет сделано и какой результат ожидать</p>
                     </li>
                     <li>
                         <span class="num">02</span>
-                        <p data-i18n="approach.l2">Современное эндоскопическое оборудование — минимальная травматичность</p>
+                        <p data-i18n="approach.l2">Работаю с HD-эндоскопами — разрез в разы меньше, чем при открытой хирургии. Вы быстрее восстанавливаетесь</p>
                     </li>
                     <li>
                         <span class="num">03</span>
-                        <p data-i18n="approach.l3">Персональное сопровождение на каждом этапе: от консультации до реабилитации</p>
+                        <p data-i18n="approach.l3">Я лично на связи в Telegram после операции. Не администратор — я. Вопрос в 2 часа ночи? Отвечу</p>
                     </li>
                 </ul>
             </div>
@@ -1396,13 +1628,13 @@
     <div class="container">
         <div class="section-header">
             <div class="t-caption" data-i18n="reviews.label">Отзывы</div>
-            <h2 class="t-h1" data-i18n="reviews.title">Что говорят<br>пациенты</h2>
+            <h2 class="t-h1" data-i18n="reviews.title">Те, кто уже прошёл <span class="muted"><br>через это</span></h2>
         </div>
 
         <div class="testimonials-grid">
             <div class="testimonial-card">
                 <div class="testimonial-stars">★★★★★</div>
-                <p class="testimonial-text" data-i18n="reviews.r1.text">«Доктор Казимов провёл мне септопластику. Результат превзошёл ожидания — дышу свободно впервые за 10 лет. Очень внимательный и профессиональный подход.»</p>
+                <p class="testimonial-text" data-i18n="reviews.r1.text">«10 лет не мог нормально дышать. Доктор Казимов сделал септопластику — дышу свободно впервые за 10 лет. Очень внимательный и профессиональный подход.»</p>
                 <div class="testimonial-author">
                     <div class="testimonial-avatar">М</div>
                     <div>
@@ -1414,7 +1646,7 @@
 
             <div class="testimonial-card">
                 <div class="testimonial-stars">★★★★★</div>
-                <p class="testimonial-text" data-i18n="reviews.r2.text">«Приехала из Казахстана по рекомендации. Операция на гайморовых пазухах прошла идеально. Клиника ProfMedService оснащена на уровне лучших клиник мира.»</p>
+                <p class="testimonial-text" data-i18n="reviews.r2.text">«Приехала из Алматы по рекомендации. Операция на пазухах прошла идеально. Клиника ProfMedService оснащена на уровне лучших клиник мира.»</p>
                 <div class="testimonial-author">
                     <div class="testimonial-avatar">А</div>
                     <div>
@@ -1426,7 +1658,7 @@
 
             <div class="testimonial-card">
                 <div class="testimonial-stars">★★★★★</div>
-                <p class="testimonial-text" data-i18n="reviews.r3.text">«После удаления новообразования на шее доктор восстановил всё так, что шрама практически не видно. Огромная благодарность за ювелирную работу.»</p>
+                <p class="testimonial-text" data-i18n="reviews.r3.text">«Удалили образование на шее. Я боялась шрама, что шрама практически не видно. Огромная благодарность за ювелирную работу.»</p>
                 <div class="testimonial-author">
                     <div class="testimonial-avatar">Р</div>
                     <div>
@@ -1447,29 +1679,29 @@
         <div class="faq-grid">
             <div>
                 <div class="t-caption" style="color:var(--gold);margin-bottom:var(--s-sm);" data-i18n="faq.label">FAQ</div>
-                <h2 class="t-h1" data-i18n="faq.title">Частые<br>вопросы</h2>
+                <h2 class="t-h1" data-i18n="faq.title">Вопросы, <span class="muted">которые<br>задают чаще всего</span></h2>
             </div>
 
             <div class="faq-list">
                 <div class="faq-item">
                     <button class="faq-q" aria-expanded="false" aria-controls="faq-a1" data-i18n="faq.q1">Как записаться на консультацию? <span class="icon">+</span></button>
-                    <div class="faq-a" id="faq-a1" role="region"><div class="faq-a-inner" data-i18n="faq.a1">Заполните форму на сайте, напишите в Telegram или WhatsApp, или позвоните по телефону. Мы свяжемся с вами в течение 30 минут для подтверждения записи.</div></div>
+                    <div class="faq-a" id="faq-a1" role="region"><div class="faq-a-inner" data-i18n="faq.a1">Напишите в Telegram, WhatsApp или заполните форму ниже. Мы свяжемся с вами в течение 30 минут для подтверждения записи.</div></div>
                 </div>
                 <div class="faq-item">
                     <button class="faq-q" data-i18n="faq.q2">Сколько стоит первичная консультация? <span class="icon">+</span></button>
-                    <div class="faq-a"><div class="faq-a-inner" data-i18n="faq.a2">Стоимость первичной консультации зависит от направления. Точную стоимость уточняйте при записи. Мы предлагаем прозрачное ценообразование без скрытых платежей.</div></div>
+                    <div class="faq-a"><div class="faq-a-inner" data-i18n="faq.a2">Зависит от направления. Мы предлагаем прозрачное ценообразование без скрытых платежей.</div></div>
                 </div>
                 <div class="faq-item">
                     <button class="faq-q" data-i18n="faq.q3">Принимаете ли пациентов из других стран? <span class="icon">+</span></button>
-                    <div class="faq-a"><div class="faq-a-inner" data-i18n="faq.a3">Да, у нас большой опыт работы с пациентами из Казахстана, Кыргызстана, Таджикистана и России. Мы помогаем с организацией визита: трансфер, проживание, переводчик.</div></div>
+                    <div class="faq-a"><div class="faq-a-inner" data-i18n="faq.a3">Да. Пациенты приезжают из Казахстана, Кыргызстана, Таджикистана и России. Мы помогаем с организацией визита: трансфер, проживание, переводчик.</div></div>
                 </div>
                 <div class="faq-item">
                     <button class="faq-q" data-i18n="faq.q4">Какой срок реабилитации после операции? <span class="icon">+</span></button>
-                    <div class="faq-a"><div class="faq-a-inner" data-i18n="faq.a4">Зависит от типа операции. Эндоскопические вмешательства — от 3-5 дней. Более сложные реконструктивные операции — от 2 недель. Подробный план реабилитации обсуждается индивидуально.</div></div>
+                    <div class="faq-a"><div class="faq-a-inner" data-i18n="faq.a4">Эндоскопические операции — от 3-5 дней. Более сложные реконструктивные операции — от 2 недель. Подробный план реабилитации обсуждается индивидуально.</div></div>
                 </div>
                 <div class="faq-item">
                     <button class="faq-q" data-i18n="faq.q5">Возможна ли онлайн-консультация? <span class="icon">+</span></button>
-                    <div class="faq-a"><div class="faq-a-inner" data-i18n="faq.a5">Да. Первичную оценку можно провести онлайн через видеозвонок. Отправьте снимки и описание проблемы в Telegram — доктор даст предварительное заключение.</div></div>
+                    <div class="faq-a"><div class="faq-a-inner" data-i18n="faq.a5">Да. Отправьте снимки и описание в Telegram Отправьте снимки и описание проблемы в Telegram — доктор даст предварительное заключение.</div></div>
                 </div>
             </div>
         </div>
@@ -1483,7 +1715,7 @@
     <div class="container">
         <div class="section-header">
             <div class="t-caption" data-i18n="contact.label">Контакты</div>
-            <h2 class="t-h1" data-i18n="contact.title">Запишитесь<br>на приём</h2>
+            <h2 class="t-h1" data-i18n="contact.title">Расскажите <span class="muted"><br>о своей ситуации</span></h2>
         </div>
 
         <div class="contact-grid">
@@ -1496,14 +1728,14 @@
                     <label for="c-service" class="sr-only">Услуга</label>
                     <select id="c-service" name="service" class="form-field">
                         <option value="" disabled selected data-i18n="contact.service">Выберите услугу</option>
-                        <option value="maxillofacial" data-i18n="contact.opt1">Челюстно-лицевая хирургия</option>
-                        <option value="ent" data-i18n="contact.opt2">ЛОР-хирургия</option>
-                        <option value="oncology" data-i18n="contact.opt3">Онкология</option>
-                        <option value="plastic" data-i18n="contact.opt4">Пластическая хирургия</option>
-                        <option value="online" data-i18n="contact.opt5">Онлайн-консультация</option>
+                        <option value="maxillofacial" data-i18n="contact.opt1">Нос не дышит</option>
+                        <option value="ent" data-i18n="contact.opt2">Образование на лице или шее</option>
+                        <option value="oncology" data-i18n="contact.opt3">Травма лица</option>
+                        <option value="plastic" data-i18n="contact.opt4">Ринопластика</option>
+                        <option value="online" data-i18n="contact.opt5">Храп и апноэ</option>
                     </select>
                     <button type="submit" class="btn btn-primary" style="justify-content:center;" data-i18n="contact.submit">Отправить заявку</button>
-                    <div id="formSuccess" style="display:none;padding:16px;background:#E8F5E9;border-radius:8px;color:#2E7D32;font-weight:500;text-align:center;" data-i18n="contact.success">Заявка отправлена! Мы свяжемся с вами в течение 30 минут.</div>
+                    <div id="formSuccess" style="display:none;padding:16px;background:#E8F5E9;border-radius:8px;color:#2E7D32;font-weight:500;text-align:center;" data-i18n="contact.success">Принято. Свяжемся в течение 30 минут.</div>
                 </form>
 
                 <div class="messenger-buttons">
@@ -1544,7 +1776,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="map-placeholder" data-i18n="contact.map">Google Maps — будет подключена</div>
+                <a href="https://maps.google.com/?q=ProfMedService+Tashkent" target="_blank" class="map-placeholder" style="text-decoration:none;cursor:pointer;transition:background 0.2s;" data-i18n="contact.map">
+                    <span style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+                        Открыть на Google Maps
+                    </span>
+                </a>
             </div>
         </div>
     </div>
@@ -1573,7 +1810,7 @@
      MOBILE CTA
      ═══════════════════════════════════════ -->
 <div class="mobile-cta">
-    <a href="#contact" class="btn btn-primary" data-i18n="nav.cta">Записаться на приём</a>
+    <a href="#contact" class="btn btn-primary" data-i18n="nav.cta">Записаться</a>
 </div>
 
 <!-- ═══════════════════════════════════════
@@ -1711,16 +1948,17 @@ const translations = {
         'nav.contact': 'Aloqa',
         'nav.cta': 'Yozilish',
         'hero.label': 'Jag\'-yuz jarrohi',
-        'hero.name': 'Qozimov<br>Alibek',
-        'hero.sub': 'Jag\'-yuz jarrohligi, LOR, onkologiya va plastik jarrohlik. Toshkentda xalqaro darajada.',
+        'hero.name': 'Kazimov<br>Alibek',
+        'hero.sub': 'Bosh va bo\'yin jarrohi. Garvard. Nyu-York. Myunxen. 10+ yillik tajriba. Mualliflik metodikasiga patent. Toshkent.',
         'hero.cta': 'Konsultatsiyaga yozilish',
         'hero.cta2': 'Batafsil',
         'proof.exp': 'yillik tajriba',
         'proof.ops': 'operatsiyalar',
         'proof.foreign': 'xorijiy bemorlar',
         'proof.sat': '% mamnun bemorlar',
+        'trust.title': 'Ta\'lim va stajirovkalar',
         'services.label': 'Ixtisosliklar',
-        'services.title': 'Amaliyot<br>yo\'nalishlari',
+        'services.title': 'Amaliyot <span class="muted"><br>yo\'nalishlari</span>',
         'services.s1.title': 'Jag\'-yuz jarrohligi',
         'services.s1.desc': 'Yuz suyaklari va yumshoq to\'qimalarida rekonstruktiv va estetik operatsiyalar.',
         'services.s2.title': 'LOR jarrohligi',
@@ -1730,13 +1968,13 @@ const translations = {
         'services.s4.title': 'Plastik jarrohlik',
         'services.s4.desc': 'Rinoplastika, otoplastika, blefaroplastika va boshqa estetik operatsiyalar.',
         'about.label': 'Shifokor haqida',
-        'about.title': 'Ishonchli<br>tajriba',
-        'about.p1': 'Qozimov Alibek — rekonstruktiv va estetik jarrohlikda ko\'p yillik tajribaga ega jag\'-yuz jarrohi.',
+        'about.title': 'Ishonchli <span class="muted"><br>tajriba</span>',
+        'about.p1': 'Kazimov Alibek — rekonstruktiv va estetik jarrohlikda ko\'p yillik tajribaga ega jag\'-yuz jarrohi.',
         'about.p2': 'Murakkab holatlar bo\'yicha ixtisoslashgan: yangi o\'smalarni olib tashlashdan yuz funksiyasi va estetikasini tiklashgacha.',
-        'contact.title': 'Qabulga<br>yoziling',
+        'contact.title': 'Qabulga <span class="muted"><br>yoziling</span>',
         'contact.submit': 'So\'rov yuborish',
         'contact.call': 'Qo\'ng\'iroq',
-        'faq.title': 'Ko\'p beriladigan<br>savollar',
+        'faq.title': 'Ko\'p beriladigan <span class="muted"><br>savollar</span>',
         'footer.rights': 'Barcha huquqlar himoyalangan.',
     },
     en: {
@@ -1748,15 +1986,16 @@ const translations = {
         'nav.cta': 'Book Now',
         'hero.label': 'Maxillofacial Surgeon',
         'hero.name': 'Kazimov<br>Alibek',
-        'hero.sub': 'Maxillofacial surgery, ENT, oncology and plastic surgery. International standards in Tashkent.',
+        'hero.sub': 'Head & neck surgeon. Harvard. New York. Munich. 10+ years of practice. Patented original technique. Tashkent.',
         'hero.cta': 'Book a Consultation',
         'hero.cta2': 'Learn More',
         'proof.exp': 'years of experience',
         'proof.ops': 'surgeries performed',
         'proof.foreign': 'international patients',
         'proof.sat': '% patient satisfaction',
+        'trust.title': 'Education & Training',
         'services.label': 'Specializations',
-        'services.title': 'Areas of<br>Practice',
+        'services.title': 'Areas of <span class="muted"><br>Practice</span>',
         'services.s1.title': 'Maxillofacial Surgery',
         'services.s1.desc': 'Reconstructive and aesthetic surgery of facial bones and soft tissues.',
         'services.s2.title': 'ENT Surgery',
@@ -1766,13 +2005,13 @@ const translations = {
         'services.s4.title': 'Plastic Surgery',
         'services.s4.desc': 'Rhinoplasty, otoplasty, blepharoplasty and other facial aesthetic procedures.',
         'about.label': 'About',
-        'about.title': 'Experience<br>you can trust',
+        'about.title': 'Experience <span class="muted"><br>you can trust</span>',
         'about.p1': 'Kazimov Alibek is a maxillofacial surgeon with extensive experience in reconstructive and aesthetic surgery.',
         'about.p2': 'Specializes in complex cases requiring multidisciplinary approach: from tumor removal to restoring facial function and aesthetics.',
-        'contact.title': 'Book an<br>Appointment',
+        'contact.title': 'Book an <span class="muted"><br>Appointment</span>',
         'contact.submit': 'Submit Request',
         'contact.call': 'Call',
-        'faq.title': 'Frequently<br>Asked Questions',
+        'faq.title': 'Frequently <span class="muted"><br>Asked Questions</span>',
         'footer.rights': 'All rights reserved.',
     }
 };
@@ -1788,15 +2027,37 @@ document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
 });
 translations.ru = originalContent;
 
-/* Language switcher */
-document.querySelectorAll('.lang-switch button').forEach(btn => {
-    btn.addEventListener('click', () => {
+/* Language dropdown */
+const langDropdown = document.getElementById('langDropdown');
+const langTrigger = langDropdown.querySelector('.lang-dropdown-trigger');
+
+langTrigger.addEventListener('click', (e) => {
+    e.stopPropagation();
+    langDropdown.classList.toggle('open');
+    langTrigger.setAttribute('aria-expanded', langDropdown.classList.contains('open'));
+});
+
+document.addEventListener('click', () => {
+    langDropdown.classList.remove('open');
+    langTrigger.setAttribute('aria-expanded', 'false');
+});
+
+document.querySelectorAll('.lang-option').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        e.stopPropagation();
         const lang = btn.dataset.lang;
         document.documentElement.setAttribute('data-lang', lang);
-        document.documentElement.lang = lang === 'uz' ? 'uz' : lang;
+        document.documentElement.lang = lang;
 
-        document.querySelectorAll('.lang-switch button').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.lang-option').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
+
+        /* Update trigger flag SVG + lang code */
+        const flagSvg = btn.querySelector('svg');
+        if (flagSvg) langTrigger.innerHTML = flagSvg.outerHTML + '<span class="lang-code">' + lang.toUpperCase() + '</span>';
+
+        langDropdown.classList.remove('open');
+        langTrigger.setAttribute('aria-expanded', 'false');
 
         const dict = translations[lang] || originalContent;
 
@@ -1813,6 +2074,10 @@ document.querySelectorAll('.lang-switch button').forEach(btn => {
     });
 });
 </script>
+
+<!-- Chat Widget -->
+<script>window.KAZIMOV_CHAT_URL='https://alibek-chatbot.vercel.app';</script>
+<script src="https://alibek-chatbot.vercel.app/widget-loader.js" defer></script>
 
 </body>
 </html>
