@@ -717,30 +717,36 @@
             color: var(--bg);
         }
 
-        .approach-grid {
-            display: grid;
-            grid-template-columns: 0.55fr 0.45fr;
-            gap: var(--s-3xl);
-            align-items: center;
+        .approach .approach-header {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto var(--s-xl);
         }
 
         .approach-text {
             color: rgba(245,240,232,0.7);
-            font-size: 1.1rem;
-            line-height: 1.8;
-            margin-bottom: var(--s-xl);
+            font-size: 1.05rem;
+            line-height: 1.7;
         }
 
         .approach-list {
-            display: flex;
-            flex-direction: column;
-            gap: var(--s-md);
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--s-lg);
         }
 
         .approach-list li {
             display: flex;
-            gap: var(--s-md);
-            align-items: flex-start;
+            flex-direction: column;
+            gap: var(--s-sm);
+            padding: var(--s-lg);
+            border: 1px solid rgba(245,240,232,0.08);
+            border-radius: var(--radius);
+            transition: border-color 0.3s;
+        }
+
+        .approach-list li:hover {
+            border-color: var(--gold);
         }
 
         .approach-list .num {
@@ -748,25 +754,12 @@
             font-weight: 700;
             color: var(--gold);
             letter-spacing: 0.1em;
-            flex-shrink: 0;
-            padding-top: 4px;
         }
 
         .approach-list p {
             color: rgba(245,240,232,0.8);
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             line-height: 1.6;
-        }
-
-        .approach-photo {
-            border-radius: var(--radius);
-            overflow: hidden;
-        }
-
-        .approach-photo img {
-            width: 100%;
-            aspect-ratio: 4/5;
-            object-fit: cover;
         }
 
         /* ═══════════════════════════════════════
@@ -1523,8 +1516,7 @@
             .about-grid { grid-template-columns: 1fr; min-height: auto; }
             .about-photo { height: 400px; }
             .about-content { padding: var(--s-xl) var(--s-md); }
-            .approach-grid { grid-template-columns: 1fr; }
-            .approach-photo { order: -1; max-width: 400px; }
+            .approach-list { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
             .review-card { width: clamp(260px, 75vw, 300px); }
             .review-text-wrap .review-scroll-btn { display: none; }
             .review-videos .review-video-card { width: clamp(160px, 44vw, 200px); }
@@ -2448,30 +2440,25 @@
      ═══════════════════════════════════════ -->
 <section class="approach reveal">
     <div class="container">
-        <div class="approach-grid">
-            <div>
-                <div class="t-caption about-caption" data-i18n="approach.label">Подход</div>
-                <h2 class="t-h1 about-title" data-i18n="approach.title">Что будет, <span class="muted">если<br>вы запишетесь</span></h2>
-                <p class="approach-text" data-i18n="approach.desc">Три вещи, которые отличают мой подход от стандартного.</p>
-                <ul class="approach-list">
-                    <li>
-                        <span class="num">01</span>
-                        <p data-i18n="approach.l1">Перед операцией вы видите план на 3D-модели и точно понимаете, что будет сделано и какой результат ожидать</p>
-                    </li>
-                    <li>
-                        <span class="num">02</span>
-                        <p data-i18n="approach.l2">Работаю с HD-эндоскопами — разрез в разы меньше, чем при открытой хирургии. Вы быстрее восстанавливаетесь</p>
-                    </li>
-                    <li>
-                        <span class="num">03</span>
-                        <p data-i18n="approach.l3">Я лично на связи в Telegram после операции. Не администратор — я. Вопрос в 2 часа ночи? Отвечу</p>
-                    </li>
-                </ul>
-            </div>
-            <div class="approach-photo">
-                <img src="assets/img/lifestyle-4.jpg" alt="Казимов Алибек" loading="lazy">
-            </div>
+        <div class="approach-header">
+            <div class="t-caption about-caption" data-i18n="approach.label">Подход</div>
+            <h2 class="t-h1 about-title" data-i18n="approach.title">Что будет, <span class="muted">если вы запишетесь</span></h2>
+            <p class="approach-text" data-i18n="approach.desc">Три вещи, которые отличают мой подход от стандартного.</p>
         </div>
+        <ul class="approach-list">
+            <li>
+                <span class="num">01</span>
+                <p data-i18n="approach.l1">Перед операцией вы видите план на 3D-модели и точно понимаете, что будет сделано и какой результат ожидать</p>
+            </li>
+            <li>
+                <span class="num">02</span>
+                <p data-i18n="approach.l2">Работаю с HD-эндоскопами — разрез в разы меньше, чем при открытой хирургии. Вы быстрее восстанавливаетесь</p>
+            </li>
+            <li>
+                <span class="num">03</span>
+                <p data-i18n="approach.l3">Я лично на связи в Telegram после операции. Не администратор — я. Вопрос в 2 часа ночи? Отвечу</p>
+            </li>
+        </ul>
     </div>
 </section>
 
@@ -2856,6 +2843,12 @@ const translations = {
         'contact.ig_btn': 'Instagram',
         'contact.call_btn': 'Qo\'ng\'iroq: +998 91 524 52 64',
         'contact.call': 'Qo\'ng\'iroq',
+        'approach.label': 'Yondashuv',
+        'approach.title': 'Yozilsangiz <span class="muted">nima bo\'ladi</span>',
+        'approach.desc': 'Mening yondashuvimni standartdan farq qiluvchi uchta narsa.',
+        'approach.l1': 'Operatsiyadan oldin 3D-modelda rejani ko\'rasiz va natijani aniq tushunasiz',
+        'approach.l2': 'HD-endoskoplar bilan ishlayman — kesim ochiq jarrohlikka qaraganda ancha kichik. Tezroq tiklanasiz',
+        'approach.l3': 'Operatsiyadan keyin Telegramda shaxsan men aloqadaman. Administrator emas — men. Kechasi soat 2 da savol? Javob beraman',
         'faq.title': 'Ko\'p beriladigan <span class="muted"><br>savollar</span>',
         'footer.rights': 'Barcha huquqlar himoyalangan.',
     },
@@ -2907,6 +2900,12 @@ const translations = {
         'contact.ig_btn': 'Instagram',
         'contact.call_btn': 'Call: +998 91 524 52 64',
         'contact.call': 'Call',
+        'approach.label': 'Approach',
+        'approach.title': 'What happens <span class="muted">when you book</span>',
+        'approach.desc': 'Three things that set my approach apart.',
+        'approach.l1': 'Before surgery, you see the plan on a 3D model and know exactly what to expect',
+        'approach.l2': 'I use HD endoscopes — incisions are much smaller than open surgery. You recover faster',
+        'approach.l3': 'I\'m personally available on Telegram after surgery. Not an assistant — me. Question at 2 AM? I\'ll answer',
         'faq.title': 'Frequently <span class="muted"><br>Asked Questions</span>',
         'footer.rights': 'All rights reserved.',
     }
@@ -3009,8 +3008,6 @@ document.querySelectorAll('.lang-option').forEach(btn => {
 <script>
 (function(){
     // --- YouTube Playlist → Video Cards ---
-    const YT_API_KEY = 'AIzaSyD80pHnh6ytjJ3R9zZIDKt-2g80Eta0GTQ';
-    const PLAYLIST_ID = 'PLuSj3qPUFKqvBjPWisl6PH7gOBUlUlee2';
     const vScroll = document.getElementById('review-videos');
     const dotsC = document.getElementById('review-dots');
     const btnL = document.getElementById('review-scroll-left');
@@ -3108,8 +3105,8 @@ document.querySelectorAll('.lang-option').forEach(btn => {
         });
     }
 
-    // Fetch playlist
-    fetch(`https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=20&playlistId=${PLAYLIST_ID}&key=${YT_API_KEY}`)
+    // Load cached playlist data (no API key exposed)
+    fetch('assets/data/yt-reviews.json')
         .then(r => r.json())
         .then(data => {
             if (!data.items || !data.items.length) return;
