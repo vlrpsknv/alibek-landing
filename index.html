@@ -10,10 +10,23 @@
     <meta property="og:image" content="assets/img/hero.png">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://kazimov.uz/">
+    <meta property="og:url" content="https://kazimov.uz/">
+    <meta property="og:locale" content="ru_RU">
+    <meta property="og:locale:alternate" content="uz_UZ">
+    <meta property="og:locale:alternate" content="en_US">
+    <meta property="og:site_name" content="Казимов Алибек — хирург">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="theme-color" content="#1A1A1A">
+    <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
+    <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.svg">
     <noscript><style>.reveal{opacity:1;transform:none;}</style></noscript>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="image" href="assets/img/hero.webp" type="image/webp" fetchpriority="high">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Lora:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="shared/header.css">
 
     <!-- Schema.org -->
     <script type="application/ld+json">
@@ -24,11 +37,28 @@
         "medicalSpecialty": ["MaxillofacialSurgery", "Otolaryngology", "Oncology", "PlasticSurgery"],
         "address": {
             "@type": "PostalAddress",
+            "streetAddress": "Клиника ProfMedService",
             "addressLocality": "Ташкент",
             "addressCountry": "UZ"
         },
-        "telephone": "+998-XX-XXX-XX-XX",
-        "url": "https://kazimov.uz"
+        "telephone": "+998 91 524 52 64",
+        "url": "https://kazimov.uz",
+        "image": "https://kazimov.uz/assets/img/hero.webp",
+        "knowsLanguage": ["ru", "uz", "en"],
+        "hasCredential": [
+            {"@type": "EducationalOccupationalCredential", "credentialCategory": "Fellowship", "recognizedBy": {"@type": "Organization", "name": "AO CMF"}},
+            {"@type": "EducationalOccupationalCredential", "credentialCategory": "Fellowship", "recognizedBy": {"@type": "Organization", "name": "EACMFS"}},
+            {"@type": "EducationalOccupationalCredential", "credentialCategory": "Certificate", "recognizedBy": {"@type": "Organization", "name": "Harvard Medical School"}}
+        ],
+        "alumniOf": [
+            {"@type": "EducationalOrganization", "name": "Harvard Medical School"},
+            {"@type": "EducationalOrganization", "name": "NYU Grossman School of Medicine"},
+            {"@type": "EducationalOrganization", "name": "Ludwig-Maximilians-Universität München"},
+            {"@type": "EducationalOrganization", "name": "СПбГМУ им. акад. Павлова"}
+        ],
+        "award": "Патент на хирургическую методику при врождённых пороках ЛОР-органов",
+        "description": "Челюстно-лицевой хирург, ЛОР, онкология, пластическая хирургия. Международный опыт 9 стран. 2000+ операций.",
+        "priceRange": "$$"
     }
     </script>
 
@@ -51,6 +81,16 @@
             --border:    #DCDCDC;
             --white:     #FFFFFF;
 
+            /* Messenger colors */
+            --tg-bg:     #E3F2FD;
+            --tg-hover:  #BBDEFB;
+            --tg-text:   #1976D2;
+            --wa-bg:     #E8F5E9;
+            --wa-hover:  #C8E6C9;
+            --wa-text:   #2E7D32;
+            --success-bg:   #E8F5E9;
+            --success-text: #2E7D32;
+
             /* Typography */
             --font: 'Inter', -apple-system, sans-serif;
 
@@ -66,8 +106,17 @@
 
             /* Layout */
             --max-w: 1200px;
-            --radius: 14px;
             --radius-sm: 8px;
+            --radius: 14px;
+            --radius-lg: 20px;
+            --radius-xl: 36px;
+            --radius-pill: 100px;
+
+            /* Transitions */
+            --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+            --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+            --duration: 0.3s;
+            --duration-slow: 0.4s;
         }
 
         /* ═══════════════════════════════════════
@@ -150,10 +199,10 @@
             align-items: center;
             gap: var(--s-sm);
             padding: 14px 32px;
-            border-radius: 100px;
+            border-radius: var(--radius-pill);
             font-weight: 600;
             font-size: 0.95rem;
-            transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+            transition: all var(--duration) var(--ease-out);
             white-space: nowrap;
         }
 
@@ -184,195 +233,13 @@
         .btn-ghost svg { transition: transform 0.3s ease; }
         .btn-ghost:hover svg { transform: translateX(4px); }
 
-        /* ═══════════════════════════════════════
-           01. HEADER
-           ═══════════════════════════════════════ */
-        .header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 100;
-            padding: var(--s-md) 0;
-            transition: all 0.4s ease;
-        }
+        /* Header styles moved to shared/header.css */
 
-        .header.scrolled {
-            background: rgba(241, 241, 241, 0.95);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border);
+        /* Global focus-visible */
+        :focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
         }
-
-        .header-inner {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .logo {
-            font-size: 1.15rem;
-            font-weight: 700;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-        }
-
-        .logo span { color: var(--gold); }
-
-        .nav { display: flex; align-items: center; gap: var(--s-xl); }
-
-        .nav a {
-            font-size: 0.875rem;
-            font-weight: 500;
-            color: var(--text-soft);
-            transition: color 0.2s;
-        }
-        .nav a:hover { color: var(--accent); }
-
-        .header-actions { display: flex; align-items: center; gap: var(--s-md); }
-
-        /* Language dropdown */
-        .lang-dropdown { position: relative; flex-shrink: 0; }
-
-        .lang-dropdown-trigger {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            height: 36px;
-            border-radius: 8px;
-            background: rgba(0,0,0,0.05);
-            cursor: pointer;
-            transition: background 0.2s;
-            padding: 0 10px;
-        }
-        .lang-dropdown-trigger:hover { background: rgba(0,0,0,0.08); }
-        .lang-dropdown-trigger svg { width: 20px; height: 20px; display: block; border-radius: 50%; flex-shrink: 0; }
-        .lang-dropdown-trigger .lang-code {
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: var(--text);
-            line-height: 1;
-        }
-
-        .lang-dropdown-menu {
-            position: absolute;
-            top: calc(100% + 8px);
-            right: 0;
-            background: var(--surface);
-            border-radius: 12px;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.12), 0 0 0 1px rgba(0,0,0,0.04);
-            padding: 6px;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(-8px) scale(0.96);
-            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-            z-index: 110;
-            min-width: 120px;
-        }
-        .lang-dropdown.open .lang-dropdown-menu {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0) scale(1);
-        }
-
-        .lang-option {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            width: 100%;
-            padding: 8px 12px;
-            border-radius: 8px;
-            font-size: 0.8rem;
-            font-weight: 500;
-            color: var(--text-soft);
-            white-space: nowrap;
-            cursor: pointer;
-            transition: all 0.15s;
-        }
-        .lang-option:hover { background: rgba(0,0,0,0.05); }
-        .lang-option.active { color: var(--text); font-weight: 600; background: rgba(0,0,0,0.03); }
-        .lang-option svg { width: 22px; height: 22px; border-radius: 50%; flex-shrink: 0; }
-
-        /* Fixed header sizes — prevent layout shift on lang change */
-        .nav { min-width: 440px; justify-content: center; }
-        .nav a { flex: 1; text-align: center; white-space: nowrap; }
-
-        .header .btn {
-            padding: 10px 24px;
-            font-size: 0.85rem;
-            min-width: 152px;
-            text-align: center;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .burger {
-            display: none;
-            flex-direction: column;
-            gap: 5px;
-            width: 24px;
-            cursor: pointer;
-        }
-        .burger span {
-            height: 2px;
-            background: var(--text);
-            border-radius: 2px;
-            transition: all 0.3s;
-        }
-
-        /* Mobile menu */
-        .mobile-nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            z-index: 10000;
-            background: rgba(241,241,241,0.98);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: var(--s-xl);
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
-        }
-        .mobile-nav.open { opacity: 1; visibility: visible; }
-        .mobile-nav a {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: var(--text);
-            transition: color 0.2s;
-        }
-        .mobile-nav a:hover { color: var(--gold); }
-        .mobile-nav a.btn-primary {
-            color: var(--white);
-            font-size: 0.95rem;
-            margin-top: var(--s-md);
-        }
-        .mobile-nav a.btn-primary:hover { color: var(--white); }
-        .mobile-nav-close {
-            position: absolute;
-            top: var(--s-lg);
-            right: var(--s-lg);
-            font-size: 1.75rem;
-            color: var(--text);
-            cursor: pointer;
-            background: none;
-            border: none;
-            width: 44px;
-            height: 44px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            transition: background 0.2s;
-        }
-        .mobile-nav-close:hover { background: rgba(0,0,0,0.05); }
 
         /* SR only */
         .sr-only {
@@ -454,7 +321,7 @@
             gap: var(--s-sm);
             padding: 6px 14px;
             background: rgba(26, 26, 26, 0.06);
-            border-radius: 100px;
+            border-radius: var(--radius-pill);
             margin-bottom: var(--s-lg);
         }
 
@@ -524,12 +391,12 @@
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             border: 2px solid rgba(255, 255, 255, 0.45);
-            border-radius: 16px;
+            border-radius: var(--radius);
             padding: 12px 18px 12px 12px;
             display: flex;
             align-items: center;
             gap: 12px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: transform var(--duration) var(--ease-out), box-shadow var(--duration) var(--ease-out);
             box-shadow: 0 4px 20px rgba(0,0,0,0.06);
             white-space: nowrap;
         }
@@ -587,12 +454,12 @@
            03. SOCIAL PROOF (numbers)
            ═══════════════════════════════════════ */
         .proof {
-            padding: 0 0 var(--s-4xl);
+            padding: 0 0 var(--s-3xl);
         }
 
         .proof-card {
             position: relative;
-            border-radius: 36px;
+            border-radius: var(--radius-xl);
             overflow: hidden;
             border: 2px solid rgba(255, 255, 255, 0.3);
         }
@@ -626,7 +493,7 @@
             backdrop-filter: blur(20px) saturate(180%);
             -webkit-backdrop-filter: blur(20px) saturate(180%);
             border: 1px solid rgba(255, 255, 255, 0.35);
-            border-radius: 20px;
+            border-radius: var(--radius-lg);
             padding: 16px 24px;
             text-align: left;
             box-shadow:
@@ -654,7 +521,7 @@
            04. SERVICES
            ═══════════════════════════════════════ */
         .services {
-            padding: 0 0 var(--s-4xl);
+            padding: 0 0 var(--s-3xl);
         }
 
         .section-header {
@@ -677,8 +544,7 @@
             border: 1px solid var(--border);
             border-radius: var(--radius);
             padding: var(--s-lg) var(--s-lg);
-            transition: border-color 0.5s ease, box-shadow 0.5s ease, transform 0.5s ease;
-            cursor: pointer;
+            transition: border-color var(--duration-slow) var(--ease-out), box-shadow var(--duration-slow) var(--ease-out), transform var(--duration-slow) var(--ease-out);
         }
 
         .service-card:hover {
@@ -702,56 +568,105 @@
             font-size: 0.9rem;
         }
 
+        a.service-card {
+            text-decoration: none;
+            color: var(--text);
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+        }
+        .service-card .service-link-more {
+            display: block;
+            margin-top: auto;
+            padding-top: var(--s-md);
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--gold);
+            transition: color var(--duration);
+            text-align: left;
+        }
+        .service-card:hover .service-link-more { color: var(--gold-l); }
+
         /* ═══════════════════════════════════════
            05. ABOUT
            ═══════════════════════════════════════ */
         .about {
-            padding: 0 0 var(--s-4xl);
             background: var(--white);
+            overflow: hidden;
         }
 
         .about-grid {
             display: grid;
             grid-template-columns: 0.45fr 0.55fr;
-            gap: var(--s-3xl);
-            align-items: start;
+            gap: 0;
+            align-items: stretch;
+            min-height: 600px;
         }
 
         .about-photo {
-            border-radius: var(--radius);
+            position: relative;
             overflow: hidden;
-            position: sticky;
-            top: 100px;
         }
 
         .about-photo img {
+            position: absolute;
+            bottom: 0;
+            left: 0;
             width: 100%;
-            aspect-ratio: 3/4;
+            height: 105%;
             object-fit: cover;
-            object-position: top center;
+            object-position: center 10%;
         }
 
-        .about-content { padding-top: var(--s-md); }
+        .about-content {
+            padding: var(--s-3xl) clamp(32px, 5vw, 80px) var(--s-3xl) clamp(32px, 4vw, 64px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            max-width: 680px;
+        }
+
+        .about-caption { color: var(--gold); margin-bottom: var(--s-sm); }
+        .about-title { margin-bottom: var(--s-md); }
+        .about-memberships { margin-top: var(--s-md); margin-bottom: var(--s-sm); font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; }
+        .cert-tag--gold { border: 1px solid var(--gold); background: transparent; color: var(--gold); }
+
+        /* Education timeline */
+        .education { padding: var(--s-xl) 0 var(--s-3xl); }
+        .education-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: var(--s-md); }
+        .edu-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: var(--s-lg); position: relative; overflow: hidden; }
+        .edu-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--gold); }
+        .edu-card__label { font-size: 0.7rem; font-weight: 700; color: var(--text-muted); letter-spacing: 0.1em; margin-bottom: var(--s-sm); }
+        .edu-card__title { margin-bottom: var(--s-xs); }
+        .edu-card__desc { color: var(--text-soft); font-size: 0.9rem; }
+        .patent-highlight { margin-top: var(--s-xl); padding: var(--s-xl); background: linear-gradient(135deg, var(--accent), var(--accent-l)); border-radius: var(--radius); color: var(--white); display: flex; align-items: center; gap: var(--s-xl); }
+        .patent-highlight__icon { font-size: 2.5rem; flex-shrink: 0; }
+        .patent-highlight__title { font-weight: 700; font-size: 1.1rem; margin-bottom: var(--s-xs); }
+        .patent-highlight__desc { opacity: 0.8; font-size: 0.95rem; line-height: 1.6; }
+
+        /* Action labels */
+        .action-label { position: absolute; bottom: 16px; left: 16px; color: var(--white); font-size: 0.8rem; font-weight: 600; text-shadow: 0 1px 4px rgba(0,0,0,0.5); z-index: 2; }
+        .action-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-md); }
 
         .about-text {
             color: var(--text-soft);
-            margin-bottom: var(--s-xl);
-            font-size: 1.05rem;
-            line-height: 1.8;
+            margin-bottom: var(--s-md);
+            font-size: 1rem;
+            line-height: 1.7;
         }
 
         .certs-grid {
             display: flex;
             flex-wrap: wrap;
-            gap: var(--s-sm);
-            margin-top: var(--s-xl);
+            gap: 6px;
+            margin-top: var(--s-md);
         }
 
         .cert-tag {
-            padding: 8px 16px;
+            padding: 6px 14px;
             background: var(--bg);
-            border-radius: 100px;
-            font-size: 0.8rem;
+            border-radius: var(--radius-pill);
+            font-size: 0.75rem;
             font-weight: 500;
             color: var(--text-soft);
         }
@@ -760,7 +675,7 @@
            06. IN ACTION (surgery photos)
            ═══════════════════════════════════════ */
         .action {
-            padding: 0 0 var(--s-4xl);
+            padding: 0 0 var(--s-3xl);
         }
 
         .action-grid {
@@ -780,7 +695,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+            transition: transform 0.6s var(--ease-out);
         }
 
         .action-item:hover img { transform: scale(1.05); }
@@ -797,7 +712,7 @@
            07. APPROACH (philosophy/lifestyle)
            ═══════════════════════════════════════ */
         .approach {
-            padding: 0 0 var(--s-4xl);
+            padding: var(--s-3xl) 0;
             background: var(--text);
             color: var(--bg);
         }
@@ -858,48 +773,240 @@
            08. TESTIMONIALS
            ═══════════════════════════════════════ */
         .testimonials {
-            padding: 0 0 var(--s-4xl);
+            padding: 0 0 var(--s-3xl);
+            scroll-margin-top: 80px;
         }
 
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
+        /* Aggregate rating badge */
+        .review-aggregate {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: var(--s-lg);
+        }
+        .review-aggregate-score {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--text);
+            line-height: 1;
+        }
+        .review-aggregate-stars {
+            color: var(--gold);
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+        }
+        .review-aggregate-count {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* Video swimlane */
+        .review-videos-wrap {
+            position: relative;
+            margin-bottom: 48px;
+        }
+        /* Scroll arrows */
+        .review-scroll-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 3;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--white);
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: box-shadow 0.2s, transform 0.2s, opacity 0.2s;
+            opacity: 0.9;
+        }
+        .review-scroll-btn:hover {
+            box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+            transform: translateY(-50%) scale(1.05);
+            opacity: 1;
+        }
+        .review-scroll-btn--left { left: -22px; }
+        .review-scroll-btn--right { right: -22px; }
+        .review-scroll-btn[disabled] { opacity: 0.25; pointer-events: none; cursor: default; }
+        .review-scroll-btn svg {
+            width: 18px;
+            height: 18px;
+            stroke: var(--text);
+            fill: none;
+            stroke-width: 2.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* Dots indicator */
+        .review-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: var(--s-md);
+        }
+        .review-dot-item {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--border);
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+        }
+        .review-dot-item.active {
+            background: var(--gold);
+            transform: scale(1.25);
+        }
+
+        .review-videos {
+            display: flex;
             gap: var(--s-md);
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            padding: 0 4px;
+        }
+        .review-videos::-webkit-scrollbar { display: none; }
+
+        .review-video-card {
+            scroll-snap-align: start;
+            flex-shrink: 0;
+            width: clamp(200px, 25vw, 280px);
+            aspect-ratio: 9 / 16;
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+        }
+        .review-video-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.15) 45%, transparent 100%);
+            z-index: 1;
         }
 
-        .testimonial-card {
+        .review-video-play {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.25);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.25s, transform 0.25s;
+        }
+        .review-video-play svg {
+            margin-left: 3px;
+        }
+        .review-video-card:hover .review-video-play {
+            background: rgba(255,255,255,0.5);
+            transform: translate(-50%, -50%) scale(1.08);
+        }
+
+        .review-video-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 2;
+            padding: 16px;
+        }
+        .review-video-name {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 6px;
+        }
+        .review-video-tag {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: rgba(255,255,255,0.9);
+            background: rgba(255,255,255,0.16);
+            border: 1px solid rgba(255,255,255,0.25);
+            border-radius: 6px;
+            padding: 4px 10px;
+        }
+
+        /* Bento text reviews */
+        /* Text reviews carousel */
+        .review-text-wrap {
+            position: relative;
+            margin-bottom: var(--s-md);
+        }
+        .review-text-wrap .review-scroll-btn { top: 50%; }
+        .review-bento {
+            display: flex;
+            gap: var(--s-md);
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+        .review-bento::-webkit-scrollbar { display: none; }
+        .review-card {
+            scroll-snap-align: start;
+            flex-shrink: 0;
+            width: clamp(280px, 30vw, 360px);
             background: var(--white);
             border: 1px solid var(--border);
             border-radius: var(--radius);
-            padding: var(--s-xl);
+            padding: 28px;
+            display: flex;
+            flex-direction: column;
+            gap: var(--s-md);
+            transition: box-shadow 0.3s, border-color 0.3s;
         }
+        .review-card:hover {
+            box-shadow: 0 8px 32px rgba(0,0,0,0.07);
+            border-color: var(--gold);
+        }
+        .review-card--large .review-text { font-size: 1rem; }
 
-        .testimonial-stars {
+        .review-stars {
             color: var(--gold);
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             letter-spacing: 2px;
-            margin-bottom: var(--s-md);
+            line-height: 1;
         }
-
-        .testimonial-text {
-            color: var(--text-soft);
+        .review-text {
             font-size: 0.95rem;
             line-height: 1.7;
-            margin-bottom: var(--s-lg);
+            color: var(--text-soft);
             font-style: italic;
+            flex: 1;
+            margin: 0;
         }
-
-        .testimonial-author {
+        .review-author {
             display: flex;
             align-items: center;
-            gap: var(--s-md);
+            gap: 12px;
+            margin-top: auto;
         }
-
-        .testimonial-avatar {
+        .review-avatar {
+            flex-shrink: 0;
             width: 40px;
             height: 40px;
             border-radius: 50%;
             background: var(--bg-deep);
+            border: 1px solid var(--border);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -907,16 +1014,125 @@
             font-size: 0.85rem;
             color: var(--accent);
         }
+        .review-name { font-weight: 600; font-size: 0.85rem; }
+        .review-date { font-size: 0.75rem; color: var(--text-muted); margin-top: 2px; }
 
-        .testimonial-name { font-weight: 600; font-size: 0.9rem; }
-        .testimonial-date { font-size: 0.75rem; color: var(--text-muted); }
+        /* Platform badge (logo + name + arrow) */
+        .review-platform-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: auto;
+            padding-top: var(--s-md);
+            border-top: 1px solid var(--border);
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-soft);
+            transition: color 0.2s;
+        }
+        .review-platform-badge svg:first-child {
+            border-radius: 6px;
+            flex-shrink: 0;
+        }
+        .review-platform-arrow {
+            margin-left: auto;
+            opacity: 0.6;
+            transition: opacity 0.2s, transform 0.2s;
+        }
+        .review-card:hover .review-platform-arrow {
+            opacity: 1;
+            transform: translateX(3px);
+        }
+
+        a.review-card {
+            text-decoration: none;
+            color: inherit;
+            cursor: pointer;
+        }
+
+        /* All reviews link */
+        .review-all-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text);
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-decoration: none;
+            margin-top: 32px;
+            transition: color 0.2s;
+        }
+        .review-all-link svg {
+            transition: transform 0.25s ease;
+        }
+        .review-all-link:hover { color: var(--gold); }
+        .review-all-link:hover svg { transform: translateX(5px); }
+
+        /* Video fullscreen modal */
+        .video-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 10001;
+            background: rgba(0,0,0,0.96);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+        .video-modal.open { opacity: 1; visibility: visible; pointer-events: auto; }
+        .video-modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.15);
+            border: none;
+            color: #fff;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+            z-index: 2;
+        }
+        .video-modal-close:hover { background: rgba(255,255,255,0.3); }
+        .video-modal-content {
+            position: relative;
+            width: 90vw;
+            max-width: 900px;
+            aspect-ratio: 16/9;
+            border-radius: 16px;
+            overflow: hidden;
+            background: #000;
+        }
+        .video-modal-info {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            color: #fff;
+        }
+        .video-modal-info .review-video-name { font-size: 1rem; margin-bottom: 4px; }
+        .video-modal-info .review-video-tag { font-size: 0.8rem; }
 
         /* ═══════════════════════════════════════
            09. FAQ
            ═══════════════════════════════════════ */
         .faq {
-            padding: 0 0 var(--s-4xl);
+            padding: var(--s-3xl) 0;
             background: var(--white);
+        }
+
+        .faq-label {
+            color: var(--gold);
+            margin-bottom: var(--s-sm);
         }
 
         .faq-grid {
@@ -932,7 +1148,6 @@
 
         .faq-item {
             border-bottom: 1px solid var(--border);
-            overflow: hidden;
         }
 
         .faq-q {
@@ -949,44 +1164,66 @@
         }
 
         .faq-q .icon {
-            width: 24px;
-            height: 24px;
+            width: 28px;
+            height: 28px;
             border-radius: 50%;
             border: 1.5px solid var(--border);
             display: flex;
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
-            transition: all 0.3s ease;
-            font-size: 0.8rem;
+            transition: all var(--duration) var(--ease-out);
             color: var(--text-muted);
+            position: relative;
+        }
+
+        .faq-q .icon::before,
+        .faq-q .icon::after {
+            content: '';
+            position: absolute;
+            background: currentColor;
+            border-radius: 1px;
+            transition: transform var(--duration) var(--ease-out);
+        }
+
+        .faq-q .icon::before {
+            width: 12px;
+            height: 1.5px;
+        }
+
+        .faq-q .icon::after {
+            width: 1.5px;
+            height: 12px;
         }
 
         .faq-item.open .faq-q .icon {
             background: var(--accent);
             border-color: var(--accent);
             color: var(--white);
-            transform: rotate(45deg);
+        }
+
+        .faq-item.open .faq-q .icon::after {
+            transform: rotate(90deg);
         }
 
         .faq-a {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+            transition: max-height var(--duration-slow) var(--ease-out);
         }
 
         .faq-a-inner {
-            padding-bottom: var(--s-lg);
             color: var(--text-soft);
             font-size: 0.95rem;
             line-height: 1.7;
+            padding-bottom: var(--s-lg);
         }
 
         /* ═══════════════════════════════════════
            10. CONTACT / CTA
            ═══════════════════════════════════════ */
         .contact {
-            padding: 0 0 var(--s-4xl);
+            padding: 0 0 var(--s-3xl);
         }
 
         .contact-grid {
@@ -994,6 +1231,11 @@
             grid-template-columns: 1fr 1fr;
             gap: var(--s-3xl);
         }
+
+        .contact-actions { display: flex; flex-direction: column; gap: var(--s-sm); }
+        .contact-actions-desc { font-size: 0.9rem; color: var(--text-soft); margin-bottom: var(--s-xs); }
+        .contact-action-btn { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 500; padding: 14px 20px; border-radius: var(--radius-sm); font-size: 0.9rem; transition: opacity 0.2s, transform 0.2s; }
+        .contact-action-btn:hover { opacity: 0.9; transform: translateY(-1px); }
 
         .contact-form {
             display: flex;
@@ -1016,9 +1258,12 @@
         .form-field:focus {
             outline: none;
             border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(26, 26, 26, 0.08);
         }
 
         .form-field::placeholder { color: var(--text-muted); }
+
+        .form-success { display: none; padding: var(--s-md); background: var(--success-bg); border-radius: var(--radius-sm); color: var(--success-text); font-weight: 500; text-align: center; }
 
         .messenger-buttons {
             display: flex;
@@ -1036,13 +1281,13 @@
             border-radius: var(--radius-sm);
             font-weight: 600;
             font-size: 0.85rem;
-            transition: all 0.3s ease;
+            transition: all var(--duration) var(--ease-out);
         }
 
-        .msg-btn.tg { background: #E3F2FD; color: #1976D2; }
-        .msg-btn.tg:hover { background: #BBDEFB; }
-        .msg-btn.wa { background: #E8F5E9; color: #2E7D32; }
-        .msg-btn.wa:hover { background: #C8E6C9; }
+        .msg-btn.tg { background: var(--tg-bg); color: var(--tg-text); }
+        .msg-btn.tg:hover { background: var(--tg-hover); }
+        .msg-btn.wa { background: var(--wa-bg); color: var(--wa-text); }
+        .msg-btn.wa:hover { background: var(--wa-hover); }
         .msg-btn.phone { background: var(--bg-deep); color: var(--text); }
         .msg-btn.phone:hover { background: var(--border); }
 
@@ -1166,7 +1411,7 @@
         .reveal {
             opacity: 0;
             transform: translateY(30px);
-            transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+            transition: all 0.8s var(--ease-out);
         }
 
         .reveal.visible {
@@ -1189,7 +1434,7 @@
            MARQUEE / LOGO TICKER
            ═══════════════════════════════════════ */
         .marquee-section {
-            padding: 0 0 var(--s-4xl);
+            padding: 0 0 var(--s-3xl);
             overflow: hidden;
         }
 
@@ -1275,11 +1520,21 @@
             .hero-photo { max-width: 400px; margin: 0 auto; }
             .hero-photo img { max-width: 100%; max-height: 420px; }
             .services-grid { grid-template-columns: 1fr; }
-            .about-grid { grid-template-columns: 1fr; }
-            .about-photo { position: static; max-width: 400px; }
+            .about-grid { grid-template-columns: 1fr; min-height: auto; }
+            .about-photo { height: 400px; }
+            .about-content { padding: var(--s-xl) var(--s-md); }
             .approach-grid { grid-template-columns: 1fr; }
             .approach-photo { order: -1; max-width: 400px; }
-            .testimonials-grid { grid-template-columns: 1fr; }
+            .review-card { width: clamp(260px, 75vw, 300px); }
+            .review-text-wrap .review-scroll-btn { display: none; }
+            .review-videos .review-video-card { width: clamp(160px, 44vw, 200px); }
+            .review-videos { padding-right: 32px; }
+            .review-aggregate-score { font-size: 1.6rem; }
+            .review-aggregate { flex-wrap: wrap; gap: 8px; }
+            .review-video-play { width: 40px; height: 40px; }
+            .review-video-name { font-size: 0.85rem; }
+            .review-video-tag { font-size: 0.7rem; padding: 3px 8px; }
+            .review-scroll-btn { display: none; }
             .faq-grid { grid-template-columns: 1fr; }
             .contact-grid { grid-template-columns: 1fr; }
             .marquee__content img { height: 44px; }
@@ -1313,7 +1568,7 @@
             }
             .hero-photo { order: 4; padding: 16px 0 24px; }
             .hero-photo img { max-width: 100% !important; margin: 0 auto; }
-            .hero-img-wrap { background: transparent; }
+            .hero-img-wrap { background: transparent; -webkit-mask-image: none; mask-image: none; }
             .hero-ctas { order: 5; display: flex; flex-direction: column; align-items: stretch; gap: 12px; padding: 0; margin-bottom: 16px; }
             .hero-ctas .btn { justify-content: center; }
             .hero-content { padding-left: 0 !important; }
@@ -1330,9 +1585,9 @@
             #kazimov-chat-btn { display: none !important; }
 
             /* Sections — mobile: bottom padding only */
-            .proof { padding: 0 0 var(--s-3xl); }
+            .proof { padding: 0 0 var(--s-2xl); }
             .proof-card {
-                border-radius: 24px;
+                border-radius: var(--radius-lg);
                 aspect-ratio: 3/4;
             }
             .proof-card > picture {
@@ -1357,18 +1612,21 @@
                 padding: var(--s-md);
             }
             .proof-item {
-                border-radius: 14px;
+                border-radius: var(--radius);
                 padding: 12px 16px;
             }
             .proof-num { font-size: clamp(1.5rem, 6vw, 2rem); }
             .proof-label { font-size: 0.85rem; line-height: 1.2; }
             .action-grid { grid-template-columns: repeat(2, 1fr); }
-            .services, .about, .action, .approach, .testimonials, .faq, .contact, .education {
-                padding: 0 0 var(--s-4xl);
+            .services, .about, .action, .testimonials, .contact, .education, .ai-promo {
+                padding: 0 0 var(--s-2xl);
+            }
+            .approach, .faq {
+                padding: var(--s-2xl) 0;
             }
 
             /* Marquee */
-            .marquee-section { padding: 0 0 var(--s-3xl); }
+            .marquee-section { padding: 0 0 var(--s-lg); }
             .marquee-section .marquee-heading { margin-bottom: var(--s-xl); }
             .marquee-section .section-title { font-size: 1.45rem; }
             .marquee { --gap: 2.5rem; --duration: 25s; }
@@ -1384,6 +1642,313 @@
             .hero-ctas .btn { justify-content: center; }
             [style*="minmax(340px"] { grid-template-columns: 1fr !important; }
         }
+
+        /* AI Assistant promo */
+        .ai-promo {
+            padding: var(--s-xl) 0 var(--s-3xl);
+        }
+        .ai-promo-card {
+            background: linear-gradient(135deg, #1A1A1A 0%, #2A2A2A 100%);
+            border-radius: var(--radius-xl);
+            padding: clamp(40px, 6vw, 72px);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--s-3xl);
+            align-items: center;
+            color: #fff;
+            overflow: hidden;
+            position: relative;
+        }
+        .ai-promo-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(184,151,106,0.15) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .ai-promo-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 14px;
+            background: rgba(184,151,106,0.2);
+            border: 1px solid rgba(184,151,106,0.3);
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--gold);
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: var(--s-lg);
+        }
+        .ai-promo-badge .pulse {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--gold);
+            animation: pulse-dot 2s ease-in-out infinite;
+        }
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+        .ai-promo h2 {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: var(--s-md);
+        }
+        .ai-promo-desc {
+            color: rgba(255,255,255,0.7);
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: var(--s-xl);
+        }
+        .ai-promo-features {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: var(--s-xl);
+        }
+        .ai-promo-feature {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.85);
+        }
+        .ai-promo-feature .check {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: rgba(184,151,106,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: var(--gold);
+            font-size: 0.7rem;
+        }
+        .ai-promo-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 32px;
+            background: var(--gold);
+            color: #fff;
+            border-radius: 100px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+            text-decoration: none;
+        }
+        .ai-promo-btn:hover { background: var(--gold-l); transform: translateY(-1px); }
+
+        /* Chat mockup — realistic widget replica */
+        .ai-promo-visual {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            justify-content: center;
+        }
+        .ai-promo-mockup {
+            width: 100%;
+            max-width: 370px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.45), 0 0 0 1px rgba(255,255,255,0.08);
+            display: flex;
+            flex-direction: column;
+            font-family: 'Inter', sans-serif;
+        }
+        /* Header */
+        .ai-mock-header {
+            background: #1A1A1A;
+            padding: 14px 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .ai-mock-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: #B8976A;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 13px;
+            color: #fff;
+            flex-shrink: 0;
+            letter-spacing: 0.5px;
+        }
+        .ai-mock-header-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            min-width: 0;
+        }
+        .ai-mock-header-name {
+            color: #fff;
+            font-size: 14px;
+            font-weight: 600;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .ai-mock-header-sub {
+            color: rgba(255,255,255,0.5);
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .ai-mock-header-sub::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #4ade80;
+            flex-shrink: 0;
+        }
+        /* Chat body */
+        .ai-mock-body {
+            background: #f7f7f8;
+            padding: 20px 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            min-height: 220px;
+        }
+        .ai-mock-msg {
+            padding: 10px 14px;
+            font-size: 13.5px;
+            line-height: 1.55;
+            max-width: 82%;
+            word-break: break-word;
+        }
+        .ai-mock-msg.user {
+            background: #1A1A1A;
+            color: #fff;
+            border-radius: 16px 16px 4px 16px;
+            align-self: flex-end;
+        }
+        .ai-mock-msg.bot {
+            background: #fff;
+            color: #1A1A1A;
+            border: 1px solid #e5e5e5;
+            border-radius: 16px 16px 16px 4px;
+            align-self: flex-start;
+        }
+        .ai-mock-time {
+            font-size: 11px;
+            color: #999;
+            text-align: center;
+            margin-top: -4px;
+        }
+        /* Quick tags */
+        .ai-mock-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            padding: 0 16px 14px;
+            background: #f7f7f8;
+        }
+        .ai-mock-tag {
+            padding: 6px 12px;
+            font-size: 12px;
+            color: #1A1A1A;
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 100px;
+            white-space: nowrap;
+            cursor: default;
+            transition: border-color 0.2s;
+        }
+        .ai-mock-tag:hover {
+            border-color: #B8976A;
+            color: #B8976A;
+        }
+        /* Input bar */
+        .ai-mock-input {
+            background: #f7f7f8;
+            padding: 0 12px 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .ai-mock-input-field {
+            flex: 1;
+            height: 40px;
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 100px;
+            padding: 0 16px;
+            font-size: 13px;
+            color: #999;
+            display: flex;
+            align-items: center;
+        }
+        .ai-mock-send {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #1A1A1A;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .ai-mock-send svg {
+            width: 18px;
+            height: 18px;
+            color: #fff;
+        }
+
+        @media (max-width: 768px) {
+            .ai-promo-card { grid-template-columns: 1fr; padding: 32px 24px; }
+            .ai-promo-visual { order: -1; }
+            .ai-promo-mockup { max-width: 340px; }
+        }
+
+        /* Floating social bar */
+        .float-social {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 9998;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .float-social a {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        .float-social a:hover { transform: scale(1.1); box-shadow: 0 4px 16px rgba(0,0,0,0.2); }
+        .float-social .fs-tg { background: #2AABEE; }
+        .float-social .fs-wa { background: #25D366; }
+        .float-social .fs-phone { background: var(--accent); }
+        .float-social a svg { width: 22px; height: 22px; }
+        @media (max-width: 768px) {
+            .float-social { display: none; }
+        }
+
     </style>
 </head>
 <body>
@@ -1397,7 +1962,23 @@
             <a href="#" class="logo">DR<span>.</span> KAZIMOV<span>.</span></a>
 
             <nav class="nav">
-                <a href="#services" data-i18n="nav.services">Услуги</a>
+                <div class="nav-dropdown" id="navDropdown">
+                    <button class="nav-dropdown-trigger" aria-expanded="false" data-i18n="nav.services">
+                        Услуги
+                        <svg viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </button>
+                    <div class="nav-dropdown-menu">
+                        <a href="services/nos-ne-dyshit.html" data-i18n="services.s1.title">Нос не дышит</a>
+                        <a href="services/novoobrazovaniya.html" data-i18n="services.s2.title">Новообразования</a>
+                        <a href="services/travma-litsa.html" data-i18n="services.s3.title">Травма лица</a>
+                        <a href="services/plastika-litsa.html" data-i18n="services.s4.title">Пластика лица</a>
+                        <a href="services/khrap-apnoe.html" data-i18n="services.s5.title">Храп и апноэ</a>
+                        <a href="services/detskaya-lor.html" data-i18n="services.s6.title">Детская ЛОР-хирургия</a>
+                        <a href="services/chelyust-vnchs.html" data-i18n="services.s7.title">Боль в челюсти</a>
+                        <a href="services/opukhla-shcheka.html" data-i18n="services.s8.title">Опухла щека</a>
+                        <a href="services/gorlo.html" data-i18n="services.s9.title">Горло</a>
+                    </div>
+                </div>
                 <a href="#about" data-i18n="nav.about">О враче</a>
                 <a href="#action" data-i18n="nav.results">В деле</a>
                 <a href="#testimonials" data-i18n="nav.reviews">Отзывы</a>
@@ -1425,7 +2006,7 @@
                         </button>
                     </div>
                 </div>
-                <a href="#contact" class="btn btn-primary" data-i18n="nav.cta">Записаться</a>
+                <a href="#contact" class="btn btn-primary" data-i18n="nav.cta">Бесплатная консультация</a>
             </div>
 
             <button class="burger" id="burger" aria-label="Меню" aria-expanded="false">
@@ -1438,12 +2019,23 @@
 <!-- Mobile nav overlay -->
 <div class="mobile-nav" id="mobileNav" role="dialog" aria-label="Навигация">
     <button class="mobile-nav-close" id="mobileNavClose" aria-label="Закрыть меню">&times;</button>
-    <a href="#services" data-i18n="nav.services">Услуги</a>
+    <a href="#" class="mobile-nav-services-toggle" data-i18n="nav.services">Услуги ▾</a>
+    <div class="mobile-nav-services">
+        <a href="services/nos-ne-dyshit.html" data-i18n="services.s1.title">Нос не дышит</a>
+        <a href="services/novoobrazovaniya.html" data-i18n="services.s2.title">Новообразования</a>
+        <a href="services/travma-litsa.html" data-i18n="services.s3.title">Травма лица</a>
+        <a href="services/plastika-litsa.html" data-i18n="services.s4.title">Пластика лица</a>
+        <a href="services/khrap-apnoe.html" data-i18n="services.s5.title">Храп и апноэ</a>
+        <a href="services/detskaya-lor.html" data-i18n="services.s6.title">Детская ЛОР-хирургия</a>
+        <a href="services/chelyust-vnchs.html" data-i18n="services.s7.title">Боль в челюсти</a>
+        <a href="services/opukhla-shcheka.html" data-i18n="services.s8.title">Опухла щека</a>
+        <a href="services/gorlo.html" data-i18n="services.s9.title">Горло</a>
+    </div>
     <a href="#about" data-i18n="nav.about">О враче</a>
     <a href="#action" data-i18n="nav.results">В деле</a>
     <a href="#testimonials" data-i18n="nav.reviews">Отзывы</a>
     <a href="#contact" data-i18n="nav.contact">Контакты</a>
-    <a href="#contact" class="btn btn-primary" data-i18n="nav.cta">Записаться</a>
+    <a href="#contact" class="btn btn-primary" data-i18n="nav.cta">Бесплатная консультация</a>
 </div>
 
 <main>
@@ -1461,7 +2053,7 @@
                 <h1 class="t-display hero-name" data-i18n="hero.name">Казимов <br>Алибек</h1>
                 <p class="hero-sub" data-i18n="hero.sub">Хирург головы и шеи. Гарвард. NYU. Лондон. Мадрид. 10+ лет практики. Патент на авторскую методику.</p>
                 <div class="hero-ctas">
-                    <a href="#contact" class="btn btn-primary" data-i18n="hero.cta">Записаться на консультацию</a>
+                    <a href="#contact" class="btn btn-primary" data-i18n="hero.cta">Бесплатная консультация</a>
                     <a href="#services" class="btn btn-ghost" data-i18n="hero.cta2">Узнать больше <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
                 </div>
             </div>
@@ -1520,6 +2112,107 @@
 </div>
 
 <!-- ═══════════════════════════════════════
+     TESTIMONIALS
+     ═══════════════════════════════════════ -->
+<section class="testimonials reveal" id="testimonials">
+    <div class="container">
+        <div class="section-header" style="margin-bottom:var(--s-lg);">
+            <div class="t-caption" data-i18n="reviews.label">ОТЗЫВЫ</div>
+            <h2 class="t-h1" data-i18n="reviews.title">Что говорят <span class="muted">пациенты</span></h2>
+        </div>
+
+        <div class="review-aggregate">
+            <span class="review-aggregate-score">5.0</span>
+            <span class="review-aggregate-stars">★★★★★</span>
+            <span class="review-aggregate-count">31 отзыв на 2 платформах</span>
+        </div>
+
+        <!-- Video reviews swimlane -->
+        <div class="review-videos-wrap" id="review-videos-wrap">
+            <button class="review-scroll-btn review-scroll-btn--left" id="review-scroll-left">
+                <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+            <button class="review-scroll-btn review-scroll-btn--right" id="review-scroll-right">
+                <svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg>
+            </button>
+            <div class="review-videos" id="review-videos">
+                <!-- Loaded dynamically from YouTube playlist -->
+            </div>
+            <div class="review-dots" id="review-dots"></div>
+        </div>
+
+        <!-- Text reviews carousel -->
+        <div class="review-text-wrap">
+            <button class="review-scroll-btn review-scroll-btn--left" id="text-scroll-left">
+                <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+            <button class="review-scroll-btn review-scroll-btn--right" id="text-scroll-right">
+                <svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg>
+            </button>
+            <div class="review-bento" id="review-text-scroll">
+                <a href="https://clinics.uz/catalog/medical-centers/prof-med-service/doc/kazimov-alibek-bahtierovich" target="_blank" rel="noopener" class="review-card">
+                    <div class="review-stars">★★★★★</div>
+                    <p class="review-text">«Хочу выразить огромную благодарность врачу Алибеку Бахтиёровичу за его высокий профессионализм, внимательное отношение и по-настоящему золотые руки. Операция была проведена на высочайшем уровне: чётко, аккуратно и без лишнего стресса.»</p>
+                    <div class="review-author"><div class="review-avatar">М</div><div><div class="review-name">Миршарипов Музаффар</div><div class="review-date">Апрель 2026</div></div></div>
+                </a>
+                <a href="https://clinics.uz/catalog/medical-centers/prof-med-service/doc/kazimov-alibek-bahtierovich" target="_blank" rel="noopener" class="review-card">
+                    <div class="review-stars">★★★★★</div>
+                    <p class="review-text">«Лучший хирург, которого я встречала. 2 года назад делала операцию на нос, все прошло идеально, спасибо за новое дыхание.»</p>
+                    <div class="review-author"><div class="review-avatar">Ф</div><div><div class="review-name">Низомиддинова Фарангиз</div><div class="review-date">Ноябрь 2025</div></div></div>
+                </a>
+                <a href="https://clinics.uz/catalog/medical-centers/prof-med-service/doc/kazimov-alibek-bahtierovich" target="_blank" rel="noopener" class="review-card">
+                    <div class="review-stars">★★★★★</div>
+                    <p class="review-text">«Обратился 2 года назад с постоянной болью в челюсти. До этого был у нескольких специалистов, но никто не связывал состояние с ВНЧС. Алибек Бахтиёрович диагностировал дисфункцию, назначил лечение, изготовил индивидуальную капу. Через пару недель боль ушла. Врач-профессионал, работает глубоко, системно!»</p>
+                    <div class="review-author"><div class="review-avatar">И</div><div><div class="review-name">Исмаил</div><div class="review-date">Март 2026</div></div></div>
+                </a>
+                <a href="https://med24.uz/doctor/kazimov-alibek-bakhtiyerovich" target="_blank" rel="noopener" class="review-card">
+                    <div class="review-stars">★★★★★</div>
+                    <p class="review-text">«Врач от Бога, провел сложнейшую операцию, которую не брались делать другие хирурги, провел без последствий! Бесконечно благодарна за профессионализм и отзывчивость.»</p>
+                    <div class="review-author"><div class="review-avatar">Ш</div><div><div class="review-name">Хамидова Шахноза</div><div class="review-date">Май 2025</div></div></div>
+                </a>
+                <a href="https://clinics.uz/catalog/medical-centers/prof-med-service/doc/kazimov-alibek-bahtierovich" target="_blank" rel="noopener" class="review-card">
+                    <div class="review-stars">★★★★★</div>
+                    <p class="review-text">«Я ещё не встречала такого врача — очень грамотный, хотя очень молодой. Человечность на первом уровне. Если бы все врачи были как он, многие пациенты выздоровели бы даже только от его отношения к больному.»</p>
+                    <div class="review-author"><div class="review-avatar">Н</div><div><div class="review-name">Мухамедова Нилуфар</div><div class="review-date">Июль 2025</div></div></div>
+                </a>
+                <a href="https://clinics.uz/catalog/medical-centers/prof-med-service/doc/kazimov-alibek-bahtierovich" target="_blank" rel="noopener" class="review-card">
+                    <div class="review-stars">★★★★★</div>
+                    <p class="review-text">«Замечательный врач и человек, таких сейчас мало! Желаем ему всего самого хорошего!»</p>
+                    <div class="review-author"><div class="review-avatar">Е</div><div><div class="review-name">Карпачева Екатерина</div><div class="review-date">Сентябрь 2025</div></div></div>
+                </a>
+                <a href="https://clinics.uz/catalog/medical-centers/prof-med-service/doc/kazimov-alibek-bahtierovich" target="_blank" rel="noopener" class="review-card">
+                    <div class="review-stars">★★★★★</div>
+                    <p class="review-text">«Огромное спасибо за понимание и за человечность. Это редкость среди врачей. Доктор бесплатно ответил на вопросы о моём ребёнке. Я ему очень благодарен. Дай Аллах ему здоровья и процветания.»</p>
+                    <div class="review-author"><div class="review-avatar">А</div><div><div class="review-name">Рахимов Алишер</div><div class="review-date">Март 2024</div></div></div>
+                </a>
+                <a href="https://clinics.uz/catalog/medical-centers/prof-med-service/doc/kazimov-alibek-bahtierovich" target="_blank" rel="noopener" class="review-card">
+                    <div class="review-stars">★★★★★</div>
+                    <p class="review-text">«Очень грамотный врач и профессионал своего дела, рекомендую.»</p>
+                    <div class="review-author"><div class="review-avatar">М</div><div><div class="review-name">Ибрагимов Махкамджон</div><div class="review-date">Апрель 2026</div></div></div>
+                </a>
+                <a href="https://clinics.uz/catalog/medical-centers/prof-med-service/doc/kazimov-alibek-bahtierovich" target="_blank" rel="noopener" class="review-card">
+                    <div class="review-stars">★★★★★</div>
+                    <p class="review-text">«Самый лучший врач и человек! Спасибо большое ему за всё!!!»</p>
+                    <div class="review-author"><div class="review-avatar">М</div><div><div class="review-name">Азаматов Муродхужа</div><div class="review-date">Сентябрь 2024</div></div></div>
+                </a>
+                <a href="https://clinics.uz/catalog/medical-centers/prof-med-service/doc/kazimov-alibek-bahtierovich" target="_blank" rel="noopener" class="review-card">
+                    <div class="review-stars">★★★★★</div>
+                    <p class="review-text">«Отличный специалист и прекрасный человек!»</p>
+                    <div class="review-author"><div class="review-avatar">С</div><div><div class="review-name">Самира</div><div class="review-date">Ноябрь 2025</div></div></div>
+                </a>
+            </div>
+        </div>
+
+        <div style="text-align:center">
+            <a href="https://clinics.uz/catalog/medical-centers/prof-med-service/doc/kazimov-alibek-bahtierovich" target="_blank" rel="noopener" class="review-all-link">
+                Все 31 отзыв на clinics.uz
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════
      03. SOCIAL PROOF
      ═══════════════════════════════════════ -->
 <section class="proof reveal">
@@ -1551,6 +2244,7 @@
     </div>
 </section>
 
+
 <!-- ═══════════════════════════════════════
      04. SERVICES
      ═══════════════════════════════════════ -->
@@ -1562,60 +2256,60 @@
         </div>
 
         <div class="services-grid">
-            <div class="service-card" style="cursor:default;">
+            <a href="services/nos-ne-dyshit.html" class="service-card">
                 <div class="service-num">01</div>
                 <h3 class="t-h3" data-i18n="services.s1.title">Нос не дышит. Годами.</h3>
                 <p class="t-body" data-i18n="services.s1.desc">Искривление перегородки, полипы, хронический синусит. Эндоскопическая операция через ноздрю, без разрезов на лице. Восстановление 3–5 дней.</p>
-                <a href="#contact" style="display:inline-block;margin-top:var(--s-sm);font-size:0.85rem;font-weight:600;color:var(--accent);">Записаться &rarr;</a>
-            </div>
-            <div class="service-card" style="cursor:default;">
+                <span class="service-link-more">Подробнее &rarr;</span>
+            </a>
+            <a href="services/novoobrazovaniya.html" class="service-card">
                 <div class="service-num">02</div>
                 <h3 class="t-h3" data-i18n="services.s2.title">Нашли образование</h3>
                 <p class="t-body" data-i18n="services.s2.desc">Опухоли лица, шеи, полости рта, гортани, щитовидной железы. Убираю с минимальным следом и максимальным контролем.</p>
-                <a href="#contact" style="display:inline-block;margin-top:var(--s-sm);font-size:0.85rem;font-weight:600;color:var(--accent);">Записаться &rarr;</a>
-            </div>
-            <div class="service-card" style="cursor:default;">
+                <span class="service-link-more">Подробнее &rarr;</span>
+            </a>
+            <a href="services/travma-litsa.html" class="service-card">
                 <div class="service-num">03</div>
                 <h3 class="t-h3" data-i18n="services.s3.title">Травма лица</h3>
                 <p class="t-body" data-i18n="services.s3.desc">Переломы скул, челюсти, носа, орбиты. Восстанавливаю кости и ткани так, чтобы через полгода вы забыли об этом.</p>
-                <a href="#contact" style="display:inline-block;margin-top:var(--s-sm);font-size:0.85rem;font-weight:600;color:var(--accent);">Записаться &rarr;</a>
-            </div>
-            <div class="service-card" style="cursor:default;">
+                <span class="service-link-more">Подробнее &rarr;</span>
+            </a>
+            <a href="services/plastika-litsa.html" class="service-card">
                 <div class="service-num">04</div>
                 <h3 class="t-h3" data-i18n="services.s4.title">Пластика лица</h3>
                 <p class="t-body" data-i18n="services.s4.desc">Ринопластика, отопластика, блефаропластика. Исправляю форму, восстанавливаю функцию, убираю следы травм и возраста.</p>
-                <a href="#contact" style="display:inline-block;margin-top:var(--s-sm);font-size:0.85rem;font-weight:600;color:var(--accent);">Записаться &rarr;</a>
-            </div>
-            <div class="service-card" style="cursor:default;">
+                <span class="service-link-more">Подробнее &rarr;</span>
+            </a>
+            <a href="services/khrap-apnoe.html" class="service-card">
                 <div class="service-num">05</div>
                 <h3 class="t-h3" data-i18n="services.s5.title">Храпите. И это не шутка.</h3>
                 <p class="t-body" data-i18n="services.s5.desc">Синдром ночного апноэ — остановки дыхания во сне. Это опасно. Хирургия убирает причину, а не маску CPAP.</p>
-                <a href="#contact" style="display:inline-block;margin-top:var(--s-sm);font-size:0.85rem;font-weight:600;color:var(--accent);">Записаться &rarr;</a>
-            </div>
-            <div class="service-card" style="cursor:default;">
+                <span class="service-link-more">Подробнее &rarr;</span>
+            </a>
+            <a href="services/detskaya-lor.html" class="service-card">
                 <div class="service-num">06</div>
                 <h3 class="t-h3" data-i18n="services.s6.title">Детская ЛОР-хирургия</h3>
                 <p class="t-body" data-i18n="services.s6.desc">Врождённые аномалии ЛОР-органов, аденоиды, нарушения дыхания у детей. Авторская запатентованная методика, опыт 9 стран.</p>
-                <a href="#contact" style="display:inline-block;margin-top:var(--s-sm);font-size:0.85rem;font-weight:600;color:var(--accent);">Записаться &rarr;</a>
-            </div>
-            <div class="service-card" style="cursor:default;">
+                <span class="service-link-more">Подробнее &rarr;</span>
+            </a>
+            <a href="services/chelyust-vnchs.html" class="service-card">
                 <div class="service-num">07</div>
                 <h3 class="t-h3" data-i18n="services.s7.title">Болит или щёлкает челюсть</h3>
                 <p class="t-body" data-i18n="services.s7.desc">Дисфункция ВНЧС, хруст, ограничение открывания рта. Диагностика и лечение — от артроскопии до реконструкции сустава.</p>
-                <a href="#contact" style="display:inline-block;margin-top:var(--s-sm);font-size:0.85rem;font-weight:600;color:var(--accent);">Записаться &rarr;</a>
-            </div>
-            <div class="service-card" style="cursor:default;">
+                <span class="service-link-more">Подробнее &rarr;</span>
+            </a>
+            <a href="services/opukhla-shcheka.html" class="service-card">
                 <div class="service-num">08</div>
                 <h3 class="t-h3" data-i18n="services.s8.title">Опухла щека</h3>
                 <p class="t-body" data-i18n="services.s8.desc">Флюс, абсцесс, киста челюсти, периостит. Экстренная диагностика и хирургическое лечение — в день обращения.</p>
-                <a href="#contact" style="display:inline-block;margin-top:var(--s-sm);font-size:0.85rem;font-weight:600;color:var(--accent);">Записаться &rarr;</a>
-            </div>
-            <div class="service-card" style="cursor:default;">
+                <span class="service-link-more">Подробнее &rarr;</span>
+            </a>
+            <a href="services/gorlo.html" class="service-card">
                 <div class="service-num">09</div>
                 <h3 class="t-h3" data-i18n="services.s9.title">Горло не отпускает</h3>
                 <p class="t-body" data-i18n="services.s9.desc">Хронический тонзиллит, пробки в миндалинах, ком в горле, осиплость. Если консервативно не помогло — решаю хирургически.</p>
-                <a href="#contact" style="display:inline-block;margin-top:var(--s-sm);font-size:0.85rem;font-weight:600;color:var(--accent);">Записаться &rarr;</a>
-            </div>
+                <span class="service-link-more">Подробнее &rarr;</span>
+            </a>
         </div>
     </div>
 </section>
@@ -1624,113 +2318,102 @@
      05. ABOUT
      ═══════════════════════════════════════ -->
 <section class="about reveal" id="about">
-    <div class="container">
         <div class="about-grid">
             <div class="about-photo">
                 <img src="assets/img/suit.png" alt="Казимов Алибек" width="480" height="640" loading="lazy">
             </div>
             <div class="about-content">
-                <div class="t-caption" style="color:var(--gold);margin-bottom:var(--s-sm);" data-i18n="about.label">Обо мне</div>
-                <h2 class="t-h1" style="margin-bottom:var(--s-xl);" data-i18n="about.title">Опыт 9 стран — <span class="muted"><br>для пациентов Ташкента</span></h2>
+                <div class="t-caption about-caption" data-i18n="about.label">Обо мне</div>
+                <h2 class="t-h1 about-title" data-i18n="about.title">Опыт 9 стран — <span class="muted"><br>для пациентов Ташкента</span></h2>
                 <p class="about-text" data-i18n="about.p1">Высшее медицинское образование в ВолгГМУ. Специализация по челюстно-лицевой хирургии в СПбГМУ им. акад. Павлова. Стажировки и обучение в Harvard, NYU, Rutgers (США), Ludwig-Maximilians-Universit&auml;t (Мюнхен), Bizrah Academy (Лондон), Artemis Hospital (Индия), Hospital Universitario de Fuenlabrada (Испания).</p>
                 <p class="about-text" data-i18n="about.p2">Автор запатентованной хирургической методики при врождённых пороках ЛОР-органов. Единственный специалист в регионе с двойным членством: Американское (AO CMF) и Европейское (EACMFS) общества челюстно-лицевых хирургов.</p>
 
-                <h4 style="margin-top:var(--s-xl);margin-bottom:var(--s-md);font-size:0.85rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;">Членства и признание</h4>
+                <h4 class="about-memberships">Членства и признание</h4>
                 <div class="certs-grid">
-                    <span class="cert-tag" style="border:1px solid var(--gold);background:transparent;color:var(--gold);">AO CMF — Американское общество ЧЛХ</span>
-                    <span class="cert-tag" style="border:1px solid var(--gold);background:transparent;color:var(--gold);">EACMFS — Европейское общество ЧЛХ</span>
+                    <span class="cert-tag cert-tag--gold">AO CMF — Американское общество ЧЛХ</span>
+                    <span class="cert-tag cert-tag--gold">EACMFS — Европейское общество ЧЛХ</span>
                     <span class="cert-tag">Патент на авторскую методику</span>
                     <span class="cert-tag">10+ лет клинической практики</span>
                     <span class="cert-tag">2 000+ операций</span>
                 </div>
             </div>
         </div>
-    </div>
 </section>
 
 <!-- ═══════════════════════════════════════
      05b. EDUCATION TIMELINE
      ═══════════════════════════════════════ -->
-<section class="education reveal" id="education" style="padding:0 0 var(--s-4xl);">
+<section class="education reveal" id="education">
     <div class="container">
         <div class="section-header">
-            <div class="t-caption" style="color:var(--gold);">Образование и стажировки</div>
+            <div class="t-caption about-caption">Образование и стажировки</div>
             <h2 class="t-h1">Международная <span class="muted"><br>подготовка</span></h2>
         </div>
 
-        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:var(--s-md);">
+        <div class="education-grid">
 
-            <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:var(--s-lg);position:relative;overflow:hidden;">
-                <div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--gold);"></div>
-                <div style="font-size:0.7rem;font-weight:700;color:var(--text-muted);letter-spacing:0.1em;margin-bottom:var(--s-sm);">БАЗОВОЕ ОБРАЗОВАНИЕ</div>
-                <div class="t-h3" style="margin-bottom:4px;">ВолгГМУ</div>
-                <div style="color:var(--text-soft);font-size:0.9rem;">Первое высшее медицинское образование</div>
+            <div class="edu-card">
+                <div class="edu-card__label">БАЗОВОЕ ОБРАЗОВАНИЕ</div>
+                <div class="t-h3 edu-card__title">ВолгГМУ</div>
+                <div class="edu-card__desc">Первое высшее медицинское образование</div>
             </div>
 
-            <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:var(--s-lg);position:relative;overflow:hidden;">
-                <div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--gold);"></div>
-                <div style="font-size:0.7rem;font-weight:700;color:var(--text-muted);letter-spacing:0.1em;margin-bottom:var(--s-sm);">СПЕЦИАЛИЗАЦИЯ</div>
-                <div class="t-h3" style="margin-bottom:4px;">СПбГМУ им. акад. Павлова</div>
-                <div style="color:var(--text-soft);font-size:0.9rem;">Челюстно-лицевая хирургия, Санкт-Петербург</div>
+            <div class="edu-card">
+                <div class="edu-card__label">СПЕЦИАЛИЗАЦИЯ</div>
+                <div class="t-h3 edu-card__title">СПбГМУ им. акад. Павлова</div>
+                <div class="edu-card__desc">Челюстно-лицевая хирургия, Санкт-Петербург</div>
             </div>
 
-            <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:var(--s-lg);position:relative;overflow:hidden;">
-                <div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--gold);"></div>
-                <div style="font-size:0.7rem;font-weight:700;color:var(--text-muted);letter-spacing:0.1em;margin-bottom:var(--s-sm);">ИНДИЯ</div>
-                <div class="t-h3" style="margin-bottom:4px;">Artemis Hospital</div>
-                <div style="color:var(--text-soft);font-size:0.9rem;">Хирургия головы и шеи</div>
+            <div class="edu-card">
+                <div class="edu-card__label">ИНДИЯ</div>
+                <div class="t-h3 edu-card__title">Artemis Hospital</div>
+                <div class="edu-card__desc">Хирургия головы и шеи</div>
             </div>
 
-            <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:var(--s-lg);position:relative;overflow:hidden;">
-                <div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--gold);"></div>
-                <div style="font-size:0.7rem;font-weight:700;color:var(--text-muted);letter-spacing:0.1em;margin-bottom:var(--s-sm);">ГЕРМАНИЯ</div>
-                <div class="t-h3" style="margin-bottom:4px;">Ludwig-Maximilians-Universit&auml;t</div>
-                <div style="color:var(--text-soft);font-size:0.9rem;">Мюнхен</div>
+            <div class="edu-card">
+                <div class="edu-card__label">ГЕРМАНИЯ</div>
+                <div class="t-h3 edu-card__title">Ludwig-Maximilians-Universit&auml;t</div>
+                <div class="edu-card__desc">Мюнхен</div>
             </div>
 
-            <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:var(--s-lg);position:relative;overflow:hidden;">
-                <div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--gold);"></div>
-                <div style="font-size:0.7rem;font-weight:700;color:var(--text-muted);letter-spacing:0.1em;margin-bottom:var(--s-sm);">ВЕЛИКОБРИТАНИЯ</div>
-                <div class="t-h3" style="margin-bottom:4px;">Bizrah Academy</div>
-                <div style="color:var(--text-soft);font-size:0.9rem;">Ринопластика</div>
+            <div class="edu-card">
+                <div class="edu-card__label">ВЕЛИКОБРИТАНИЯ</div>
+                <div class="t-h3 edu-card__title">Bizrah Academy</div>
+                <div class="edu-card__desc">Ринопластика</div>
             </div>
 
-            <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:var(--s-lg);position:relative;overflow:hidden;">
-                <div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--gold);"></div>
-                <div style="font-size:0.7rem;font-weight:700;color:var(--text-muted);letter-spacing:0.1em;margin-bottom:var(--s-sm);">США</div>
-                <div class="t-h3" style="margin-bottom:4px;">Harvard Medical School</div>
-                <div style="color:var(--text-soft);font-size:0.9rem;">Surgical Leadership Program (SLP), 2022</div>
+            <div class="edu-card">
+                <div class="edu-card__label">США</div>
+                <div class="t-h3 edu-card__title">Harvard Medical School</div>
+                <div class="edu-card__desc">Surgical Leadership Program (SLP), 2022</div>
             </div>
 
-            <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:var(--s-lg);position:relative;overflow:hidden;">
-                <div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--gold);"></div>
-                <div style="font-size:0.7rem;font-weight:700;color:var(--text-muted);letter-spacing:0.1em;margin-bottom:var(--s-sm);">США</div>
-                <div class="t-h3" style="margin-bottom:4px;">NYU Grossman School of Medicine</div>
-                <div style="color:var(--text-soft);font-size:0.9rem;">Нью-Йорк</div>
+            <div class="edu-card">
+                <div class="edu-card__label">США</div>
+                <div class="t-h3 edu-card__title">NYU Grossman School of Medicine</div>
+                <div class="edu-card__desc">Нью-Йорк</div>
             </div>
 
-            <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:var(--s-lg);position:relative;overflow:hidden;">
-                <div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--gold);"></div>
-                <div style="font-size:0.7rem;font-weight:700;color:var(--text-muted);letter-spacing:0.1em;margin-bottom:var(--s-sm);">США</div>
-                <div class="t-h3" style="margin-bottom:4px;">Rutgers University</div>
-                <div style="color:var(--text-soft);font-size:0.9rem;">Нью-Джерси</div>
+            <div class="edu-card">
+                <div class="edu-card__label">США</div>
+                <div class="t-h3 edu-card__title">Rutgers University</div>
+                <div class="edu-card__desc">Нью-Джерси</div>
             </div>
 
-            <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:var(--s-lg);position:relative;overflow:hidden;">
-                <div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--gold);"></div>
-                <div style="font-size:0.7rem;font-weight:700;color:var(--text-muted);letter-spacing:0.1em;margin-bottom:var(--s-sm);">ИСПАНИЯ</div>
-                <div class="t-h3" style="margin-bottom:4px;">Hospital Universitario de Fuenlabrada</div>
-                <div style="color:var(--text-soft);font-size:0.9rem;">Мадрид</div>
+            <div class="edu-card">
+                <div class="edu-card__label">ИСПАНИЯ</div>
+                <div class="t-h3 edu-card__title">Hospital Universitario de Fuenlabrada</div>
+                <div class="edu-card__desc">Мадрид</div>
             </div>
 
         </div>
 
         <!-- Patent highlight -->
-        <div style="margin-top:var(--s-xl);padding:var(--s-xl);background:linear-gradient(135deg,#1A1A1A,#333);border-radius:var(--radius);color:var(--white);display:flex;align-items:center;gap:var(--s-xl);">
-            <div style="font-size:2.5rem;flex-shrink:0;">&#x1F4DC;</div>
+        <div class="patent-highlight">
+            <div class="patent-highlight__icon">&#x1F4DC;</div>
             <div>
-                <div style="font-weight:700;font-size:1.1rem;margin-bottom:4px;">Патент на хирургическую методику</div>
-                <div style="opacity:0.8;font-size:0.95rem;line-height:1.6;">Разработал новую хирургическую методику и методы диагностики при врождённых пороках ЛОР-органов. Запатентовано.</div>
+                <div class="patent-highlight__title">Патент на хирургическую методику</div>
+                <div class="patent-highlight__desc">Разработал новую хирургическую методику и методы диагностики при врождённых пороках ЛОР-органов. Запатентовано.</div>
             </div>
         </div>
 
@@ -1747,14 +2430,14 @@
             <h2 class="t-h1" data-i18n="action.title">В деле</h2><!-- short title, no muted needed -->
         </div>
 
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--s-md);">
-            <div class="action-item" style="position:relative;">
+        <div class="action-grid-2">
+            <div class="action-item">
                 <img src="assets/img/surgery-1.jpg" alt="Эндоскопическая операция" loading="lazy">
-                <div style="position:absolute;bottom:16px;left:16px;color:#fff;font-size:0.8rem;font-weight:600;text-shadow:0 1px 4px rgba(0,0,0,0.5);z-index:2;">Эндоскопическая хирургия</div>
+                <div class="action-label">Эндоскопическая хирургия</div>
             </div>
-            <div class="action-item" style="position:relative;">
+            <div class="action-item">
                 <img src="assets/img/surgery-3.jpg" alt="Работа с командой" loading="lazy">
-                <div style="position:absolute;bottom:16px;left:16px;color:#fff;font-size:0.8rem;font-weight:600;text-shadow:0 1px 4px rgba(0,0,0,0.5);z-index:2;">Работа с командой ProfMedService</div>
+                <div class="action-label">Работа с командой ProfMedService</div>
             </div>
         </div>
     </div>
@@ -1767,8 +2450,8 @@
     <div class="container">
         <div class="approach-grid">
             <div>
-                <div class="t-caption" style="color:var(--gold);margin-bottom:var(--s-sm);" data-i18n="approach.label">Подход</div>
-                <h2 class="t-h1" style="margin-bottom:var(--s-xl);" data-i18n="approach.title">Что будет, <span class="muted">если<br>вы запишетесь</span></h2>
+                <div class="t-caption about-caption" data-i18n="approach.label">Подход</div>
+                <h2 class="t-h1 about-title" data-i18n="approach.title">Что будет, <span class="muted">если<br>вы запишетесь</span></h2>
                 <p class="approach-text" data-i18n="approach.desc">Три вещи, которые отличают мой подход от стандартного.</p>
                 <ul class="approach-list">
                     <li>
@@ -1793,49 +2476,56 @@
 </section>
 
 <!-- ═══════════════════════════════════════
-     08. TESTIMONIALS
+     09. FAQ
      ═══════════════════════════════════════ -->
-<section class="testimonials reveal" id="testimonials">
+<section class="faq reveal" id="faq">
     <div class="container">
-        <div class="section-header">
-            <div class="t-caption" data-i18n="reviews.label">Отзывы</div>
-            <h2 class="t-h1" data-i18n="reviews.title">Те, кто уже прошёл <span class="muted"><br>через это</span></h2>
-        </div>
-
-        <div class="testimonials-grid">
-            <div class="testimonial-card">
-                <div class="testimonial-stars">★★★★★</div>
-                <p class="testimonial-text" data-i18n="reviews.r1.text">«10 лет не мог нормально дышать. Доктор Казимов сделал септопластику — дышу свободно впервые за 10 лет. Очень внимательный и профессиональный подход.»</p>
-                <div class="testimonial-author">
-                    <div class="testimonial-avatar">М</div>
-                    <div>
-                        <div class="testimonial-name" data-i18n="reviews.r1.name">Мадина К.</div>
-                        <div class="testimonial-date" data-i18n="reviews.r1.date">Февраль 2026</div>
-                    </div>
-                </div>
+        <div class="faq-grid">
+            <div>
+                <div class="t-caption faq-label" data-i18n="faq.label">FAQ</div>
+                <h2 class="t-h1" data-i18n="faq.title">Вопросы, <span class="muted">которые<br>задают чаще всего</span></h2>
             </div>
 
-            <div class="testimonial-card">
-                <div class="testimonial-stars">★★★★★</div>
-                <p class="testimonial-text" data-i18n="reviews.r2.text">«Приехала из Алматы по рекомендации. Операция на пазухах прошла идеально. Клиника ProfMedService оснащена на уровне лучших клиник мира.»</p>
-                <div class="testimonial-author">
-                    <div class="testimonial-avatar">А</div>
-                    <div>
-                        <div class="testimonial-name" data-i18n="reviews.r2.name">Айгуль Т.</div>
-                        <div class="testimonial-date" data-i18n="reviews.r2.date">Январь 2026</div>
-                    </div>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <button class="faq-q" id="faq-q1" aria-expanded="false" aria-controls="faq-a1" data-i18n="faq.q1">Как записаться на консультацию? <span class="icon"></span></button>
+                    <div class="faq-a" id="faq-a1" role="region" aria-labelledby="faq-q1"><div class="faq-a-inner" data-i18n="faq.a1">Напишите в Telegram, WhatsApp или позвоните. Мы свяжемся с вами в течение 30 минут для подтверждения записи.</div></div>
                 </div>
-            </div>
-
-            <div class="testimonial-card">
-                <div class="testimonial-stars">★★★★★</div>
-                <p class="testimonial-text" data-i18n="reviews.r3.text">«Удалили образование на шее. Я боялась шрама, что шрама практически не видно. Огромная благодарность за ювелирную работу.»</p>
-                <div class="testimonial-author">
-                    <div class="testimonial-avatar">Р</div>
-                    <div>
-                        <div class="testimonial-name" data-i18n="reviews.r3.name">Руслан М.</div>
-                        <div class="testimonial-date" data-i18n="reviews.r3.date">Декабрь 2025</div>
-                    </div>
+                <div class="faq-item">
+                    <button class="faq-q" id="faq-q2" aria-expanded="false" aria-controls="faq-a2" data-i18n="faq.q2">Сколько стоит первичная консультация? <span class="icon"></span></button>
+                    <div class="faq-a" id="faq-a2" role="region" aria-labelledby="faq-q2"><div class="faq-a-inner" data-i18n="faq.a2">Зависит от направления. Мы предлагаем прозрачное ценообразование без скрытых платежей.</div></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-q" id="faq-q3" aria-expanded="false" aria-controls="faq-a3" data-i18n="faq.q3">Принимаете ли пациентов из других стран? <span class="icon"></span></button>
+                    <div class="faq-a" id="faq-a3" role="region" aria-labelledby="faq-q3"><div class="faq-a-inner" data-i18n="faq.a3">Да. Пациенты приезжают из Казахстана, Кыргызстана, Таджикистана и России. Мы помогаем с организацией визита: трансфер, проживание, переводчик.</div></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-q" id="faq-q4" aria-expanded="false" aria-controls="faq-a4" data-i18n="faq.q4">Какой срок реабилитации после операции? <span class="icon"></span></button>
+                    <div class="faq-a" id="faq-a4" role="region" aria-labelledby="faq-q4"><div class="faq-a-inner" data-i18n="faq.a4">Эндоскопические операции — от 3-5 дней. Более сложные реконструктивные операции — от 2 недель. Подробный план реабилитации обсуждается индивидуально.</div></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-q" id="faq-q5" aria-expanded="false" aria-controls="faq-a5" data-i18n="faq.q5">Возможна ли онлайн-консультация? <span class="icon"></span></button>
+                    <div class="faq-a" id="faq-a5" role="region" aria-labelledby="faq-q5"><div class="faq-a-inner" data-i18n="faq.a5">Да. Отправьте снимки и описание проблемы в Telegram — доктор даст предварительное заключение.</div></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-q" id="faq-q6" aria-expanded="false" aria-controls="faq-a6" data-i18n="faq.q6">Останутся ли шрамы после операции? <span class="icon"></span></button>
+                    <div class="faq-a" id="faq-a6" role="region" aria-labelledby="faq-q6"><div class="faq-a-inner" data-i18n="faq.a6">Большинство моих операций — эндоскопические, через естественные отверстия. Там, где разрез необходим, я провожу его по естественным складкам кожи. Через 6–12 месяцев шрам становится практически невидимым.</div></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-q" id="faq-q7" aria-expanded="false" aria-controls="faq-a7" data-i18n="faq.q7">Используете ли вы 3D-планирование? <span class="icon"></span></button>
+                    <div class="faq-a" id="faq-a7" role="region" aria-labelledby="faq-q7"><div class="faq-a-inner" data-i18n="faq.a7">Да. Перед операцией я создаю 3D-модель и показываю планируемый результат. Вы видите, что будет сделано, ещё до того, как ляжете на операционный стол.</div></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-q" id="faq-q8" aria-expanded="false" aria-controls="faq-a8" data-i18n="faq.q8">Как приехать на лечение из другой страны? <span class="icon"></span></button>
+                    <div class="faq-a" id="faq-a8" role="region" aria-labelledby="faq-q8"><div class="faq-a-inner" data-i18n="faq.a8">Отправьте снимки и описание в Telegram — я дам предварительную оценку бесплатно. Затем проводим видеоконсультацию, составляем план и стоимость. Помогаем с трансфером и проживанием. Вы знаете всё до покупки билета.</div></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-q" id="faq-q9" aria-expanded="false" aria-controls="faq-a9" data-i18n="faq.q9">Почему один врач, а не команда? <span class="icon"></span></button>
+                    <div class="faq-a" id="faq-a9" role="region" aria-labelledby="faq-q9"><div class="faq-a-inner" data-i18n="faq.a9">Потому что в хирургии лица ответственность неделима. Консультация — я. Планирование — я. Операция — я. Послеоперационный контроль — я. Один врач от начала до конца — один человек отвечает за результат.</div></div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-q" id="faq-q10" aria-expanded="false" aria-controls="faq-a10" data-i18n="faq.q10">Что означают AO CMF и EACMFS? <span class="icon"></span></button>
+                    <div class="faq-a" id="faq-a10" role="region" aria-labelledby="faq-q10"><div class="faq-a-inner" data-i18n="faq.a10">Это международные объединения челюстно-лицевых хирургов — американское и европейское. Туда принимают по результатам практики и экспертной оценки коллег. Двойное членство — это как два паспорта в хирургии: признание и в Америке, и в Европе.</div></div>
                 </div>
             </div>
         </div>
@@ -1843,36 +2533,56 @@
 </section>
 
 <!-- ═══════════════════════════════════════
-     09. FAQ
+     AI ASSISTANT PROMO
      ═══════════════════════════════════════ -->
-<section class="faq reveal" id="faq">
+<section class="ai-promo reveal">
     <div class="container">
-        <div class="faq-grid">
+        <div class="ai-promo-card">
+            <!-- Left: text -->
             <div>
-                <div class="t-caption" style="color:var(--gold);margin-bottom:var(--s-sm);" data-i18n="faq.label">FAQ</div>
-                <h2 class="t-h1" data-i18n="faq.title">Вопросы, <span class="muted">которые<br>задают чаще всего</span></h2>
+                <div class="ai-promo-badge"><span class="pulse"></span> Онлайн 24/7</div>
+                <h2 data-i18n="ai.title">Не уверены, нужна ли операция?</h2>
+                <p class="ai-promo-desc" data-i18n="ai.desc">Задайте вопрос AI-ассистенту доктора Казимова. Он ответит на основе медицинских данных — точно, понятно и бесплатно.</p>
+                <div class="ai-promo-features">
+                    <div class="ai-promo-feature"><span class="check">✓</span> <span data-i18n="ai.f1">Отвечает на русском, узбекском и английском</span></div>
+                    <div class="ai-promo-feature"><span class="check">✓</span> <span data-i18n="ai.f2">Расскажет об услугах и поможет записаться</span></div>
+                    <div class="ai-promo-feature"><span class="check">✓</span> <span data-i18n="ai.f3">Работает круглосуточно, без выходных</span></div>
+                </div>
+                <button class="ai-promo-btn" onclick="var b=document.getElementById('kazimov-chat-btn');if(b&&b.offsetParent!==null)b.click();else{var m=document.getElementById('mobile-chat-trigger');if(m)m.click();}" data-i18n="ai.btn">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                    Спросить AI-ассистента
+                </button>
             </div>
-
-            <div class="faq-list">
-                <div class="faq-item">
-                    <button class="faq-q" aria-expanded="false" aria-controls="faq-a1" data-i18n="faq.q1">Как записаться на консультацию? <span class="icon">+</span></button>
-                    <div class="faq-a" id="faq-a1" role="region"><div class="faq-a-inner" data-i18n="faq.a1">Напишите в Telegram, WhatsApp или заполните форму ниже. Мы свяжемся с вами в течение 30 минут для подтверждения записи.</div></div>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-q" data-i18n="faq.q2">Сколько стоит первичная консультация? <span class="icon">+</span></button>
-                    <div class="faq-a"><div class="faq-a-inner" data-i18n="faq.a2">Зависит от направления. Мы предлагаем прозрачное ценообразование без скрытых платежей.</div></div>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-q" data-i18n="faq.q3">Принимаете ли пациентов из других стран? <span class="icon">+</span></button>
-                    <div class="faq-a"><div class="faq-a-inner" data-i18n="faq.a3">Да. Пациенты приезжают из Казахстана, Кыргызстана, Таджикистана и России. Мы помогаем с организацией визита: трансфер, проживание, переводчик.</div></div>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-q" data-i18n="faq.q4">Какой срок реабилитации после операции? <span class="icon">+</span></button>
-                    <div class="faq-a"><div class="faq-a-inner" data-i18n="faq.a4">Эндоскопические операции — от 3-5 дней. Более сложные реконструктивные операции — от 2 недель. Подробный план реабилитации обсуждается индивидуально.</div></div>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-q" data-i18n="faq.q5">Возможна ли онлайн-консультация? <span class="icon">+</span></button>
-                    <div class="faq-a"><div class="faq-a-inner" data-i18n="faq.a5">Да. Отправьте снимки и описание в Telegram Отправьте снимки и описание проблемы в Telegram — доктор даст предварительное заключение.</div></div>
+            <!-- Right: realistic chat mockup -->
+            <div class="ai-promo-visual">
+                <div class="ai-promo-mockup">
+                    <!-- Header -->
+                    <div class="ai-mock-header">
+                        <div class="ai-mock-avatar">КА</div>
+                        <div class="ai-mock-header-info">
+                            <div class="ai-mock-header-name">Клиника д-ра Казимова</div>
+                            <div class="ai-mock-header-sub">Виртуальный ассистент</div>
+                        </div>
+                    </div>
+                    <!-- Messages -->
+                    <div class="ai-mock-body">
+                        <div class="ai-mock-msg bot">Здравствуйте! Чем могу помочь?</div>
+                        <div class="ai-mock-msg user" data-i18n="ai.msg1">У меня болит челюсть при открывании рта — это серьёзно?</div>
+                        <div class="ai-mock-msg bot" data-i18n="ai.msg2">Боль при открывании рта может быть связана с дисфункцией ВНЧС. Рекомендую очную консультацию для точной диагностики. Записать вас?</div>
+                    </div>
+                    <!-- Quick tags -->
+                    <div class="ai-mock-tags">
+                        <span class="ai-mock-tag">Услуги клиники</span>
+                        <span class="ai-mock-tag">Записаться</span>
+                        <span class="ai-mock-tag">Стоимость</span>
+                    </div>
+                    <!-- Input bar -->
+                    <div class="ai-mock-input">
+                        <div class="ai-mock-input-field">Напишите сообщение...</div>
+                        <div class="ai-mock-send">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1891,38 +2601,26 @@
 
         <div class="contact-grid">
             <div>
-                <form class="contact-form" id="contactForm">
-                    <label for="c-name" class="sr-only">Имя</label>
-                    <input type="text" id="c-name" name="name" class="form-field" placeholder="Ваше имя" data-i18n-placeholder="contact.name" required>
-                    <label for="c-phone" class="sr-only">Телефон</label>
-                    <input type="tel" id="c-phone" name="phone" class="form-field" placeholder="Телефон" data-i18n-placeholder="contact.phone" required>
-                    <label for="c-service" class="sr-only">Услуга</label>
-                    <select id="c-service" name="service" class="form-field">
-                        <option value="" disabled selected data-i18n="contact.service">Выберите услугу</option>
-                        <option value="maxillofacial" data-i18n="contact.opt1">Нос не дышит</option>
-                        <option value="ent" data-i18n="contact.opt2">Образование на лице или шее</option>
-                        <option value="oncology" data-i18n="contact.opt3">Травма лица</option>
-                        <option value="plastic" data-i18n="contact.opt4">Ринопластика</option>
-                        <option value="online" data-i18n="contact.opt5">Храп и апноэ</option>
-                    </select>
-                    <button type="submit" class="btn btn-primary" style="justify-content:center;" data-i18n="contact.submit">Отправить заявку</button>
-                    <div id="formSuccess" style="display:none;padding:16px;background:#E8F5E9;border-radius:8px;color:#2E7D32;font-weight:500;text-align:center;" data-i18n="contact.success">Принято. Свяжемся в течение 30 минут.</div>
-                </form>
-
-                <div class="messenger-buttons">
-                    <a href="#" class="msg-btn tg">
+                <div class="contact-actions">
+                    <p class="contact-actions-desc" data-i18n="contact.actions_desc">Свяжитесь удобным способом — ответим в течение 30 минут</p>
+                    <a href="https://t.me/Eshelon94" target="_blank" class="btn contact-action-btn" style="justify-content:center;width:100%;background:#0088cc;color:#fff;">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm5.94 8.13l-1.97 9.3c-.15.67-.54.83-1.09.52l-3.02-2.22-1.46 1.4c-.16.16-.3.3-.61.3l.22-3.06 5.56-5.02c.24-.22-.05-.34-.38-.13L8.69 13.7l-2.93-.91c-.64-.2-.65-.64.13-.95l11.45-4.41c.53-.2 1 .13.82.95l-.22-.25z"/></svg>
-                        Telegram
+                        <span data-i18n="contact.tg_btn">Написать в Telegram</span>
                     </a>
-                    <a href="#" class="msg-btn wa">
+                    <a href="https://wa.me/998915245264" target="_blank" class="btn contact-action-btn" style="justify-content:center;width:100%;background:#25D366;color:#fff;">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 2.12.55 4.11 1.51 5.85L0 24l6.33-1.66A11.94 11.94 0 0012 24c6.63 0 12-5.37 12-12S18.63 0 12 0zm5.8 16.97c-.24.67-1.41 1.28-1.95 1.36-.5.07-1.13.1-1.83-.11-.42-.13-.96-.31-1.65-.61-2.9-1.26-4.79-4.19-4.94-4.39-.14-.19-1.17-1.56-1.17-2.97 0-1.41.74-2.11 1-2.39.27-.28.58-.35.78-.35.19 0 .39 0 .56.01.18.01.42-.07.66.5.24.58.82 2 .89 2.15.07.14.12.31.02.5-.1.19-.14.31-.28.47-.14.17-.3.38-.42.51-.14.14-.29.3-.12.58.17.28.73 1.21 1.57 1.96 1.08.96 1.99 1.26 2.27 1.4.28.14.44.12.61-.07.17-.19.71-.83.9-1.11.19-.28.38-.24.64-.14.26.1 1.63.77 1.91.91.28.14.47.21.54.33.07.12.07.67-.17 1.34z"/></svg>
-                        WhatsApp
+                        <span data-i18n="contact.wa_btn">Написать в WhatsApp</span>
                     </a>
-                    <a href="tel:+998XXXXXXXXX" class="msg-btn phone">
+                    <a href="https://instagram.com/alibek.surgeon" target="_blank" class="btn contact-action-btn" style="justify-content:center;width:100%;background:#1A1A1A;color:#fff;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                        <span data-i18n="contact.ig_btn">Instagram</span>
+                    </a>
+                    <a href="tel:+998915245264" class="btn contact-action-btn" style="justify-content:center;width:100%;background:var(--bg-deep);color:var(--text);">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.13.81.36 1.6.68 2.36a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.76.32 1.55.55 2.36.68A2 2 0 0122 16.92z"/></svg>
-                        <span data-i18n="contact.call">Позвонить</span>
+                        <span data-i18n="contact.call_btn">Позвонить: +998 91 524 52 64</span>
                     </a>
                 </div>
+
             </div>
 
             <div class="contact-info">
@@ -1931,7 +2629,7 @@
                     <div class="contact-detail">
                         <div>
                             <div class="label" data-i18n="contact.addr_label">Адрес</div>
-                            <div class="value" data-i18n="contact.addr">Клиника ProfMedService, Ташкент</div>
+                            <a href="https://yandex.ru/profile/-/CPvu7Nyj" target="_blank" class="value" style="color:var(--gold);text-decoration:underline;text-underline-offset:3px;" data-i18n="contact.addr">Клиника ProfMedService, Ташкент</a>
                         </div>
                     </div>
                     <div class="contact-detail">
@@ -1943,16 +2641,10 @@
                     <div class="contact-detail">
                         <div>
                             <div class="label" data-i18n="contact.tel_label">Телефон</div>
-                            <div class="value">+998 XX XXX XX XX</div>
+                            <div class="value">+998 91 524 52 64</div>
                         </div>
                     </div>
                 </div>
-                <a href="https://maps.google.com/?q=ProfMedService+Tashkent" target="_blank" class="map-placeholder" style="text-decoration:none;cursor:pointer;transition:background 0.2s;" data-i18n="contact.map">
-                    <span style="display:flex;flex-direction:column;align-items:center;gap:8px;">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-                        Открыть на Google Maps
-                    </span>
-                </a>
             </div>
         </div>
     </div>
@@ -1968,20 +2660,35 @@
         <div class="footer-inner">
             <div class="footer-copy">© 2026 Казимов Алибек. <span data-i18n="footer.rights">Все права защищены.</span></div>
             <div class="footer-links">
-                <a href="#" data-i18n="footer.privacy">Политика конфиденциальности</a>
-                <a href="#">Instagram</a>
-                <a href="#">Telegram</a>
-                <a href="#">YouTube</a>
+                <a href="https://instagram.com/alibek.surgeon" target="_blank">Instagram</a>
+                <a href="https://t.me/Eshelon94" target="_blank">Telegram</a>
+                <a href="https://wa.me/998915245264" target="_blank">WhatsApp</a>
+                <a href="tel:+998915245264">+998 91 524 52 64</a>
             </div>
         </div>
     </div>
 </footer>
 
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {"@type": "Question", "name": "Как записаться на консультацию?", "acceptedAnswer": {"@type": "Answer", "text": "Напишите в Telegram, WhatsApp или позвоните. Мы свяжемся с вами в течение 30 минут."}},
+            {"@type": "Question", "name": "Принимаете ли пациентов из других стран?", "acceptedAnswer": {"@type": "Answer", "text": "Да. Пациенты приезжают из Казахстана, Кыргызстана, Таджикистана и России. Помогаем с организацией визита."}},
+            {"@type": "Question", "name": "Какой срок реабилитации после операции?", "acceptedAnswer": {"@type": "Answer", "text": "Эндоскопические операции — 3-5 дней. Реконструктивные — от 2 недель. План обсуждается индивидуально."}},
+            {"@type": "Question", "name": "Возможна ли онлайн-консультация?", "acceptedAnswer": {"@type": "Answer", "text": "Да. Отправьте снимки и описание проблемы в Telegram — доктор даст предварительное заключение."}},
+            {"@type": "Question", "name": "Останутся ли шрамы после операции?", "acceptedAnswer": {"@type": "Answer", "text": "Большинство операций — эндоскопические. Где разрез необходим, он проходит по естественным складкам. Через 6-12 месяцев шрам практически невидим."}},
+            {"@type": "Question", "name": "Как приехать из другой страны?", "acceptedAnswer": {"@type": "Answer", "text": "Отправьте снимки в Telegram для предварительной оценки. После видеоконсультации составим план и стоимость. Поможем с трансфером и проживанием."}}
+        ]
+    }
+    </script>
+
 <!-- ═══════════════════════════════════════
      MOBILE CTA
      ═══════════════════════════════════════ -->
 <div class="mobile-cta">
-    <a href="#contact" class="btn btn-primary" data-i18n="nav.cta">Записаться</a>
+    <a href="#contact" class="btn btn-primary" data-i18n="nav.cta">Бесплатная консультация</a>
     <button class="mobile-chat-btn" id="mobile-chat-trigger" aria-label="Открыть чат">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
     </button>
@@ -2052,21 +2759,6 @@ document.querySelectorAll('.faq-q').forEach(btn => {
     });
 });
 
-/* Form submission handler */
-document.getElementById('contactForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const name = document.getElementById('c-name').value;
-    const phone = document.getElementById('c-phone').value;
-    const service = document.getElementById('c-service').value;
-
-    /* Option 1: Open pre-filled WhatsApp message */
-    const text = encodeURIComponent(`Здравствуйте! Меня зовут ${name}. Хочу записаться на приём.\nТелефон: ${phone}\nУслуга: ${service}`);
-    window.open(`https://wa.me/?text=${text}`, '_blank');
-
-    /* Show success message */
-    this.querySelector('button[type="submit"]').style.display = 'none';
-    document.getElementById('formSuccess').style.display = 'block';
-});
 
 /* Scroll reveal */
 const revealElements = document.querySelectorAll('.reveal');
@@ -2158,7 +2850,11 @@ const translations = {
         'about.p1': 'Kazimov Alibek — rekonstruktiv va estetik jarrohlikda ko\'p yillik tajribaga ega jag\'-yuz jarrohi.',
         'about.p2': 'Murakkab holatlar bo\'yicha ixtisoslashgan: yangi o\'smalarni olib tashlashdan yuz funksiyasi va estetikasini tiklashgacha.',
         'contact.title': 'Qabulga <span class="muted"><br>yoziling</span>',
-        'contact.submit': 'So\'rov yuborish',
+        'contact.actions_desc': 'Qulay usulda bog\'laning — 30 daqiqada javob beramiz',
+        'contact.tg_btn': 'Telegramga yozish',
+        'contact.wa_btn': 'WhatsAppga yozish',
+        'contact.ig_btn': 'Instagram',
+        'contact.call_btn': 'Qo\'ng\'iroq: +998 91 524 52 64',
         'contact.call': 'Qo\'ng\'iroq',
         'faq.title': 'Ko\'p beriladigan <span class="muted"><br>savollar</span>',
         'footer.rights': 'Barcha huquqlar himoyalangan.',
@@ -2205,7 +2901,11 @@ const translations = {
         'about.p1': 'Kazimov Alibek is a maxillofacial surgeon with extensive experience in reconstructive and aesthetic surgery.',
         'about.p2': 'Specializes in complex cases requiring multidisciplinary approach: from tumor removal to restoring facial function and aesthetics.',
         'contact.title': 'Book an <span class="muted"><br>Appointment</span>',
-        'contact.submit': 'Submit Request',
+        'contact.actions_desc': 'Get in touch — we reply within 30 minutes',
+        'contact.tg_btn': 'Message on Telegram',
+        'contact.wa_btn': 'Message on WhatsApp',
+        'contact.ig_btn': 'Instagram',
+        'contact.call_btn': 'Call: +998 91 524 52 64',
         'contact.call': 'Call',
         'faq.title': 'Frequently <span class="muted"><br>Asked Questions</span>',
         'footer.rights': 'All rights reserved.',
@@ -2222,6 +2922,31 @@ document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
     originalPlaceholders[el.getAttribute('data-i18n-placeholder')] = el.placeholder;
 });
 translations.ru = originalContent;
+
+/* Services nav dropdown */
+const navDropdown = document.getElementById('navDropdown');
+if (navDropdown) {
+    const navTrigger = navDropdown.querySelector('.nav-dropdown-trigger');
+    navTrigger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        navDropdown.classList.toggle('open');
+        navTrigger.setAttribute('aria-expanded', navDropdown.classList.contains('open'));
+    });
+    document.addEventListener('click', () => {
+        navDropdown.classList.remove('open');
+        navTrigger.setAttribute('aria-expanded', 'false');
+    });
+}
+
+/* Mobile services accordion */
+const mobileServicesToggle = document.querySelector('.mobile-nav-services-toggle');
+const mobileServices = document.querySelector('.mobile-nav-services');
+if (mobileServicesToggle && mobileServices) {
+    mobileServicesToggle.addEventListener('click', (e) => {
+        e.preventDefault();
+        mobileServices.classList.toggle('open');
+    });
+}
 
 /* Language dropdown */
 const langDropdown = document.getElementById('langDropdown');
@@ -2272,37 +2997,170 @@ document.querySelectorAll('.lang-option').forEach(btn => {
 </script>
 
 <!-- Chat Widget -->
-<script>window.KAZIMOV_CHAT_URL='http://localhost:3001';</script>
-<script src="http://localhost:3001/widget-loader.js" defer></script>
+<script>window.KAZIMOV_CHAT_URL='https://alibek-chatbot.vercel.app';</script>
+<script src="https://alibek-chatbot.vercel.app/widget-loader.js" defer></script>
 
-<!-- Mobile chat button → triggers the widget's floating button + icon toggle -->
+<!-- Video modal -->
+<div class="video-modal" id="video-modal">
+    <button class="video-modal-close" id="video-modal-close">&times;</button>
+    <div class="video-modal-content" id="video-modal-content"></div>
+    <div class="video-modal-info" id="video-modal-info"></div>
+</div>
 <script>
-(function() {
-  var chatSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>';
-  var closeSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>';
-  var mobileOpen = false;
+(function(){
+    // --- YouTube Playlist → Video Cards ---
+    const YT_API_KEY = 'AIzaSyD80pHnh6ytjJ3R9zZIDKt-2g80Eta0GTQ';
+    const PLAYLIST_ID = 'PLuSj3qPUFKqvBjPWisl6PH7gOBUlUlee2';
+    const vScroll = document.getElementById('review-videos');
+    const dotsC = document.getElementById('review-dots');
+    const btnL = document.getElementById('review-scroll-left');
+    const btnR = document.getElementById('review-scroll-right');
+    const modal = document.getElementById('video-modal');
+    const modalContent = document.getElementById('video-modal-content');
+    const modalInfo = document.getElementById('video-modal-info');
+    const closeBtn = document.getElementById('video-modal-close');
 
-  document.addEventListener('click', function(e) {
-    var trigger = e.target.closest('#mobile-chat-trigger');
-    if (!trigger) return;
-    var widgetBtn = document.getElementById('kazimov-chat-btn');
-    if (widgetBtn) widgetBtn.click();
-    mobileOpen = !mobileOpen;
-    trigger.innerHTML = mobileOpen ? closeSvg : chatSvg;
-  });
-
-  // Listen for close from iframe's X button
-  window.addEventListener('message', function(e) {
-    if (e.data && e.data.type === 'kazimov-chat-close' && mobileOpen) {
-      var widgetBtn = document.getElementById('kazimov-chat-btn');
-      if (widgetBtn) widgetBtn.click();
-      mobileOpen = false;
-      var trigger = document.getElementById('mobile-chat-trigger');
-      if (trigger) trigger.innerHTML = chatSvg;
+    // Extract short tag from title (before — or |)
+    function extractTag(title) {
+        const sep = title.match(/[—|]/);
+        if (sep) {
+            const parts = title.split(sep[0]);
+            const short = (parts[1] || parts[0]).trim();
+            return short.length > 30 ? short.slice(0, 28) + '…' : short;
+        }
+        return title.length > 30 ? title.slice(0, 28) + '…' : title;
     }
-  });
+
+    // Build a video card element
+    function createVideoCard(video) {
+        const videoId = video.snippet.resourceId.videoId;
+        const thumb = video.snippet.thumbnails.maxres || video.snippet.thumbnails.standard || video.snippet.thumbnails.high;
+        const title = video.snippet.title;
+        const tag = extractTag(title);
+
+        const card = document.createElement('div');
+        card.className = 'review-video-card';
+        card.setAttribute('data-video-id', videoId);
+        card.setAttribute('tabindex', '0');
+        card.setAttribute('role', 'button');
+        card.innerHTML = `
+            <img src="${thumb.url}" alt="${title}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.4);" loading="lazy">
+            <div class="review-video-play"><svg width="20" height="20" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
+            <div class="review-video-info">
+                <div class="review-video-name">${title.split(/[—|]/)[0].trim()}</div>
+                <div class="review-video-tag">${tag}</div>
+            </div>`;
+        return card;
+    }
+
+    // Modal: open with YouTube embed
+    function openModal(videoId, title) {
+        modalContent.style.background = '#000';
+        modalContent.innerHTML = `<iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0" frameborder="0" allow="autoplay;encrypted-media" allowfullscreen style="position:absolute;inset:0;width:100%;height:100%;border-radius:16px;"></iframe>`;
+        modalInfo.innerHTML = '';
+        modal.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+        modal.classList.remove('open');
+        document.body.style.overflow = '';
+        modalContent.innerHTML = '';
+    }
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+
+    // Scroll controls
+    function initScrollControls() {
+        const cards = vScroll.querySelectorAll('.review-video-card');
+        if (!cards.length) return;
+
+        // Hide dots
+        dotsC.style.display = 'none';
+
+        function getCardWidth() {
+            return cards[0].offsetWidth + 16;
+        }
+
+        // Scroll by 1 card, loop
+        btnL.addEventListener('click', () => {
+            if (vScroll.scrollLeft <= 5) {
+                vScroll.scrollTo({ left: vScroll.scrollWidth, behavior: 'smooth' });
+            } else {
+                vScroll.scrollBy({ left: -getCardWidth(), behavior: 'smooth' });
+            }
+        });
+        btnR.addEventListener('click', () => {
+            const maxSl = vScroll.scrollWidth - vScroll.clientWidth;
+            if (vScroll.scrollLeft >= maxSl - 5) {
+                vScroll.scrollTo({ left: 0, behavior: 'smooth' });
+            } else {
+                vScroll.scrollBy({ left: getCardWidth(), behavior: 'smooth' });
+            }
+        });
+
+        // Click → modal
+        cards.forEach(card => {
+            const handler = () => openModal(card.dataset.videoId, card.querySelector('.review-video-name')?.textContent);
+            card.addEventListener('click', handler);
+            card.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handler(); } });
+        });
+    }
+
+    // Fetch playlist
+    fetch(`https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=20&playlistId=${PLAYLIST_ID}&key=${YT_API_KEY}`)
+        .then(r => r.json())
+        .then(data => {
+            if (!data.items || !data.items.length) return;
+            data.items.forEach(item => {
+                if (item.snippet.title === 'Private video' || item.snippet.title === 'Deleted video') return;
+                vScroll.appendChild(createVideoCard(item));
+            });
+            initScrollControls();
+        })
+        .catch(err => console.warn('YouTube playlist load failed:', err));
+
+    // --- Text reviews carousel ---
+    const tScroll = document.getElementById('review-text-scroll');
+    const tBtnL = document.getElementById('text-scroll-left');
+    const tBtnR = document.getElementById('text-scroll-right');
+    if (tScroll && tBtnL && tBtnR) {
+        function tCardWidth() {
+            const c = tScroll.querySelector('.review-card');
+            return c ? c.offsetWidth + 16 : 320;
+        }
+        tBtnL.addEventListener('click', () => {
+            if (tScroll.scrollLeft <= 5) {
+                tScroll.scrollTo({ left: tScroll.scrollWidth, behavior: 'smooth' });
+            } else {
+                tScroll.scrollBy({ left: -tCardWidth(), behavior: 'smooth' });
+            }
+        });
+        tBtnR.addEventListener('click', () => {
+            const maxSl = tScroll.scrollWidth - tScroll.clientWidth;
+            if (tScroll.scrollLeft >= maxSl - 5) {
+                tScroll.scrollTo({ left: 0, behavior: 'smooth' });
+            } else {
+                tScroll.scrollBy({ left: tCardWidth(), behavior: 'smooth' });
+            }
+        });
+    }
 })();
 </script>
+
+<!-- Floating social bar -->
+<div class="float-social">
+    <a href="https://t.me/Eshelon94" class="fs-tg" aria-label="Telegram" title="Написать в Telegram">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm5.94 8.13l-1.97 9.3c-.15.67-.54.83-1.09.52l-3.02-2.22-1.46 1.4c-.16.16-.3.3-.61.3l.22-3.06 5.56-5.02c.24-.22-.05-.34-.38-.13L8.69 13.7l-2.93-.91c-.64-.2-.65-.64.13-.95l11.45-4.41c.53-.2 1 .13.82.95l-.22-.25z"/></svg>
+    </a>
+    <a href="https://wa.me/998915245264" class="fs-wa" aria-label="WhatsApp" title="Написать в WhatsApp">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 2.12.55 4.11 1.51 5.85L0 24l6.33-1.66A11.94 11.94 0 0012 24c6.63 0 12-5.37 12-12S18.63 0 12 0zm5.8 16.97c-.24.67-1.41 1.28-1.95 1.36-.5.07-1.13.1-1.83-.11-.42-.13-.96-.31-1.65-.61-2.9-1.26-4.79-4.19-4.94-4.39-.14-.19-1.17-1.56-1.17-2.97 0-1.41.74-2.11 1-2.39.27-.28.58-.35.78-.35.19 0 .39 0 .56.01.18.01.42-.07.66.5.24.58.82 2 .89 2.15.07.14.12.31.02.5-.1.19-.14.31-.28.47-.14.17-.3.38-.42.51-.14.14-.29.3-.12.58.17.28.73 1.21 1.57 1.96 1.08.96 1.99 1.26 2.27 1.4.28.14.44.12.61-.07.17-.19.71-.83.9-1.11.19-.28.38-.24.64-.14.26.1 1.63.77 1.91.91.28.14.47.21.54.33.07.12.07.67-.17 1.34z"/></svg>
+    </a>
+    <a href="tel:+998915245264" class="fs-phone" aria-label="Позвонить" title="Позвонить">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.13.81.36 1.6.68 2.36a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.76.32 1.55.55 2.36.68A2 2 0 0122 16.92z"/></svg>
+    </a>
+</div>
 
 </body>
 </html>
